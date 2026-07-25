@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLATZHALTER-LOGO (nur Symbol) fuer Antonov Outdoor.
+     Der Schriftzug "ANTONOV Outdoor" steht im HTML daneben (.logo__text).
+     Ersetzen Sie diese Datei durch Ihr echtes Logo (gleicher Dateiname "logo.svg").
+     Enthält Ihr echtes Logo bereits den Firmennamen, entfernen Sie den
+     <span class="logo__text"> im Header/Footer der HTML-Seiten. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60" role="img" aria-label="Antonov Outdoor">
+  <rect x="1.5" y="1.5" width="57" height="57" rx="12" fill="#1f2830"/>
+  <g fill="none" stroke="#c6973f" stroke-width="3" stroke-linecap="round">
+    <path d="M14 26 L30 15 L46 26"/>
+    <line x1="18" y1="26" x2="18" y2="46"/>
+    <line x1="42" y1="26" x2="42" y2="46"/>
+    <line x1="18" y1="33" x2="42" y2="33"/>
+    <line x1="18" y1="40" x2="42" y2="40"/>
+  </g>
+</svg>
