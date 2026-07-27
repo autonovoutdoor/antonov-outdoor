@@ -57,65 +57,26 @@
     <div class="container">
       <div class="kontakt-grid">
         <div class="formular-box">
-          <form class="formular js-mehrschritt" action="#" method="post" novalidate>
-            <div class="form-fortschritt">
-              <div class="form-fortschritt__schritt aktiv" data-nr="1">Leistung</div>
-              <div class="form-fortschritt__schritt" data-nr="2">Kontaktdaten</div>
-              <div class="form-fortschritt__schritt" data-nr="3">Nachricht</div>
+          <form class="formular js-produkt-form" data-produkt="Beratungsanfrage" novalidate>
+            <div class="feld"><label for="k-name">Name *</label><input type="text" id="k-name" name="name" required placeholder="Vor- und Nachname"></div>
+            <div class="feld"><label for="k-email">E-Mail *</label><input type="email" id="k-email" name="email" required placeholder="ihre@email.de"></div>
+            <div class="feld"><label for="k-tel">Telefon <span class="hinweis">(freiwillig – falls Sie einen Rückruf möchten)</span></label><input type="tel" id="k-tel" name="telefon" placeholder="Für einen schnellen Rückruf"></div>
+            <div class="feld"><label for="k-msg">Ihre Nachricht</label><textarea id="k-msg" name="nachricht" placeholder="Beschreiben Sie kurz Ihr Anliegen (Vorhaben, Wünsche, Zeitrahmen …)"></textarea></div>
+            <div class="feld">
+              <label style="display:flex; gap:10px; align-items:flex-start; font-weight:400;">
+                <input type="checkbox" required style="width:auto; margin-top:5px;">
+                <span class="hinweis">Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. *</span>
+              </label>
             </div>
-
-            <div class="form-schritt aktiv">
-              <label>Worum geht es? *</label>
-              <div class="leistung-auswahl">
-                <div class="leistung-option"><input type="radio" id="l1" name="leistung" value="Terrassenüberdachung" required><label for="l1"><span class="lo-icon">🏠</span>Terrassen&shy;überdachung</label></div>
-                <div class="leistung-option"><input type="radio" id="l2" name="leistung" value="Carport"><label for="l2"><span class="lo-icon">🚗</span>Carport</label></div>
-                <div class="leistung-option"><input type="radio" id="l3" name="leistung" value="SkyView"><label for="l3"><span class="lo-icon">💎</span>SkyView</label></div>
-                <div class="leistung-option"><input type="radio" id="l4" name="leistung" value="Flat Line"><label for="l4"><span class="lo-icon">📐</span>Flat Line</label></div>
-                <div class="leistung-option"><input type="radio" id="l6" name="leistung" value="Vordach"><label for="l6"><span class="lo-icon">🚪</span>Vordach</label></div>
-              </div>
-              <div class="form-navi">
-                <span></span>
-                <button type="button" class="btn btn--primaer js-weiter">Weiter →</button>
-              </div>
-            </div>
-
-            <div class="form-schritt">
-              <div class="feld"><label for="name">Name *</label><input type="text" id="name" name="name" required placeholder="Vor- und Nachname"></div>
-              <div class="feld"><label for="email">E-Mail *</label><input type="email" id="email" name="email" required placeholder="ihre@email.de"></div>
-              <div class="feld"><label for="telefon">Telefon</label><input type="tel" id="telefon" name="telefon" placeholder="Für schnelle Rückfragen"></div>
-              <div class="feld"><label for="ort">Ort / PLZ</label><input type="text" id="ort" name="ort" placeholder="z. B. 79761 Waldshut-Tiengen"></div>
-              <div class="form-navi">
-                <button type="button" class="btn btn--rahmen js-zurueck">← Zurück</button>
-                <button type="button" class="btn btn--primaer js-weiter">Weiter →</button>
-              </div>
-            </div>
-
-            <div class="form-schritt">
-              <div class="feld"><label for="nachricht">Ihre Nachricht</label><textarea id="nachricht" name="nachricht" placeholder="Beschreiben Sie kurz Ihr Vorhaben (Maße, Wünsche, Zeitrahmen …)"></textarea></div>
-              <div class="feld">
-                <label style="display:flex; gap:10px; align-items:flex-start; font-weight:400;">
-                  <input type="checkbox" required style="width:auto; margin-top:5px;">
-                  <span class="hinweis">Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *</span>
-                </label>
-              </div>
-              <div class="form-navi">
-                <button type="button" class="btn btn--rahmen js-zurueck">← Zurück</button>
-                <button type="submit" class="btn btn--primaer">Anfrage absenden</button>
-              </div>
-            </div>
-
-            <div class="form-erfolg">
-              <div class="form-erfolg__icon">✓</div>
-              <h3>Vielen Dank für Ihre Anfrage!</h3>
-              <p>Wir haben Ihre Angaben erhalten und melden uns innerhalb von 24&nbsp;Stunden bei Ihnen.</p>
-              <p><strong>Sie möchten sofort sprechen?</strong><br><a href="tel:+491603681266">📞 0160 3681266</a></p>
-            </div>
+            <button type="submit" class="btn btn--primaer" style="width:100%;">Anfrage senden</button>
+            <p class="hinweis" style="margin-top:12px;">* Pflichtfelder</p>
           </form>
-          <p class="hinweis" style="margin-top:14px;">
-            <!-- HINWEIS für den Betreiber: Formular zeigt aktuell nur eine Bestätigung an.
-                 Für echten Mailversand siehe ANLEITUNG.md (z. B. Formspree). -->
-            * Pflichtfelder
-          </p>
+          <div class="form-erfolg">
+            <div class="form-erfolg__icon">✓</div>
+            <h3>Vielen Dank für Ihre Anfrage!</h3>
+            <p>Wir haben Ihre Angaben erhalten und melden uns innerhalb von 24&nbsp;Stunden bei Ihnen.</p>
+            <p><strong>Sie möchten sofort sprechen?</strong><br><a href="tel:+491603681266">📞 0160 3681266</a></p>
+          </div>
         </div>
 
         <div class="kontakt-info">
