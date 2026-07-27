@@ -340,4 +340,50 @@ document.addEventListener("DOMContentLoaded", function () {
       b.addEventListener("click", function () { entscheiden(b.getAttribute("data-cookie")); });
     });
   })();
+
+  /* ---- Produktseiten: Farb-/Glas-Musterauswahl -------------------------- */
+  document.querySelectorAll(".muster-auswahl").forEach(function (gruppe) {
+    var ziel = gruppe.getAttribute("data-ziel");
+    gruppe.querySelectorAll(".muster").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        gruppe.querySelectorAll(".muster").forEach(function (m) { m.classList.remove("an"); });
+        btn.classList.add("an");
+        if (ziel) { var el = document.querySelector(ziel); if (el) el.textContent = btn.getAttribute("data-name"); }
+      });
+    });
+  });
+
+  /* ---- Produktseiten: Kontaktformular an Web3Forms ---------------------- */
+  var WEB3FORMS_KEY_PRODUKT = "b26a6983-d43b-4a05-908c-f5ba56350c48";
+  document.querySelectorAll(".js-produkt-form").forEach(function (pform) {
+    var box = pform.closest(".formular-box") || pform.parentElement;
+    var erfolg = box ? box.querySelector(".form-erfolg") : null;
+    pform.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!pform.checkValidity()) { pform.reportValidity(); return; }
+      var btn = pform.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = "Wird gesendet …"; }
+      var g = function (n) { var el = pform.querySelector('[name="' + n + '"]'); return el ? el.value.trim() : ""; };
+      var produkt = pform.getAttribute("data-produkt") || "";
+      var payload = {
+        access_key: WEB3FORMS_KEY_PRODUKT,
+        subject: "Produktanfrage: " + produkt,
+        from_name: "Antonov Outdoor – Website",
+        replyto: g("email"), email: g("email"), botcheck: "",
+        Produkt: produkt, Name: g("name"), "E-Mail": g("email"), Telefon: g("telefon"), Nachricht: g("nachricht")
+      };
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.success) { pform.style.display = "none"; if (erfolg) erfolg.classList.add("aktiv"); }
+          else { throw new Error("fail"); }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = "Anfrage senden"; }
+          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0160 3681266.");
+        });
+    });
+  });
 });
