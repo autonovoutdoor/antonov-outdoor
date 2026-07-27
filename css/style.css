@@ -141,6 +141,10 @@ ul { list-style: none; }
 .nav a.aktiv { color: var(--farbe-gold-dunkel); }
 .nav .btn { margin-left: 8px; padding: 10px 20px; }
 .nav .btn:hover { color: #fff; }
+/* B2B "Für Handwerker"-Link (dezent abgesetzt) */
+.nav__partner { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: .88rem;
+  color: var(--farbe-text-hell); border: 1px solid var(--farbe-grau-linie); border-radius: 8px; padding: 9px 14px; margin-left: 10px; }
+.nav__partner:hover { color: var(--farbe-gold-dunkel); border-color: var(--farbe-gold); background: var(--farbe-grau); }
 
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 110; }
 .nav-toggle span { display: block; width: 26px; height: 3px; background: var(--farbe-anthrazit); border-radius: 3px; transition: all var(--uebergang); }
@@ -694,6 +698,7 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .nav.offen { transform: translateX(0); }
   .nav a { width: 100%; padding: 14px 12px; border-bottom: 1px solid var(--farbe-grau-linie); border-radius: 0; }
   .nav .btn { width: 100%; margin: 12px 0 0; }
+  .nav__partner { border: none; margin: 12px 0 0; justify-content: center; background: var(--farbe-grau); border-radius: 8px; }
   .highlights { grid-template-columns: 1fr; }
   .karten { grid-template-columns: 1fr; }
   .ablauf { grid-template-columns: 1fr; }

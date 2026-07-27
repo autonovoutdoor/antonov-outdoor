@@ -386,4 +386,38 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   });
+
+  /* ---- Partner-/Bewerbungsformular (B2B) an Web3Forms --------------------- */
+  document.querySelectorAll(".js-partner-form").forEach(function (bf) {
+    var box = bf.closest(".formular-box") || bf.parentElement;
+    var erfolg = box ? box.querySelector(".form-erfolg") : null;
+    bf.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!bf.checkValidity()) { bf.reportValidity(); return; }
+      var btn = bf.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = "Wird gesendet …"; }
+      var payload = {
+        access_key: WEB3FORMS_KEY_PRODUKT,
+        subject: bf.getAttribute("data-betreff") || "Anfrage über die Website",
+        from_name: "Antonov Outdoor – Website", botcheck: ""
+      };
+      bf.querySelectorAll("[name]").forEach(function (el) {
+        if (el.type === "checkbox") return;
+        payload[el.getAttribute("name")] = el.value.trim();
+        if (el.type === "email") { payload.replyto = el.value.trim(); }
+      });
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.success) { bf.style.display = "none"; if (erfolg) erfolg.classList.add("aktiv"); }
+          else { throw new Error("fail"); }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = "Bewerbung senden"; }
+          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0160 3681266.");
+        });
+    });
+  });
 });
