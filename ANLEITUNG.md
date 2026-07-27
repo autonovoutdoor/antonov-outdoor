@@ -78,7 +78,7 @@ website/
 | **Adresse (Straße, Hausnr.)** | `impressum.html`, `datenschutz.html` | `[Straße und Hausnummer]` |
 | **Rechtstexte** | `impressum.html`, `datenschutz.html`, `agb.html` | Nur Gerüst – siehe Punkt 3 |
 
-Telefon/WhatsApp (`0160 3681266`), Ort (Waldshut-Tiengen) und Öffnungszeiten (Mo–Fr 8–17 Uhr)
+Telefon/WhatsApp (`0156 79818872`), Ort (Waldshut-Tiengen) und Öffnungszeiten (Mo–Fr 8–17 Uhr)
 sind bereits überall eingetragen.
 
 ### 🟡 Danach (empfohlen)

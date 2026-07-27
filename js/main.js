@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = "Anfrage absenden"; }
-          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0160 3681266.");
+          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0156 79818872.");
         });
     });
   }
@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = "Anfrage senden"; }
-          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0160 3681266.");
+          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0156 79818872.");
         });
     });
   });
@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = "Bewerbung senden"; }
-          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0160 3681266.");
+          alert("Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – oder rufen Sie uns direkt an: 0156 79818872.");
         });
     });
   });

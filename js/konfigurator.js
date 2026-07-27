@@ -325,7 +325,7 @@
       '<div class="form-erfolg__icon">✓</div>' +
       "<h3>Vielen Dank für Ihre Anfrage!</h3>" +
       "<p>Ihre Konfiguration (Anfrage-Nr. " + anfrageNr + ") ist bei uns eingegangen. Wir melden uns innerhalb von 24&nbsp;Stunden mit Ihrem persönlichen Angebot.</p>" +
-      '<p><strong>Sie möchten sofort sprechen?</strong><br><a href="tel:+491603681266">📞 0160 3681266</a></p></div>';
+      '<p><strong>Sie möchten sofort sprechen?</strong><br><a href="tel:+4915679818872">📞 0156 79818872</a></p></div>';
   }
 
   /* ---- Interaktion ------------------------------------------------------- */
@@ -428,7 +428,7 @@
     var f = mount.querySelector(".kf__fehler");
     if (f) {
       f.innerHTML = "Das Senden hat leider nicht geklappt. Bitte prüfen Sie Ihre Internetverbindung – " +
-        'oder rufen Sie uns direkt an: <a href="tel:+491603681266">0160 3681266</a>.';
+        'oder rufen Sie uns direkt an: <a href="tel:+4915679818872">0156 79818872</a>.';
       f.classList.add("an");
     }
   }
