@@ -47,7 +47,7 @@
 /* 2. RESET & BASIS ---------------------------------------------------------- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
 body {
   font-family: var(--schrift);
@@ -119,10 +119,19 @@ ul { list-style: none; }
 .topbar__insta svg { width: 15px; height: 15px; display: block; }
 
 .header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 2px 12px rgba(31,40,48,0.07); }
-.header .container { display: flex; align-items: center; justify-content: space-between; min-height: 74px; }
+.header .container { display: flex; align-items: center; gap: 16px; min-height: 74px; }
 
-.logo { display: flex; align-items: center; gap: 11px; }
+.logo { display: flex; align-items: center; gap: 11px; margin-right: auto; }
 .logo img { height: 58px; width: auto; }
+
+/* Kontakt-Icons (Telefon, WhatsApp, E-Mail, Instagram) – auf einer Linie mit dem Logo */
+.header__kontakt { display: flex; align-items: center; gap: 16px; }
+.header__kontakt a { color: var(--farbe-anthrazit); display: inline-flex; align-items: center; transition: color var(--uebergang); }
+.header__kontakt a:hover { color: var(--farbe-gold-dunkel); }
+.header__kontakt .tb-ico { font-size: 1.2rem; line-height: 1; }
+.header__kontakt .tb-txt, .header__kontakt .topbar__insta span { display: none; }
+.header__kontakt .topbar__insta { gap: 0; }
+.header__kontakt .topbar__insta svg { width: 20px; height: 20px; }
 .logo__text { font-size: 1.2rem; font-weight: 800; color: var(--farbe-anthrazit); letter-spacing: .3px; line-height:1.1; }
 .logo__text span { color: var(--farbe-gold); display:block; font-size:.72rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; }
 
@@ -697,17 +706,9 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .leistung-auswahl { grid-template-columns: repeat(2, 1fr); }
   .galerie { grid-template-columns: repeat(2, 1fr); }
   .formular-box { padding: 22px; }
-  /* Topbar mobil: bleibt beim Scrollen oben sichtbar (klebt über dem Logo-Header) */
-  .topbar { position: sticky; top: 0; z-index: 101; }
-  .header { top: 40px; }
-  .topbar .container { justify-content: center; min-height: 40px; }
-  .topbar__info { display: none; }
-  /* nur gleich große Icons, sauber in einer Reihe */
-  .topbar__links { flex-wrap: nowrap; gap: 30px; align-items: center; justify-content: center; }
-  .topbar__links a { font-size: 0; display: inline-flex; align-items: center; }
-  .topbar__links .tb-txt, .topbar__insta span { display: none; }
-  .topbar__links .tb-ico { font-size: 1.25rem; line-height: 1; }
-  .topbar__insta svg { width: 20px; height: 20px; }
+  /* Header mobil: Logo links, Kontakt-Icons rechts (kompakter), Menü-Button daneben */
+  .header .container { gap: 10px; }
+  .header__kontakt { gap: 13px; }
   .form-fortschritt__schritt { font-size: 0; }
   .form-fortschritt__schritt::before { margin-bottom: 0; }
   .hero-badges { grid-template-columns: repeat(2, 1fr); }
