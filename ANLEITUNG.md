@@ -142,7 +142,7 @@ neue Seite in die Footer-Liste, den Abschnitt „Einzugsgebiet" auf der Startsei
 
 ## 6. Bilder
 
-- **Echte Fotos** von VD AluSysteme sind eingebunden und wurden automatisch verkleinert und in
+- **Echte Fotos** von unserem Aluminium-Hersteller sind eingebunden und wurden automatisch verkleinert und in
   **WebP + JPG** (für schnelle Ladezeiten) umgewandelt. Zuordnung:
   - `hero.*` → großer Kopfbereich der Startseite (Terrasse über Lounge)
   - `terrassenueberdachung-1/2/3` → Leistungsseite Terrassenüberdachung
@@ -156,7 +156,7 @@ neue Seite in die Footer-Liste, den Abschnitt „Einzugsgebiet" auf der Startsei
 - **Original-Fotos** (die großen Dateien) liegen unter `webseite antonov/Bilder/…` – bewusst **nicht**
   im Web-Ordner, damit die Website schlank bleibt. Neue Fotos am besten als JPG **max. 1600 px** liefern.
 
-> **Hinweis Bildrechte:** Sie haben angegeben, das Herstellermaterial von VD AluSysteme mit
+> **Hinweis Bildrechte:** Sie haben angegeben, das Herstellermaterial von unserem Aluminium-Hersteller mit
 > Erlaubnis nutzen zu dürfen. Der Bildnachweis steht bereits im Impressum.
 
 ---
