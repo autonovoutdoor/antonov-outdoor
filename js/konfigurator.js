@@ -175,7 +175,7 @@
         { key: "automatik", type: "choice", cols: 2, label: "Wetter-Automatik", options: [ { v: "Ja, mit Wetter-Automatik" }, { v: "Nein" } ] } ] },
       stepFarbe(FARBE_PERGOLA), stepMontage() ] },
 
-    { v: "Sonstiges", desc: "Markise, Geländer, Vordach …", icon: "✨", steps: [
+    { v: "Sonstiges", desc: "Markise, Geländer, Vordach …", icon: "✨", img: "bilder/konfig-sonstiges", steps: [
       { title: "Was können wir für Sie tun?", groups: [ { key: "anliegen", type: "textarea", required: true,
         placeholder: "Beschreiben Sie Ihr Vorhaben – z. B. Sonnenschutz, Geländer, Sichtschutz, Reparatur …" } ] },
       stepMasse(), stepMontage() ] },
