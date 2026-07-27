@@ -645,6 +645,12 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
 .konfig-hinweis p { margin: 0; color: var(--farbe-text); }
 .konfig-hinweis strong { font-family: var(--schrift-headline); font-size: 1.2rem; color: var(--farbe-anthrazit); display: block; }
 
+/* Fester Hintergrund beim Scrollen (Parallax) – bleibt stehen statt wegzulaufen.
+   Nur ab Tablet/Desktop, da fixierte Hintergründe auf Handys (iOS) oft ruckeln. */
+@media (min-width: 768px) {
+  .hero, .seitenkopf, .produkt-hero__bg { background-attachment: fixed; }
+}
+
 /* 11. RESPONSIVE ------------------------------------------------------------- */
 @media (max-width: 960px) {
   .highlights { grid-template-columns: repeat(2, 1fr); }
