@@ -220,6 +220,7 @@
           <input class="fn-input" id="fnTel" name="telefon" type="tel" placeholder="0170 1234567" autocomplete="tel" required></div>
         <div class="fn-field"><label for="fnMail">E-Mail</label>
           <input class="fn-input" id="fnMail" name="email" type="email" placeholder="ihre@email.de" autocomplete="email" required></div>
+        <input type="text" id="fnHp" name="hp_firma" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
         <label class="fn-consent"><input type="checkbox" id="fnConsent" required>
           <span>Ich stimme zu, dass Antonov Outdoor mich zu meiner Anfrage kontaktiert. Es gilt die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
         <div class="fn-nav">
@@ -297,6 +298,29 @@
 <script>
 (function(){
   var WEB3FORMS_KEY = "b26a6983-d43b-4a05-908c-f5ba56350c48";
+  // Supabase (Antonov Base) – öffentlicher anon-Key; Insert ausschließlich über RPC submit_lead
+  var SUPA_URL = "https://nrpwbbepwuauikqpcvxz.supabase.co";
+  var SUPA_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycHdiYmVwd3VhdWlrcXBjdnh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMTA3NDIsImV4cCI6MjEwMTc4Njc0Mn0.1ds84MnzcWvSTH4XkTZuGuvU6Uc9XZKiAJzWPOYimjQ";
+  function fnUtm(){
+    var q; try{ q = new URLSearchParams(location.search); }catch(e){ q = { get:function(){ return null; } }; }
+    return { source:q.get('utm_source')||'direkt', medium:q.get('utm_medium')||'', campaign:q.get('utm_campaign')||'', content:q.get('utm_content')||'', term:q.get('utm_term')||'' };
+  }
+  function sendToCRM(name, tel, mail){
+    try{
+      var u = fnUtm();
+      fetch(SUPA_URL + "/rest/v1/rpc/submit_lead", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer "+SUPA_ANON },
+        body: JSON.stringify({
+          p_name:name, p_telefon:tel, p_email:mail,
+          p_montageart:answers.Montageart||null, p_breite:answers.Breite||null, p_tiefe:answers.Tiefe||null,
+          p_eindeckung:answers.Eindeckung||null, p_zeitpunkt:answers.Zeitpunkt||null,
+          p_source:u.source, p_medium:u.medium, p_campaign:u.campaign, p_content:u.content, p_term:u.term,
+          p_landing_page:location.pathname, p_referrer:document.referrer||null
+        })
+      }).catch(function(){});
+    }catch(e){}
+  }
   var steps = Array.prototype.slice.call(document.querySelectorAll(".fn-step"));
   var bar = document.getElementById("fnBar");
   var idx = 0;
@@ -362,9 +386,13 @@
     var mail = document.getElementById("fnMail").value.trim();
     var ok   = document.getElementById("fnConsent").checked;
     if (!name || !tel || !/.+@.+\..+/.test(mail) || !ok){ err.style.display="block"; return; }
+    // Honeypot: ausgefüllt = Bot → Danke-Seite zeigen, aber nichts senden
+    var hp = document.getElementById("fnHp");
+    if (hp && hp.value){ next(); return; }
     err.style.display="none";
     var btn = document.getElementById("fnSubmit");
     btn.disabled = true; btn.textContent = "Wird gesendet …";
+    sendToCRM(name, tel, mail);   // best-effort in die Antonov Base (Supabase)
 
     var payload = {
       access_key: WEB3FORMS_KEY,
