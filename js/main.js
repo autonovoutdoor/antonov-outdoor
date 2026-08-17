@@ -7,6 +7,25 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
+  /* ---- Leads zusätzlich in die Antonov Base (Supabase) ------------------- */
+  var BASE_URL = "https://nrpwbbepwuauikqpcvxz.supabase.co";
+  var BASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycHdiYmVwd3VhdWlrcXBjdnh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMTA3NDIsImV4cCI6MjEwMTc4Njc0Mn0.1ds84MnzcWvSTH4XkTZuGuvU6Uc9XZKiAJzWPOYimjQ";
+  function sendLeadToBase(lead) {
+    try {
+      fetch(BASE_URL + "/rest/v1/rpc/submit_lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "apikey": BASE_ANON, "Authorization": "Bearer " + BASE_ANON },
+        body: JSON.stringify({
+          p_name: lead.name || "", p_telefon: lead.telefon || "", p_email: lead.email || "",
+          p_source: lead.source || "website", p_medium: "web",
+          p_campaign: lead.campaign || "", p_content: lead.content || "",
+          p_notes: lead.notes || null,
+          p_landing_page: location.pathname, p_referrer: document.referrer || null
+        })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
   /* ---- Mobiles Menü ------------------------------------------------------ */
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".nav");
@@ -162,6 +181,12 @@ document.addEventListener("DOMContentLoaded", function () {
         Name: g("name"), "E-Mail": g("email"), Telefon: g("telefon"),
         "Ort / PLZ": g("ort"), Nachricht: g("nachricht")
       };
+
+      sendLeadToBase({
+        name: g("name"), telefon: g("telefon"), email: g("email"),
+        source: "website", campaign: "kontakt", content: leistung,
+        notes: [leistung ? "Leistung: " + leistung : "", g("ort") ? "Ort/PLZ: " + g("ort") : "", g("nachricht")].filter(Boolean).join("\n") || null
+      });
 
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -372,6 +397,11 @@ document.addEventListener("DOMContentLoaded", function () {
         replyto: g("email"), email: g("email"), botcheck: "",
         Produkt: produkt, Name: g("name"), "E-Mail": g("email"), Telefon: g("telefon"), Nachricht: g("nachricht")
       };
+      sendLeadToBase({
+        name: g("name"), telefon: g("telefon"), email: g("email"),
+        source: "website", campaign: "produkt", content: produkt,
+        notes: g("nachricht") || null
+      });
       fetch("https://api.web3forms.com/submit", {
         method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload)
