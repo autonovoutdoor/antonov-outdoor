@@ -107,6 +107,19 @@
              color:#666; font-size:.82rem; flex-wrap:wrap; }
   .fn-err{ color:#c0392b; font-size:.9rem; margin-top:10px; text-align:center; display:none; }
 
+  /* Consent-Banner (Meta-Pixel) */
+  .fn-cc{ position:fixed; left:0; right:0; bottom:0; z-index:60; background:#1a1a1a; color:#eee;
+          padding:14px 16px; box-shadow:0 -4px 18px rgba(0,0,0,.28); display:none; }
+  .fn-cc.is-show{ display:block; }
+  .fn-cc__inner{ max-width:520px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .fn-cc p{ margin:0; font-size:.8rem; line-height:1.45; color:#cfcabb; }
+  .fn-cc a{ color:var(--fn-gold); }
+  .fn-cc__btns{ display:flex; gap:10px; }
+  .fn-cc__btns button{ flex:1; padding:11px; border-radius:10px; border:none; font-weight:700;
+                       cursor:pointer; font-size:.92rem; font-family:inherit; }
+  .fn-cc__ok{ background:var(--fn-gold); color:#fff; }
+  .fn-cc__no{ background:#3a3a3a; color:#eee; }
+
   @media (min-width:380px){ .fn-hero img{ height:250px; } }
 </style>
 </head>
@@ -237,6 +250,50 @@
   </div>
 </div>
 
+<div class="fn-cc" id="fnCC">
+  <div class="fn-cc__inner">
+    <p>Wir würden gern Marketing-Cookies des <strong>Meta-Pixels</strong> setzen, um den Erfolg unserer Instagram-/Facebook-Anzeigen zu messen. Das geschieht nur mit Ihrer Einwilligung. Details in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+    <div class="fn-cc__btns">
+      <button type="button" class="fn-cc__no" id="fnCCno">Ablehnen</button>
+      <button type="button" class="fn-cc__ok" id="fnCCok">Akzeptieren</button>
+    </div>
+  </div>
+</div>
+
+<!-- Meta-Pixel: lädt ausschließlich nach Einwilligung -->
+<script>
+(function(){
+  var PIXEL_ID = "1733703514828005";
+  var KEY = "ao_ads_consent";
+  function loadPixel(){
+    if (window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+  // Beim Absenden aufgerufen – feuert nur, wenn der Pixel (nach Einwilligung) geladen ist
+  window.aoFireLead = function(){ try{ if(window.fbq) window.fbq('track','Lead'); }catch(e){} };
+
+  var choice = null; try{ choice = localStorage.getItem(KEY); }catch(e){}
+  if (choice === "yes"){ loadPixel(); return; }
+  if (choice === "no"){ return; }
+  var cc = document.getElementById("fnCC");
+  cc.classList.add("is-show");
+  document.getElementById("fnCCok").addEventListener("click", function(){
+    try{ localStorage.setItem(KEY,"yes"); }catch(e){}
+    cc.classList.remove("is-show"); loadPixel();
+  });
+  document.getElementById("fnCCno").addEventListener("click", function(){
+    try{ localStorage.setItem(KEY,"no"); }catch(e){}
+    cc.classList.remove("is-show");
+  });
+})();
+</script>
+
 <script>
 (function(){
   var WEB3FORMS_KEY = "b26a6983-d43b-4a05-908c-f5ba56350c48";
@@ -326,8 +383,7 @@
       body: JSON.stringify(payload)
     }).then(function(r){ return r.json(); }).then(function(res){
       if (res && res.success){
-        /* Optional später: Meta-Pixel-Conversion hier feuern:
-           if (window.fbq) fbq('track','Lead'); */
+        if (window.aoFireLead) window.aoFireLead();
         next();
       } else { throw new Error("fail"); }
     }).catch(function(){
