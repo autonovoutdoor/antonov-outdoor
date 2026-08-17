@@ -455,12 +455,37 @@
           zufriedenen Kunden.</p>
       </div>
 
-      <!-- Echte Google-Bewertungen: Sobald das Google-Unternehmensprofil verifiziert ist,
-           hier den Bewertungslink im Button einsetzen bzw. ein Bewertungs-Widget (z. B. Trustindex)
-           hinter der Cookie-Zustimmung einbinden. -->
-      <div class="bewertungen-hinweis">
-        <a id="google-bewertung-link" href="#" class="btn btn--primaer">Auf Google bewerten</a>
+      <!-- Google-Bewertungen (Trustindex) – lädt ausschließlich nach Zustimmung -->
+      <div class="bewertungen-widget" style="margin-top:24px;">
+        <div id="ti-consent" style="display:none; max-width:640px; margin:0 auto; background:#fff; border:1px solid #e4e0d6; border-radius:14px; padding:22px; text-align:center;">
+          <p style="margin:0 0 14px; color:#555; font-size:.92rem;">Um unsere echten Google-Bewertungen anzuzeigen, laden wir den externen Dienst <strong>Trustindex</strong>. Dabei können Daten an Trustindex bzw. Google übertragen werden. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+          <button type="button" id="ti-show" class="btn btn--primaer">Bewertungen anzeigen</button>
+        </div>
+        <div id="ti-reviews"></div>
       </div>
+      <script>
+      (function(){
+        function loadTI(){
+          var box=document.getElementById('ti-reviews');
+          if(!box || box.getAttribute('data-loaded')) return;
+          box.setAttribute('data-loaded','1');
+          var s=document.createElement('script');
+          s.defer=true; s.async=true;
+          s.src='https://cdn.trustindex.io/loader.js?643132a79af74086a04625c53d9';
+          box.appendChild(s);
+        }
+        var box=document.getElementById('ti-consent');
+        function go(){ if(box) box.style.display='none'; loadTI(); }
+        var ok=false;
+        try{ ok=(localStorage.getItem('ao_cookie')==='alle')||(localStorage.getItem('ao_reviews_consent')==='yes'); }catch(e){}
+        if(ok){ go(); }
+        else{
+          if(box) box.style.display='block';
+          var btn=document.getElementById('ti-show');
+          if(btn) btn.addEventListener('click', function(){ try{ localStorage.setItem('ao_reviews_consent','yes'); }catch(e){} go(); });
+        }
+      })();
+      </script>
     </div>
   </section>
 
