@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kostenloses Angebot für Ihre Terrassenüberdachung | Antonov Outdoor</title>
-<meta name="description" content="In unter 60 Sekunden zum kostenlosen, unverbindlichen Festpreis-Angebot für Ihre Terrassenüberdachung, Pergola, Carport oder Kaltwintergarten – maßgefertigt im Landkreis Waldshut.">
+<meta name="description" content="Ihr unverbindliches Festpreis-Angebot für Ihre Terrassenüberdachung in 24 Stunden – maßgefertigt aus Aluminium im Landkreis Waldshut. Jetzt in unter 60 Sekunden anfragen.">
 <meta name="theme-color" content="#1a1a1a">
 <meta name="robots" content="noindex,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kostenloses Festpreis-Angebot – Antonov Outdoor">
-<meta property="og:description" content="In unter 60 Sekunden zum unverbindlichen Angebot für Ihre Terrassenüberdachung. Maßanfertigung &amp; Montage aus dem Landkreis Waldshut.">
+<meta property="og:title" content="Unverbindliches Angebot in 24 Stunden – Antonov Outdoor">
+<meta property="og:description" content="Ihr unverbindliches Festpreis-Angebot für Ihre Terrassenüberdachung in 24 Stunden. Maßanfertigung &amp; Montage aus dem Landkreis Waldshut.">
 <meta property="og:image" content="https://www.antonov-outdoor.de/bilder/terrassenueberdachung-1.jpg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/bilder/favicon-48.png">
@@ -28,14 +28,12 @@
   .fn-wrap{ max-width:520px; margin:0 auto; min-height:100dvh; background:var(--fn-grau);
             display:flex; flex-direction:column; }
 
-  /* Kopf */
   .fn-top{ display:flex; align-items:center; justify-content:space-between; gap:12px;
            padding:12px 18px; background:var(--fn-dark); }
   .fn-top img{ height:34px; width:auto; }
   .fn-top a.tel{ color:#fff; text-decoration:none; font-weight:600; font-size:.9rem;
                  display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
 
-  /* Fortschritt */
   .fn-progress{ height:6px; background:#dcd8cd; }
   .fn-progress__bar{ height:100%; width:0; background:var(--fn-gold); transition:width .35s ease; }
 
@@ -56,9 +54,7 @@
   .fn-badge{ background:#fff; border:1px solid var(--fn-linie); border-radius:20px;
              padding:6px 12px; font-size:.82rem; font-weight:600; }
 
-  /* Optionskarten */
   .fn-opts{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .fn-opts--1{ grid-template-columns:1fr; }
   .fn-opt{ background:#fff; border:2px solid var(--fn-linie); border-radius:14px; cursor:pointer;
            overflow:hidden; text-align:left; padding:0; font:inherit; color:inherit;
            transition:border-color .15s, transform .1s, box-shadow .15s; }
@@ -70,19 +66,22 @@
   .fn-opt__lbl{ padding:10px 12px; font-weight:600; font-size:1rem; }
   .fn-opt__lbl small{ display:block; font-weight:400; color:#666; font-size:.82rem; margin-top:2px; }
 
-  /* Felder */
   .fn-field{ margin:0 0 14px; }
   .fn-field label{ display:block; font-weight:600; margin-bottom:6px; font-size:.95rem; }
+  .fn-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .fn-inwrap{ position:relative; }
+  .fn-inwrap .fn-unit{ position:absolute; right:14px; top:50%; transform:translateY(-50%);
+                       color:#999; font-weight:600; pointer-events:none; }
   .fn-input{ width:100%; padding:15px 16px; border:2px solid var(--fn-linie); border-radius:12px;
              font-size:1.05rem; background:#fff; font-family:inherit; }
   .fn-input:focus{ outline:none; border-color:var(--fn-gold); }
-  .fn-plz{ text-align:center; letter-spacing:4px; font-size:1.4rem; font-weight:700; }
+  .fn-input.fn-hasunit{ padding-right:44px; }
+  .fn-masshint{ text-align:center; color:#777; font-size:.85rem; margin:2px 0 0; }
 
   .fn-consent{ display:flex; gap:10px; align-items:flex-start; font-size:.85rem; color:#555; margin:6px 0 4px; }
   .fn-consent input{ width:20px; height:20px; margin-top:2px; flex:none; accent-color:var(--fn-gold); }
   .fn-consent a{ color:var(--fn-gold-d); }
 
-  /* Buttons */
   .fn-btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
            padding:17px 20px; border:none; border-radius:12px; background:var(--fn-gold); color:#fff;
            font-size:1.12rem; font-weight:700; cursor:pointer; font-family:inherit;
@@ -96,7 +95,6 @@
   .fn-back:hover{ color:#333; background:#e9e5db; }
   .fn-hint{ text-align:center; font-size:.8rem; color:#888; margin-top:14px; }
 
-  /* Danke */
   .fn-done{ text-align:center; padding:30px 10px; }
   .fn-done__ico{ width:76px; height:76px; border-radius:50%; background:#2e7d32; color:#fff;
                  font-size:2.4rem; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
@@ -130,40 +128,20 @@
         <picture><source srcset="bilder/terrassenueberdachung-1.webp" type="image/webp">
         <img src="bilder/terrassenueberdachung-1.jpg" alt="Terrassenüberdachung aus Aluminium"></picture>
       </div>
-      <h1 class="fn-h">Ihre Terrassenüberdachung nach Maß – kostenloses Festpreis-Angebot</h1>
-      <p class="fn-sub">Beantworten Sie 5 kurze Fragen und erhalten Sie Ihr <strong>unverbindliches Angebot</strong> – in unter 60&nbsp;Sekunden.</p>
+      <h1 class="fn-h">Terrassenüberdachung nach Maß – Ihr unverbindliches Angebot in 24 Stunden</h1>
+      <p class="fn-sub">Beantworten Sie 3 kurze Fragen und erhalten Sie Ihr <strong>persönliches Festpreis-Angebot</strong> – in unter 60&nbsp;Sekunden.</p>
       <div class="fn-badges">
+        <span class="fn-badge">⏱️ Angebot in 24&nbsp;Stunden</span>
         <span class="fn-badge">✅ Maßanfertigung</span>
-        <span class="fn-badge">✅ Aus dem Landkreis Waldshut</span>
         <span class="fn-badge">✅ 100&nbsp;% unverbindlich</span>
       </div>
       <button class="fn-btn" type="button" data-next>Angebot starten →</button>
       <p class="fn-hint">Kostenlos &amp; unverbindlich · Antwort innerhalb von 24&nbsp;Stunden</p>
     </section>
 
-    <!-- 1: Produkt -->
-    <section class="fn-step" data-step="q" data-key="Produkt">
-      <p class="fn-q">Was möchten Sie überdachen?</p>
-      <div class="fn-opts">
-        <button class="fn-opt" type="button" data-val="Terrassendach (Glas)">
-          <picture><source srcset="bilder/terrassenueberdachung-1.webp" type="image/webp"><img class="fn-opt__img" src="bilder/terrassenueberdachung-1.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Terrassendach</span></button>
-        <button class="fn-opt" type="button" data-val="Lamellendach / Pergola">
-          <picture><source srcset="bilder/pergola-1.webp" type="image/webp"><img class="fn-opt__img" src="bilder/pergola-1.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Lamellendach / Pergola</span></button>
-        <button class="fn-opt" type="button" data-val="Carport">
-          <picture><source srcset="bilder/carport-1.webp" type="image/webp"><img class="fn-opt__img" src="bilder/carport-1.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Carport</span></button>
-        <button class="fn-opt" type="button" data-val="Kaltwintergarten">
-          <picture><source srcset="bilder/kaltwintergarten-1.webp" type="image/webp"><img class="fn-opt__img" src="bilder/kaltwintergarten-1.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Kaltwintergarten</span></button>
-      </div>
-      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
-    </section>
-
-    <!-- 2: Montage -->
+    <!-- 1: Montage -->
     <section class="fn-step" data-step="q" data-key="Montageart">
-      <p class="fn-q">Wie soll es angebracht sein?</p>
+      <p class="fn-q">Wie soll die Überdachung angebracht sein?</p>
       <div class="fn-opts">
         <button class="fn-opt" type="button" data-val="Wandmontage"><div class="fn-opt__ico">🏠</div><span class="fn-opt__lbl">Wandmontage<small>am Haus befestigt</small></span></button>
         <button class="fn-opt" type="button" data-val="Freistehend"><div class="fn-opt__ico">⛺</div><span class="fn-opt__lbl">Freistehend<small>eigene Pfosten</small></span></button>
@@ -172,44 +150,42 @@
       <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
     </section>
 
-    <!-- 3: Größe -->
-    <section class="fn-step" data-step="q" data-key="Größe">
-      <p class="fn-q">Wie groß soll die Fläche etwa sein?</p>
-      <div class="fn-opts">
-        <button class="fn-opt" type="button" data-val="bis 15 m²"><div class="fn-opt__ico">📐</div><span class="fn-opt__lbl">bis 15 m²</span></button>
-        <button class="fn-opt" type="button" data-val="15–25 m²"><div class="fn-opt__ico">📐</div><span class="fn-opt__lbl">15–25 m²</span></button>
-        <button class="fn-opt" type="button" data-val="über 25 m²"><div class="fn-opt__ico">📐</div><span class="fn-opt__lbl">über 25 m²</span></button>
-        <button class="fn-opt" type="button" data-val="Noch unklar"><div class="fn-opt__ico">❓</div><span class="fn-opt__lbl">Noch unklar</span></button>
+    <!-- 2: Maße (Breite & Tiefe) -->
+    <section class="fn-step" data-step="masse">
+      <p class="fn-q">Welche Maße soll die Überdachung haben?</p>
+      <p class="fn-sub" style="text-align:center;">Ungefähre Werte genügen – wir prüfen alles beim kostenlosen Aufmaß.</p>
+      <div class="fn-row">
+        <div class="fn-field"><label for="fnBreite">Breite</label>
+          <div class="fn-inwrap"><input class="fn-input fn-hasunit" id="fnBreite" type="tel" inputmode="numeric" placeholder="z. B. 500"><span class="fn-unit">cm</span></div></div>
+        <div class="fn-field"><label for="fnTiefe">Tiefe (Ausladung)</label>
+          <div class="fn-inwrap"><input class="fn-input fn-hasunit" id="fnTiefe" type="tel" inputmode="numeric" placeholder="z. B. 350"><span class="fn-unit">cm</span></div></div>
       </div>
-      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
-    </section>
-
-    <!-- 4: Zeitpunkt -->
-    <section class="fn-step" data-step="q" data-key="Zeitpunkt">
-      <p class="fn-q">Wann soll es umgesetzt werden?</p>
-      <div class="fn-opts">
-        <button class="fn-opt" type="button" data-val="In 1–3 Monaten"><div class="fn-opt__ico">📅</div><span class="fn-opt__lbl">In 1–3 Monaten</span></button>
-        <button class="fn-opt" type="button" data-val="In 4–6 Monaten"><div class="fn-opt__ico">📅</div><span class="fn-opt__lbl">In 4–6 Monaten</span></button>
-        <button class="fn-opt" type="button" data-val="Später / dieses Jahr"><div class="fn-opt__ico">📅</div><span class="fn-opt__lbl">Später</span></button>
-        <button class="fn-opt" type="button" data-val="Noch unklar"><div class="fn-opt__ico">❓</div><span class="fn-opt__lbl">Noch unklar</span></button>
-      </div>
-      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
-    </section>
-
-    <!-- 5: PLZ -->
-    <section class="fn-step" data-step="plz">
-      <p class="fn-q">Ihre Postleitzahl?</p>
-      <p class="fn-sub" style="text-align:center;">Damit prüfen wir Ihre Wind-/Schneelastzone und ob Sie in unserem Einzugsgebiet liegen.</p>
-      <div class="fn-field">
-        <input class="fn-input fn-plz" id="fnPlz" type="tel" inputmode="numeric" maxlength="5" placeholder="79761" autocomplete="postal-code">
-      </div>
+      <p class="fn-masshint">Angabe in Zentimetern (z.&nbsp;B. 500&nbsp;cm = 5&nbsp;m)</p>
       <div class="fn-nav">
         <button class="fn-back" type="button" data-back aria-label="Zurück">‹</button>
-        <button class="fn-btn" type="button" id="fnPlzNext">Weiter →</button>
+        <button class="fn-btn" type="button" id="fnMasseNext">Weiter →</button>
       </div>
     </section>
 
-    <!-- 6: Kontakt -->
+    <!-- 3: Dach-Eindeckung -->
+    <section class="fn-step" data-step="q" data-key="Eindeckung">
+      <p class="fn-q">Woraus soll das Dach sein?</p>
+      <div class="fn-opts">
+        <button class="fn-opt" type="button" data-val="VSG-Glas 8 mm klar">
+          <picture><source srcset="bilder/glas-vsg-klar.webp" type="image/webp"><img class="fn-opt__img" src="bilder/glas-vsg-klar.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">VSG-Glas 8&nbsp;mm klar<small>durchsichtig, hell</small></span></button>
+        <button class="fn-opt" type="button" data-val="VSG-Glas 8 mm opal/matt">
+          <picture><source srcset="bilder/glas-vsg-opal.webp" type="image/webp"><img class="fn-opt__img" src="bilder/glas-vsg-opal.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">VSG-Glas 8&nbsp;mm opal/matt<small>blickdicht, sanftes Licht</small></span></button>
+        <button class="fn-opt" type="button" data-val="Polycarbonat">
+          <picture><source srcset="bilder/glas-poly-klar.webp" type="image/webp"><img class="fn-opt__img" src="bilder/glas-poly-klar.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Polycarbonat<small>leicht &amp; günstiger</small></span></button>
+        <button class="fn-opt" type="button" data-val="Noch unklar"><div class="fn-opt__ico">❓</div><span class="fn-opt__lbl">Noch unklar<small>bitte beraten</small></span></button>
+      </div>
+      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
+    </section>
+
+    <!-- 4: Kontakt -->
     <section class="fn-step" data-step="kontakt">
       <p class="fn-q">Fast geschafft! Wohin dürfen wir Ihr Angebot senden?</p>
       <form id="fnForm" novalidate>
@@ -226,11 +202,11 @@
           <button class="fn-btn" type="submit" id="fnSubmit">Angebot anfordern ✓</button>
         </div>
         <p class="fn-err" id="fnErr">Bitte füllen Sie Name, Telefon, E-Mail aus und bestätigen Sie die Zustimmung.</p>
-        <div class="fn-trust"><span>🔒 Ihre Daten sind sicher</span><span>⏱️ Antwort in 24&nbsp;h</span></div>
+        <div class="fn-trust"><span>🔒 Ihre Daten sind sicher</span><span>⏱️ Angebot in 24&nbsp;h</span></div>
       </form>
     </section>
 
-    <!-- 7: Danke -->
+    <!-- 5: Danke -->
     <section class="fn-step" data-step="danke">
       <div class="fn-done">
         <div class="fn-done__ico">✓</div>
@@ -256,7 +232,6 @@
   var bar = document.getElementById("fnBar");
   var idx = 0;
   var answers = {};
-  // Fortschritt nur über die Frage-/Eingabe-Schritte (ohne Intro & Danke)
   var totalCounted = steps.filter(function(s){ return s.dataset.step!=="intro" && s.dataset.step!=="danke"; }).length;
 
   function countedIndex(i){
@@ -278,11 +253,9 @@
   function next(){ show(idx+1); }
   function back(){ show(idx-1); }
 
-  // Intro-/Weiter-Buttons
   document.querySelectorAll("[data-next]").forEach(function(b){ b.addEventListener("click", next); });
   document.querySelectorAll("[data-back]").forEach(function(b){ b.addEventListener("click", back); });
 
-  // Frage-Optionen: auswählen + automatisch weiter
   steps.forEach(function(step){
     if (step.dataset.step!=="q") return;
     var key = step.dataset.key;
@@ -296,12 +269,18 @@
     });
   });
 
-  // PLZ
-  var plz = document.getElementById("fnPlz");
-  plz.addEventListener("input", function(){ plz.value = plz.value.replace(/\D/g,"").slice(0,5); });
-  document.getElementById("fnPlzNext").addEventListener("click", function(){
-    if (plz.value.length !== 5){ plz.style.borderColor="#c0392b"; plz.focus(); return; }
-    answers["PLZ"] = plz.value; next();
+  // Maße
+  var breite = document.getElementById("fnBreite");
+  var tiefe = document.getElementById("fnTiefe");
+  function clean(el){ el.value = el.value.replace(/\D/g,"").slice(0,4); }
+  breite.addEventListener("input", function(){ clean(breite); });
+  tiefe.addEventListener("input", function(){ clean(tiefe); });
+  document.getElementById("fnMasseNext").addEventListener("click", function(){
+    var b = parseInt(breite.value,10), t = parseInt(tiefe.value,10);
+    if (!b || b < 50){ breite.style.borderColor="#c0392b"; breite.focus(); return; }
+    if (!t || t < 50){ tiefe.style.borderColor="#c0392b"; tiefe.focus(); return; }
+    answers["Breite"] = b + " cm"; answers["Tiefe"] = t + " cm";
+    next();
   });
 
   // Kontakt absenden
@@ -320,14 +299,13 @@
 
     var payload = {
       access_key: WEB3FORMS_KEY,
-      subject: "🔥 Neue Lead-Anfrage (Angebots-Funnel)" + (answers.Produkt ? " – " + answers.Produkt : ""),
+      subject: "🔥 Neue Lead-Anfrage (Terrassendach-Funnel)",
       from_name: "Antonov Outdoor – Angebots-Funnel",
       replyto: mail, email: mail, botcheck: "",
-      Produkt: answers.Produkt || "-",
       Montageart: answers.Montageart || "-",
-      "Größe": answers["Größe"] || "-",
-      Zeitpunkt: answers.Zeitpunkt || "-",
-      PLZ: answers.PLZ || "-",
+      Breite: answers.Breite || "-",
+      Tiefe: answers.Tiefe || "-",
+      Eindeckung: answers.Eindeckung || "-",
       Name: name, Telefon: tel, "E-Mail": mail
     };
     fetch("https://api.web3forms.com/submit", {
@@ -335,7 +313,7 @@
       body: JSON.stringify(payload)
     }).then(function(r){ return r.json(); }).then(function(res){
       if (res && res.success){
-        /* Optional später: Meta-Pixel-Conversion hier feuern, z. B.
+        /* Optional später: Meta-Pixel-Conversion hier feuern:
            if (window.fbq) fbq('track','Lead'); */
         next();
       } else { throw new Error("fail"); }
