@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }).catch(function () {});
     } catch (e) {}
   }
+  window.aoSendLead = sendLeadToBase; // global, damit auch der Konfigurator (eigene Datei) Leads senden kann
 
   /* ---- Mobiles Menü ------------------------------------------------------ */
   var toggle = document.querySelector(".nav-toggle");

@@ -414,6 +414,14 @@
     };
     Object.keys(felder).forEach(function (k) { payload[k] = felder[k]; });
 
+    if (window.aoSendLead) window.aoSendLead({
+      name: ((state.vorname || "") + " " + (state.nachname || "")).trim(),
+      telefon: state.telefon || "",
+      email: state.email || "",
+      source: "website", campaign: "konfigurator", content: produkt.v,
+      notes: text
+    });
+
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
