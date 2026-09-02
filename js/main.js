@@ -7,6 +7,25 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
+  /* ---- Google Ads Conversion-Tracking (lädt nur nach Einwilligung) ------- */
+  var GADS_ID = "AW-18390033754";
+  var GADS_LABEL = "AW-18390033754/5snrCK3O1ewcENrKhsFE";
+  function loadGoogleAds() {
+    if (window.__gadsLoaded) return; window.__gadsLoaded = true;
+    var s = document.createElement("script"); s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GADS_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GADS_ID);
+  }
+  // Von den Formularen bei erfolgreicher Anfrage aufgerufen (feuert nur nach Einwilligung)
+  window.aoTrackLead = function () {
+    try { if (window.gtag) window.gtag("event", "conversion", { send_to: GADS_LABEL }); } catch (e) {}
+  };
+  try { if (localStorage.getItem("ao_cookie") === "alle") loadGoogleAds(); } catch (e) {}
+
   /* ---- Leads zusätzlich in die Antonov Base (Supabase) ------------------- */
   var BASE_URL = "https://nrpwbbepwuauikqpcvxz.supabase.co";
   var BASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycHdiYmVwd3VhdWlrcXBjdnh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMTA3NDIsImV4cCI6MjEwMTc4Njc0Mn0.1ds84MnzcWvSTH4XkTZuGuvU6Uc9XZKiAJzWPOYimjQ";
@@ -194,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify(payload)
       }).then(function (r) { return r.json(); })
         .then(function (d) {
-          if (d && d.success) { zeigeErfolg(); }
+          if (d && d.success) { if (window.aoTrackLead) window.aoTrackLead(); zeigeErfolg(); }
           else { throw new Error("fail"); }
         })
         .catch(function () {
@@ -357,6 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function entscheiden(wahl) {
       try { localStorage.setItem(KEY, wahl); } catch (e) {}
+      if (wahl === "alle") loadGoogleAds();
       banner.classList.remove("sichtbar");
       overlay.classList.remove("sichtbar");
       setTimeout(function () { banner.remove(); overlay.remove(); }, 350);
@@ -407,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify(payload)
       }).then(function (r) { return r.json(); })
         .then(function (d) {
-          if (d && d.success) { pform.style.display = "none"; if (erfolg) erfolg.classList.add("aktiv"); }
+          if (d && d.success) { if (window.aoTrackLead) window.aoTrackLead(); pform.style.display = "none"; if (erfolg) erfolg.classList.add("aktiv"); }
           else { throw new Error("fail"); }
         })
         .catch(function () {

@@ -419,7 +419,7 @@
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(payload)
     }).then(function (r) { return r.json(); })
-      .then(function (d) { if (d && d.success) { renderErfolg(); } else { sendeFehler(btn); } })
+      .then(function (d) { if (d && d.success) { if (window.aoTrackLead) window.aoTrackLead(); renderErfolg(); } else { sendeFehler(btn); } })
       .catch(function () { sendeFehler(btn); });
   }
 

@@ -253,7 +253,7 @@
 
 <div class="fn-cc" id="fnCC">
   <div class="fn-cc__inner">
-    <p>Wir würden gern Marketing-Cookies (<strong>Meta-Pixel</strong> &amp; <strong>Google Ads</strong>) setzen, um den Erfolg unserer Instagram-, Facebook- und Google-Anzeigen zu messen. Das geschieht nur mit Ihrer Einwilligung. Details in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+    <p>Wir würden gern Marketing-Cookies des <strong>Meta-Pixels</strong> setzen, um den Erfolg unserer Instagram-/Facebook-Anzeigen zu messen. Das geschieht nur mit Ihrer Einwilligung. Details in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
     <div class="fn-cc__btns">
       <button type="button" class="fn-cc__no" id="fnCCno">Ablehnen</button>
       <button type="button" class="fn-cc__ok" id="fnCCok">Akzeptieren</button>
@@ -261,14 +261,12 @@
   </div>
 </div>
 
-<!-- Werbe-Tracking (Meta-Pixel + Google Ads): lädt ausschließlich nach Einwilligung -->
+<!-- Meta-Pixel: lädt ausschließlich nach Einwilligung -->
 <script>
 (function(){
   var PIXEL_ID = "1733703514828005";
-  var GADS_ID = "AW-18390033754";
-  var GADS_LABEL = "AW-18390033754/5snrCK3O1ewcENrKhsFE";
   var KEY = "ao_ads_consent";
-  function loadMeta(){
+  function loadPixel(){
     if (window.fbq) return;
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -278,31 +276,17 @@
     window.fbq('init', PIXEL_ID);
     window.fbq('track', 'PageView');
   }
-  function loadGoogle(){
-    if (window.__gadsLoaded) return; window.__gadsLoaded = true;
-    var s=document.createElement('script'); s.async=true;
-    s.src="https://www.googletagmanager.com/gtag/js?id="+GADS_ID;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function(){ window.dataLayer.push(arguments); };
-    window.gtag('js', new Date());
-    window.gtag('config', GADS_ID);
-  }
-  function loadAds(){ loadMeta(); loadGoogle(); }
-  // Beim Absenden – feuert beide Conversions (Meta + Google), sofern nach Einwilligung geladen
-  window.aoFireLead = function(){
-    try{ if(window.fbq) window.fbq('track','Lead'); }catch(e){}
-    try{ if(window.gtag) window.gtag('event','conversion',{'send_to': GADS_LABEL}); }catch(e){}
-  };
+  // Beim Absenden aufgerufen – feuert nur, wenn der Pixel (nach Einwilligung) geladen ist
+  window.aoFireLead = function(){ try{ if(window.fbq) window.fbq('track','Lead'); }catch(e){} };
 
   var choice = null; try{ choice = localStorage.getItem(KEY); }catch(e){}
-  if (choice === "yes"){ loadAds(); return; }
+  if (choice === "yes"){ loadPixel(); return; }
   if (choice === "no"){ return; }
   var cc = document.getElementById("fnCC");
   cc.classList.add("is-show");
   document.getElementById("fnCCok").addEventListener("click", function(){
     try{ localStorage.setItem(KEY,"yes"); }catch(e){}
-    cc.classList.remove("is-show"); loadAds();
+    cc.classList.remove("is-show"); loadPixel();
   });
   document.getElementById("fnCCno").addEventListener("click", function(){
     try{ localStorage.setItem(KEY,"no"); }catch(e){}
