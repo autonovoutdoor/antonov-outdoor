@@ -1,8 +1,0 @@
-﻿SEO: non-www Kanonisierung, Einzugsgebiet-Seite (DE+CH), areaServed erweitert, Meta-Descriptions gekuerzt
-
-- Alle URLs (Canonical, og:url, JSON-LD, sitemap.xml, robots.txt) von www auf non-www umgestellt (passt zu CNAME; www 301 -> non-www)
-- Neue Seite einzugsgebiet.html: 30-km-Radius Hochrhein/Suedbaden/Nordschweiz mit echten Ortsnamen, Service-Schema, Breadcrumb; sitewide Footer-Link + Sitemap-Eintrag
-- areaServed in allen 23 Business-Schemas um DE- und CH-Orte erweitert (Klingnau, Zurzach, Aargau, Schaffhausen, Zuercher Unterland u.a.)
-- 13 zu lange Meta-Descriptions auf ~150 Zeichen gekuerzt
-
-Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
