@@ -454,8 +454,8 @@
           Ihre Bewertung. ⭐</p>
       </div>
 
-      <!-- Google-Bewertungen (Trustindex) – lädt ausschließlich nach Zustimmung -->
-      <div class="bewertungen-widget" style="margin-top:24px;">
+      <!-- Google-Bewertungen (Trustindex) – VORERST AUSGEBLENDET (TI_AKTIV=false). Zum Reaktivieren: hidden entfernen + TI_AKTIV=true -->
+      <div class="bewertungen-widget" style="margin-top:24px;" hidden>
         <div id="ti-consent" style="display:none; max-width:640px; margin:0 auto; background:#fff; border:1px solid #e4e0d6; border-radius:14px; padding:22px; text-align:center;">
           <p style="margin:0 0 14px; color:#555; font-size:.92rem;">Um unsere echten Google-Bewertungen anzuzeigen, laden wir den externen Dienst <strong>Trustindex</strong>. Dabei können Daten an Trustindex bzw. Google übertragen werden. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
           <button type="button" id="ti-show" class="btn btn--primaer">Bewertungen anzeigen</button>
@@ -464,6 +464,7 @@
       </div>
       <script>
       (function(){
+        var TI_AKTIV=false; if(!TI_AKTIV) return;
         function loadTI(){
           var box=document.getElementById('ti-reviews');
           if(!box || box.getAttribute('data-loaded')) return;
