@@ -1132,3 +1132,12 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .cookie-banner__btns .btn { width: 100%; }
   .cookie-banner__btns .btn--primaer { margin-left: 0; }
 }
+
+/* Technische Daten – Datenblatt-Tabelle (Produktseiten) */
+.datenblatt{margin-top:42px;overflow-x:auto}
+.datenblatt table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #ece8dd}
+.datenblatt th,.datenblatt td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid #ece8dd;font-size:.98rem;line-height:1.55}
+.datenblatt th{width:34%;font-weight:800;color:#1a1a1a;background:#faf7ef;white-space:nowrap}
+.datenblatt td{color:#444}
+.datenblatt tr:last-child th,.datenblatt tr:last-child td{border-bottom:none}
+@media(max-width:640px){.datenblatt th{width:44%;white-space:normal}}
