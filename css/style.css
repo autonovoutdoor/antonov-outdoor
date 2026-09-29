@@ -1152,3 +1152,9 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .produkt-hero h1{ font-size:1.72rem; line-height:1.15; }
   .produkt-hero p{ font-size:1.02rem; margin-bottom:20px; }
 }
+
+/* Auswahlseiten mit 5 Modellen: letzte Reihe zentriert */
+.karten--zentriert { display: flex; flex-wrap: wrap; justify-content: center; }
+.karten--zentriert > .karte { flex: 0 1 calc((100% - 56px) / 3); }
+@media (max-width: 960px) { .karten--zentriert > .karte { flex-basis: calc((100% - 28px) / 2); } }
+@media (max-width: 640px) { .karten--zentriert > .karte { flex-basis: 100%; } }
