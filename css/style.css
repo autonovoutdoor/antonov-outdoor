@@ -1158,3 +1158,37 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
 .karten--zentriert > .karte { flex: 0 1 calc((100% - 56px) / 3); }
 @media (max-width: 960px) { .karten--zentriert > .karte { flex-basis: calc((100% - 28px) / 2); } }
 @media (max-width: 640px) { .karten--zentriert > .karte { flex-basis: 100%; } }
+
+/* Startseiten-Hero als Slider (TDS, SkyView, Carport, Markisen, Geländer) */
+.hero--slider { background: #1a1a1a; overflow: hidden; min-height: 640px; display: flex; align-items: center; }
+.hero--slider > .container { position: relative; z-index: 2; width: 100%; }
+.hero-slider { position: absolute; inset: 0; z-index: 0; touch-action: pan-y; }
+.hero-slider::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(20,24,28,.82) 0%, rgba(20,24,28,.55) 45%, rgba(20,24,28,.18) 100%); }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
+.hero-slide.aktiv { opacity: 1; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.04); transition: transform 7s ease-out; }
+.hero-slide.aktiv img { transform: scale(1); }
+.hero-slide__label { position: absolute; left: 50%; bottom: 46px; transform: translateX(-50%); white-space: nowrap; z-index: 3; color: #fff; font-weight: 700; font-size: .92rem;
+  background: rgba(20,24,28,.55); border: 1px solid rgba(255,255,255,.25); padding: 8px 14px; border-radius: 30px;
+  backdrop-filter: blur(4px); opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.hero-slide__label::after { content: " →"; color: var(--farbe-gold-leucht); }
+.hero-slide.aktiv .hero-slide__label { opacity: 1; pointer-events: auto; }
+.hero-slide__label:hover { background: rgba(20,24,28,.8); color: #fff; }
+.hero-slider__pfeil { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.35); background: rgba(20,24,28,.35); color: #fff; font-size: 1.9rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; padding-bottom: 4px; transition: background .2s; }
+.hero-slider__pfeil:hover { background: var(--farbe-gold); border-color: var(--farbe-gold); }
+.hero-slider__pfeil--zurueck { left: 18px; }
+.hero-slider__pfeil--weiter { right: 18px; }
+.hero-slider__punkte { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; display: flex; gap: 10px; }
+.hero-slider__punkte button { width: 11px; height: 11px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: rgba(255,255,255,.45); transition: all .3s; }
+.hero-slider__punkte button[aria-selected="true"] { background: var(--farbe-gold); width: 28px; border-radius: 6px; }
+@media (min-width: 768px) { .hero--slider { background-attachment: scroll; } }
+@media (max-width: 760px) {
+  .hero--slider { min-height: 0; padding-bottom: 110px; }
+  .hero-slider::after { background: linear-gradient(180deg, rgba(20,24,28,.58) 0%, rgba(20,24,28,.72) 55%, rgba(20,24,28,.5) 100%); }
+  .hero-slider__pfeil { display: none; }
+  .hero-slide__label { font-size: .82rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-slide, .hero-slide img { transition: none; transform: none; } }

@@ -157,7 +157,18 @@
   </header>
 
   <!-- ============================================================ HERO ============================================================ -->
-  <section class="hero" id="start">
+  <section class="hero hero--slider" id="start">
+    <!-- Hero-Slider: Produktfotos, Überblendung + Wischen (JS in main.js) -->
+    <div class="hero-slider" aria-roledescription="Karussell" aria-label="Unsere Produkte">
+      <div class="hero-slide aktiv"><picture><source srcset="bilder/td-1.webp" type="image/webp"><img src="bilder/td-1.jpg" alt="Terrassendach TDS mit Glasdach" fetchpriority="high"></picture><a class="hero-slide__label" href="leistung-terrassendach-tds.html">Terrassendach TDS</a></div>
+      <div class="hero-slide"><picture><source srcset="bilder/skyview-1.webp" type="image/webp"><img src="bilder/skyview-1.jpg" alt="Flachdach SkyView über einer Lounge-Terrasse" loading="lazy"></picture><a class="hero-slide__label" href="leistung-skyview.html">Flachdach SkyView</a></div>
+      <div class="hero-slide"><picture><source srcset="bilder/carport-1.webp" type="image/webp"><img src="bilder/carport-1.jpg" alt="Carport aus Aluminium mit Flachdach" loading="lazy"></picture><a class="hero-slide__label" href="leistung-carport.html">Carport</a></div>
+      <div class="hero-slide"><picture><source srcset="bilder/markise-kassette-1.webp" type="image/webp"><img src="bilder/markise-kassette-1.jpg" alt="Gelbe Kassettenmarkise über einer Terrasse" loading="lazy"></picture><a class="hero-slide__label" href="leistung-sonnenschutz.html">Markisen</a></div>
+      <div class="hero-slide"><picture><source srcset="bilder/gelaender-1.webp" type="image/webp"><img src="bilder/gelaender-1.jpg" alt="Ganzglasgeländer auf einer Dachterrasse" loading="lazy"></picture><a class="hero-slide__label" href="leistung-gelaender.html">Glasgeländer</a></div>
+      <button type="button" class="hero-slider__pfeil hero-slider__pfeil--zurueck" aria-label="Vorheriges Bild">‹</button>
+      <button type="button" class="hero-slider__pfeil hero-slider__pfeil--weiter" aria-label="Nächstes Bild">›</button>
+      <div class="hero-slider__punkte" role="tablist" aria-label="Bild wählen"></div>
+    </div>
     <div class="container">
       <div class="hero__inhalt">
         <span class="kicker">Alu-Außensysteme nach Maß · Waldshut-Tiengen</span>

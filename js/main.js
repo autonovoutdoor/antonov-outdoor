@@ -472,3 +472,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+/* Startseiten-Hero-Slider: Auto-Wechsel, Pfeile, Punkte, Wischen, Tastatur */
+(function () {
+  var slider = document.querySelector(".hero-slider");
+  if (!slider) return;
+  var slides = slider.querySelectorAll(".hero-slide");
+  var punkteBox = slider.querySelector(".hero-slider__punkte");
+  var index = 0, timer = null, INTERVALL = 6000;
+  var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var punkte = [];
+  slides.forEach(function (s, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", "Bild " + (i + 1) + ": " + (s.querySelector("img").alt || ""));
+    b.addEventListener("click", function () { zeige(i); neustart(); });
+    punkteBox.appendChild(b); punkte.push(b);
+  });
+  function zeige(i) {
+    index = (i + slides.length) % slides.length;
+    slides.forEach(function (s, n) {
+      var an = n === index;
+      s.classList.toggle("aktiv", an);
+      s.setAttribute("aria-hidden", an ? "false" : "true");
+      var link = s.querySelector("a"); if (link) link.tabIndex = an ? 0 : -1;
+      punkte[n].setAttribute("aria-selected", an ? "true" : "false");
+    });
+  }
+  function weiter() { zeige(index + 1); }
+  function start() { if (!ruhig && !timer) timer = setInterval(weiter, INTERVALL); }
+  function stopp() { clearInterval(timer); timer = null; }
+  function neustart() { stopp(); start(); }
+  slider.querySelector(".hero-slider__pfeil--weiter").addEventListener("click", function () { weiter(); neustart(); });
+  slider.querySelector(".hero-slider__pfeil--zurueck").addEventListener("click", function () { zeige(index - 1); neustart(); });
+  // Wischen (Touch) – nur horizontale Gesten, vertikales Scrollen bleibt frei
+  var hero = slider.closest(".hero") || slider;
+  var x0 = null, y0 = null;
+  hero.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  hero.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { zeige(index + (dx < 0 ? 1 : -1)); neustart(); }
+    x0 = y0 = null;
+  }, { passive: true });
+  hero.addEventListener("mouseenter", stopp);
+  hero.addEventListener("mouseleave", start);
+  document.addEventListener("visibilitychange", function () { document.hidden ? stopp() : start(); });
+  slider.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { weiter(); neustart(); }
+    if (e.key === "ArrowLeft") { zeige(index - 1); neustart(); }
+  });
+  zeige(0); start();
+})();
