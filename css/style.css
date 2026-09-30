@@ -1192,3 +1192,16 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .hero-slide__label { font-size: .82rem; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-slide, .hero-slide img { transition: none; transform: none; } }
+
+/* SEO: „Passend dazu“-Querverlinkung + Modell-Links in der Produktübersicht */
+.section--eng { padding: 44px 0; }
+.passend { display: flex; align-items: center; gap: 18px 26px; flex-wrap: wrap; }
+.passend__titel { font-size: 1.35rem; margin: 0; white-space: nowrap; }
+.link-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.link-chips a { display: inline-block; padding: 9px 16px; border: 1px solid var(--farbe-grau-linie); border-radius: 30px; background: #fff;
+  color: var(--farbe-text, #1a1a1a); font-weight: 600; font-size: .92rem; text-decoration: none; transition: all .2s; }
+.link-chips a:hover { border-color: var(--farbe-gold); color: var(--farbe-gold); }
+.karte__h { font-size: 1.35rem; margin-bottom: 8px; }
+.karte__modelle { margin: 4px 0 16px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.karte__modelle a { font-weight: 600; font-size: .92rem; }
+.karte__modelle a::before { content: "› "; color: var(--farbe-gold); }
