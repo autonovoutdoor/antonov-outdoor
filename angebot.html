@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kostenloses Angebot für Ihre Terrassenüberdachung | Antonov Outdoor</title>
-<meta name="description" content="Ihr kostenloses, unverbindliches Festpreis-Angebot für Ihre Terrassenüberdachung – maßgefertigt aus Aluminium im Landkreis Waldshut. Jetzt in unter 60 Sekunden anfragen.">
+<title>Was kostet Ihre Terrassenüberdachung? Preis in 2 Minuten | Antonov Outdoor</title>
+<meta name="description" content="Was kostet Ihre Terrassenüberdachung? Ein paar kurze Fragen beantworten und sofort den persönlichen Richtpreis inkl. Montage erhalten – Antonov Outdoor, Landkreis Waldshut.">
 <meta name="theme-color" content="#1a1a1a">
 <meta name="robots" content="noindex,follow">
 <meta property="og:type" content="website">
@@ -121,6 +121,13 @@
   .fn-cc__no{ background:#3a3a3a; color:#eee; }
 
   @media (min-width:380px){ .fn-hero img{ height:250px; } }
+  .fn-preis-kicker{ text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; font-weight:700; color:var(--fn-gold); margin:4px 0 6px; }
+  .fn-preis{ font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:2.4rem; line-height:1.1; color:#1a1a1a; }
+  .fn-preis-sub{ color:#666; font-size:.9rem; margin:4px 0 14px; }
+  .fn-zus{ list-style:none; padding:0; margin:0 auto 14px; max-width:360px; text-align:left; font-size:.92rem; color:#333; }
+  .fn-zus li{ padding:6px 0; border-bottom:1px solid var(--fn-linie); }
+  .fn-zus li:last-child{ border-bottom:none; }
+  .fn-preis-hinweis{ background:#fbf6e8; border-left:3px solid var(--fn-gold); border-radius:6px; padding:12px 14px; font-size:.82rem; line-height:1.5; color:#555; text-align:left; }
 </style>
 </head>
 <body>
@@ -141,18 +148,33 @@
         <picture><source srcset="bilder/terrassenueberdachung-1-m.webp 1200w, bilder/terrassenueberdachung-1.webp 2400w" sizes="100vw" type="image/webp">
         <img src="bilder/terrassenueberdachung-1.jpg" alt="Terrassenüberdachung aus Aluminium"></picture>
       </div>
-      <h1 class="fn-h">Terrassenüberdachung nach Maß – Ihr kostenloses, unverbindliches Angebot</h1>
-      <p class="fn-sub">Beantworten Sie 3 kurze Fragen und erhalten Sie Ihr <strong>persönliches Festpreis-Angebot</strong> – in unter 60&nbsp;Sekunden.</p>
+      <h1 class="fn-h">Was kostet Ihre Terrassenüberdachung? Ihr Preis in 2 Minuten</h1>
+      <p class="fn-sub">Beantworten Sie ein paar kurze Fragen – danach sehen Sie <strong>sofort Ihren persönlichen Richtpreis</strong> inklusive Montage und Lieferung.</p>
       <div class="fn-badges">
-        <span class="fn-badge">⏱️ Schnelle Rückmeldung</span>
+        <span class="fn-badge">💶 Preis sofort</span>
         <span class="fn-badge">✅ Maßanfertigung</span>
         <span class="fn-badge">✅ 100&nbsp;% unverbindlich</span>
       </div>
-      <button class="fn-btn" type="button" data-next>Angebot starten →</button>
-      <p class="fn-hint">Kostenlos &amp; unverbindlich · Wir melden uns schnellstmöglich</p>
+      <button class="fn-btn" type="button" data-next>Preis berechnen →</button>
+      <p class="fn-hint">Kostenlos &amp; unverbindlich · dauert ca. 2 Minuten</p>
     </section>
 
-    <!-- 1: Montage -->
+    <!-- 1: Modell -->
+    <section class="fn-step" data-step="q" data-key="Modell">
+      <p class="fn-q">Welcher Stil gefällt Ihnen?</p>
+      <div class="fn-opts">
+        <button class="fn-opt" type="button" data-val="Terrassendach TDS">
+          <picture><source srcset="bilder/terrassenueberdachung-1-m.webp" type="image/webp"><img class="fn-opt__img" src="bilder/terrassenueberdachung-1-m.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Klassisch geneigt<small>Terrassendach TDS</small></span></button>
+        <button class="fn-opt" type="button" data-val="Flachdach SkyView">
+          <picture><source srcset="bilder/referenz-2-m.webp" type="image/webp"><img class="fn-opt__img" src="bilder/referenz-2-m.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Modern flach<small>Flachdach SkyView</small></span></button>
+        <button class="fn-opt" type="button" data-val="Noch unklar"><div class="fn-opt__ico">❓</div><span class="fn-opt__lbl">Noch unklar<small>bitte beraten</small></span></button>
+      </div>
+      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
+    </section>
+
+    <!-- 2: Montage -->
     <section class="fn-step" data-step="q" data-key="Montageart">
       <p class="fn-q">Wie soll die Überdachung angebracht sein?</p>
       <div class="fn-opts">
@@ -212,7 +234,8 @@
 
     <!-- 5: Kontakt -->
     <section class="fn-step" data-step="kontakt">
-      <p class="fn-q">Fast geschafft! Wohin dürfen wir Ihr Angebot senden?</p>
+      <p class="fn-q">Ihr Preis ist berechnet! 🎉 Wohin dürfen wir Ihnen Ihr Angebot schicken?</p>
+      <p class="fn-sub" style="text-align:center;">Nach dem Absenden sehen Sie Ihren Richtpreis sofort auf dem Bildschirm.</p>
       <form id="fnForm" novalidate>
         <div class="fn-field"><label for="fnName">Name</label>
           <input class="fn-input" id="fnName" name="name" type="text" placeholder="Vor- und Nachname" autocomplete="name" required></div>
@@ -225,7 +248,7 @@
           <span>Ich stimme zu, dass Antonov Outdoor mich zu meiner Anfrage kontaktiert. Es gilt die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
         <div class="fn-nav">
           <button class="fn-back" type="button" data-back aria-label="Zurück">‹</button>
-          <button class="fn-btn" type="submit" id="fnSubmit">Angebot anfordern ✓</button>
+          <button class="fn-btn" type="submit" id="fnSubmit">Preis anzeigen ✓</button>
         </div>
         <p class="fn-err" id="fnErr">Bitte füllen Sie Name, Telefon, E-Mail aus und bestätigen Sie die Zustimmung.</p>
         <div class="fn-trust"><span>🔒 Ihre Daten sind sicher</span><span>⏱️ Schnelle Rückmeldung</span></div>
@@ -235,9 +258,12 @@
     <!-- 5: Danke -->
     <section class="fn-step" data-step="danke">
       <div class="fn-done">
-        <div class="fn-done__ico">✓</div>
-        <h2>Vielen Dank! 🎉</h2>
-        <p>Ihre Anfrage ist bei uns eingegangen. Wir melden uns <strong>schnellstmöglich</strong> mit Ihrem persönlichen Angebot.</p>
+        <p class="fn-preis-kicker">Ihr persönlicher Richtpreis</p>
+        <div class="fn-preis" id="fnPreis">–</div>
+        <p class="fn-preis-sub" id="fnPreisSub">inkl. 19&nbsp;% MwSt., Montage &amp; Lieferung</p>
+        <ul class="fn-zus" id="fnZus"></ul>
+        <p class="fn-preis-hinweis"><strong>Bitte beachten:</strong> Unverbindliche Preisorientierung. Je nach persönlicher Situation – etwa Montageaufwand, Untergrund, Statik, Zugänglichkeit oder unvorhersehbare Gegebenheiten vor Ort – kann der endgültige Preis abweichen. Ihren verbindlichen Festpreis erhalten Sie nach dem kostenlosen Aufmaß.</p>
+        <p style="margin-top:16px;">Ihre Anfrage ist bei uns eingegangen – wir melden uns <strong>schnellstmöglich</strong> für Ihr Festpreis-Angebot.</p>
         <p style="margin-top:18px;">Sie möchten sofort sprechen?</p>
         <a class="fn-btn" href="tel:+4915679818872" style="margin-top:6px;">📞 Jetzt anrufen: 0156 79818872</a>
       </div>
@@ -295,6 +321,7 @@
 })();
 </script>
 
+<script src="js/preisrechner.js"></script>
 <script>
 (function(){
   var WEB3FORMS_KEY = "b26a6983-d43b-4a05-908c-f5ba56350c48";
@@ -308,18 +335,66 @@
   function sendToCRM(name, tel, mail){
     try{
       var u = fnUtm();
-      fetch(SUPA_URL + "/rest/v1/rpc/submit_lead", {
-        method:"POST",
-        headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer "+SUPA_ANON },
-        body: JSON.stringify({
-          p_name:name, p_telefon:tel, p_email:mail,
-          p_montageart:answers.Montageart||null, p_breite:answers.Breite||null, p_tiefe:answers.Tiefe||null,
-          p_eindeckung:answers.Eindeckung||null, p_zeitpunkt:answers.Zeitpunkt||null,
-          p_source:u.source, p_medium:u.medium, p_campaign:u.campaign, p_content:u.content, p_term:u.term,
-          p_landing_page:location.pathname, p_referrer:document.referrer||null
-        })
-      }).catch(function(){});
+      var basis = {
+        p_name:name, p_telefon:tel, p_email:mail,
+        p_montageart:answers.Montageart||null, p_breite:answers.Breite||null, p_tiefe:answers.Tiefe||null,
+        p_eindeckung:answers.Eindeckung||null, p_zeitpunkt:answers.Zeitpunkt||null,
+        p_source:u.source, p_medium:u.medium, p_campaign:u.campaign, p_content:u.content, p_term:u.term,
+        p_landing_page:location.pathname, p_referrer:document.referrer||null
+      };
+      var post = function(body){
+        return fetch(SUPA_URL + "/rest/v1/rpc/submit_lead", {
+          method:"POST",
+          headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer "+SUPA_ANON },
+          body: JSON.stringify(body)
+        });
+      };
+      // Mit Notiz (Modell + Richtpreis) senden; nimmt die Schnittstelle das Feld nicht an -> bisheriges Format (kein Lead geht verloren)
+      var mitNotiz = Object.assign({}, basis, { p_notes: preisNotiz() });
+      post(mitNotiz).then(function(r){ if (!r.ok) return post(basis); }).catch(function(){ post(basis).catch(function(){}); });
     }catch(e){}
+  }
+
+  // ---- Richtpreis (gleiche Preislogik wie preisrechner.html) ----
+  var PREIS = null;
+  function preisBerechnen(){
+    PREIS = null;
+    var pr = window.aoPreisrechner; if (!pr) return;
+    var modell = answers.Modell === "Flachdach SkyView" ? "skyview" : "tds";
+    var eind = /opal|matt/i.test(answers.Eindeckung||"") ? "matt" : /Polycarbonat/i.test(answers.Eindeckung||"") ? "poly" : "klar";
+    var art = answers.Montageart === "Freistehend" ? "frei" : "wand";
+    var b = parseInt(answers.Breite,10), t = parseInt(answers.Tiefe,10);
+    if (!b || !t) return;
+    if (b > 1400 || t > 405) { PREIS = { individuell:true, modell:modell, eind:eind, art:art, b:b, t:t }; return; }
+    var r = pr.berechne(modell, eind, Math.max(200, b), Math.max(150, t), art);
+    PREIS = { von:r.von, bis:r.bis, modell:modell, eind:eind, art:art, b:b, t:t };
+  }
+  var euro = function(n){ return n.toLocaleString("de-DE") + " €"; };
+  var NAMEN = { tds:"Terrassendach TDS", skyview:"Flachdach SkyView" };
+  var EIND = { klar:"VSG-Glas 8 mm klar", matt:"VSG-Glas 8 mm opal/matt", poly:"Polycarbonat 16 mm" };
+  function preisText(){
+    if (!PREIS) return "-";
+    if (PREIS.individuell) return "individuell (Maß außerhalb des Rechners)";
+    return "ca. " + euro(PREIS.von) + " – " + euro(PREIS.bis) + " brutto inkl. Montage & Lieferung";
+  }
+  function preisNotiz(){
+    if (!PREIS) return null;
+    return "Preis-Funnel: " + NAMEN[PREIS.modell] + (answers.Modell === "Noch unklar" ? " (Modell unklar, TDS gerechnet)" : "") +
+      ", " + (PREIS.art === "frei" ? "freistehend" : "Wandmontage") + ", " + PREIS.b + " × " + PREIS.t + " cm, " + EIND[PREIS.eind] +
+      (answers.Eindeckung === "Noch unklar" ? " (Eindeckung unklar, Glas klar gerechnet)" : "") + " → Richtpreis " + preisText();
+  }
+  function preisAnzeigen(){
+    var el = document.getElementById("fnPreis"), sub = document.getElementById("fnPreisSub"), zus = document.getElementById("fnZus");
+    if (!PREIS){ el.textContent = "Wir melden uns"; sub.textContent = "mit Ihrem persönlichen Preis"; zus.innerHTML = ""; return; }
+    if (PREIS.individuell){
+      el.textContent = "Individuell";
+      sub.textContent = "Bei dieser Größe berechnen wir Statik und Verstärkung persönlich für Sie.";
+    } else {
+      el.textContent = "ca. " + euro(PREIS.von) + " – " + euro(PREIS.bis);
+      sub.innerHTML = "inkl. 19&nbsp;% MwSt., Montage &amp; Lieferung";
+    }
+    zus.innerHTML = "<li><strong>" + NAMEN[PREIS.modell] + "</strong> · " + (PREIS.art === "frei" ? "freistehend" : "Wandmontage") + "</li>" +
+      "<li>" + PREIS.b + " × " + PREIS.t + " cm</li><li>" + EIND[PREIS.eind] + "</li>";
   }
   var steps = Array.prototype.slice.call(document.querySelectorAll(".fn-step"));
   var bar = document.getElementById("fnBar");
@@ -386,9 +461,10 @@
     var mail = document.getElementById("fnMail").value.trim();
     var ok   = document.getElementById("fnConsent").checked;
     if (!name || !tel || !/.+@.+\..+/.test(mail) || !ok){ err.style.display="block"; return; }
-    // Honeypot: ausgefüllt = Bot → Danke-Seite zeigen, aber nichts senden
+    preisBerechnen();
+    // Honeypot: ausgefüllt = Bot → Preis zeigen, aber nichts senden
     var hp = document.getElementById("fnHp");
-    if (hp && hp.value){ next(); return; }
+    if (hp && hp.value){ preisAnzeigen(); next(); return; }
     err.style.display="none";
     var btn = document.getElementById("fnSubmit");
     btn.disabled = true; btn.textContent = "Wird gesendet …";
@@ -396,9 +472,11 @@
 
     var payload = {
       access_key: WEB3FORMS_KEY,
-      subject: "🔥 Neue Lead-Anfrage (Terrassendach-Funnel)",
+      subject: "🔥 Neue Lead-Anfrage (Preis-Funnel) – " + preisText(),
       from_name: "Antonov Outdoor – Angebots-Funnel",
       replyto: mail, email: mail, botcheck: "",
+      Richtpreis: preisText(),
+      Modell: answers.Modell || "-",
       Montageart: answers.Montageart || "-",
       Breite: answers.Breite || "-",
       Tiefe: answers.Tiefe || "-",
@@ -412,10 +490,11 @@
     }).then(function(r){ return r.json(); }).then(function(res){
       if (res && res.success){
         if (window.aoFireLead) window.aoFireLead();
+        preisAnzeigen();
         next();
       } else { throw new Error("fail"); }
     }).catch(function(){
-      btn.disabled=false; btn.textContent="Angebot anfordern ✓";
+      btn.disabled=false; btn.textContent="Preis anzeigen ✓";
       err.textContent="Leider ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder rufen Sie uns an: 0156 79818872.";
       err.style.display="block";
     });
