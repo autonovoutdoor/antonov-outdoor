@@ -1205,3 +1205,142 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
 .karte__modelle { margin: 4px 0 16px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; }
 .karte__modelle a { font-weight: 600; font-size: .92rem; }
 .karte__modelle a::before { content: "› "; color: var(--farbe-gold); }
+
+/* Preisrechner (preisrechner.html) */
+.pr { display: grid; grid-template-columns: 1fr 380px; gap: 36px; align-items: start; }
+.pr__schritt { background: #fff; border: 1px solid var(--farbe-grau-linie); border-radius: var(--radius); padding: 24px 26px; margin-bottom: 18px; }
+.pr__h { font-size: 1.3rem; margin: 0 0 16px; display: flex; align-items: center; gap: 10px; }
+.pr__h span { width: 30px; height: 30px; border-radius: 50%; background: var(--farbe-gold); color: #fff; font-size: 1rem; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.pr__produkte { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pr__prod { position: relative; border: 2px solid var(--farbe-grau-linie); border-radius: 12px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: border-color .2s, box-shadow .2s; }
+.pr__prod input { position: absolute; opacity: 0; pointer-events: none; }
+.pr__prod-bild { aspect-ratio: 16 / 10; overflow: hidden; background: var(--farbe-grau); }
+.pr__prod-bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr__prod strong { padding: 12px 14px 0; font-size: 1.02rem; }
+.pr__prod small { padding: 2px 14px 12px; color: #777; }
+.pr__prod:has(input:checked) { border-color: var(--farbe-gold); box-shadow: 0 0 0 3px rgba(196,154,42,.18); }
+.pr__prod:has(input:focus-visible) { outline: 2px solid var(--farbe-gold); outline-offset: 2px; }
+.pr__mass { margin-bottom: 18px; }
+.pr__mass label { display: block; font-weight: 700; margin-bottom: 8px; }
+.pr__mass label small { font-weight: 400; color: #777; }
+.pr__mass-zeile { display: flex; align-items: center; gap: 16px; }
+.pr__mass-zeile input[type="range"] { flex: 1; accent-color: var(--farbe-gold); height: 28px; }
+.pr__zahlfeld { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
+.pr__zahlfeld input { width: 78px; padding: 8px 10px; border: 1px solid var(--farbe-grau-linie); border-radius: 8px; font: inherit; text-align: right; }
+.pr__hinweis { font-size: .9rem; color: #666; margin: 4px 0 0; }
+.pr__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.pr__chips label { cursor: pointer; }
+.pr__chips input { position: absolute; opacity: 0; pointer-events: none; }
+.pr__chips span { display: inline-block; padding: 10px 16px; border: 2px solid var(--farbe-grau-linie); border-radius: 30px; font-weight: 600; transition: all .2s; }
+.pr__chips input:checked + span { border-color: var(--farbe-gold); background: #fbf6e8; }
+.pr__chips input:focus-visible + span { outline: 2px solid var(--farbe-gold); outline-offset: 2px; }
+.pr__ergebnis { position: sticky; top: 100px; background: #1a1a1a; color: #fff; border-radius: var(--radius); padding: 28px 26px; }
+.pr__ergebnis .kicker { color: var(--farbe-gold-leucht); }
+.pr__preis { font-family: var(--schrift-headline); font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin: 8px 0 4px; color: #fff; }
+.pr__preis-sub { color: #cfd3d8; font-size: .92rem; margin-bottom: 18px; }
+.pr__posten { margin: 0 0 22px; }
+.pr__posten li { color: #e6e6e6; font-size: .95rem; }
+.pr__cta { width: 100%; }
+.pr__klein { font-size: .8rem; color: #aab0b6; margin: 14px 0 0; line-height: 1.5; }
+@media (max-width: 960px) {
+  .pr { grid-template-columns: 1fr; }
+  .pr__ergebnis { position: sticky; top: auto; bottom: 0; z-index: 20; border-radius: 16px 16px 0 0; padding: 16px 84px 16px 18px; box-shadow: 0 -6px 24px rgba(0,0,0,.25); }
+  .pr__ergebnis .kicker, .pr__posten, .pr__klein { display: none; }
+  .pr__preis { font-size: 1.6rem; margin: 0; }
+  .pr__preis-sub { margin-bottom: 10px; }
+}
+@media (max-width: 640px) {
+  .pr__schritt { padding: 18px 16px; }
+  .pr__produkte { gap: 10px; }
+  .pr__prod strong { font-size: .92rem; padding: 10px 10px 0; }
+  .pr__prod small { padding: 2px 10px 10px; font-size: .8rem; }
+}
+/* Preisrechner v2: Montage-Illustrationen, Eindeckungskarten, Vorschau, Hinweis */
+.pr__prod-text { display: flex; flex-direction: column; padding: 12px 14px 14px; }
+.pr__prod-text strong { padding: 0; font-size: 1.02rem; }
+.pr__prod-text small { padding: 2px 0 0; color: #777; line-height: 1.35; }
+.pr__prod--icon .pr__illu { display: block; background: linear-gradient(180deg, #f7f4ec, #fff); padding: 14px 18px 6px; }
+.pr__illu svg { width: 100%; height: auto; display: block; }
+.pr__illu .i-wand { fill: #d9d4c7; }
+.pr__illu .i-fuge { stroke: #c4bda9; stroke-width: 2; }
+.pr__illu .i-dach { stroke: #2b2b2b; stroke-width: 5; stroke-linecap: round; fill: none; }
+.pr__illu .i-glas { fill: rgba(140,190,215,.45); }
+.pr__illu .i-pfosten { stroke: #2b2b2b; stroke-width: 5; stroke-linecap: round; }
+.pr__illu .i-pfosten--hinten { stroke: #8a8a8a; stroke-width: 4; }
+.pr__illu .i-boden { stroke: #bdb6a3; stroke-width: 3; }
+.pr__illu .i-plus { fill: var(--farbe-gold); font: 700 15px var(--schrift-text, sans-serif); }
+.pr__prod--icon:has(input:checked) .pr__illu { background: linear-gradient(180deg, #fbf3dc, #fff); }
+.pr__glas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.pr__glas label { cursor: pointer; }
+.pr__glas input { position: absolute; opacity: 0; pointer-events: none; }
+.pr__glas span { display: flex; flex-direction: column; border: 2px solid var(--farbe-grau-linie); border-radius: 12px; overflow: hidden; height: 100%; transition: border-color .2s, box-shadow .2s; }
+.pr__glas picture img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.pr__glas strong { padding: 10px 12px 0; font-size: .95rem; }
+.pr__glas small { padding: 2px 12px 12px; color: #777; font-size: .82rem; }
+.pr__glas input:checked + span { border-color: var(--farbe-gold); box-shadow: 0 0 0 3px rgba(196,154,42,.18); }
+.pr__glas input:focus-visible + span { outline: 2px solid var(--farbe-gold); outline-offset: 2px; }
+.pr__vorschau { position: relative; margin: -28px -26px 20px; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; aspect-ratio: 16 / 9; }
+.pr__vorschau img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr__vorschau span { position: absolute; left: 12px; bottom: 12px; background: rgba(20,24,28,.7); color: #fff; font-size: .82rem; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+.pr__disclaimer { margin: 18px 0 0; padding: 14px 16px; border-left: 3px solid var(--farbe-gold); background: rgba(255,255,255,.06); border-radius: 6px; font-size: .82rem; line-height: 1.55; color: #cfd3d8; }
+.pr__disclaimer strong { color: #fff; }
+@media (max-width: 960px) {
+  .pr__vorschau, .pr__disclaimer { display: none; }
+}
+@media (max-width: 640px) {
+  .pr__glas { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .pr__glas strong { font-size: .82rem; padding: 8px 8px 0; }
+  .pr__glas small { display: none; }
+  .pr__prod-text { padding: 10px; }
+  .pr__prod-text strong { font-size: .92rem; }
+  .pr__prod-text small { font-size: .78rem; }
+}
+.pr__disclaimer-mobil { display: none; }
+@media (max-width: 960px) {
+  .pr__disclaimer-mobil { display: block; font-size: .85rem; line-height: 1.55; color: #555; background: #fff; border-left: 3px solid var(--farbe-gold); border-radius: 6px; padding: 12px 14px; margin: 0 0 18px; }
+}
+.pr__tief { margin: 14px 0 0; padding: 12px 14px; background: #fbf6e8; border-left: 3px solid var(--farbe-gold); border-radius: 6px; font-size: .88rem; line-height: 1.55; color: #444; }
+.pr__tief a { font-weight: 700; white-space: nowrap; }
+/* Preisrechner v3: drei Modelle + Trapezblech-Karten (Carport) */
+.pr__produkte--3 { grid-template-columns: repeat(3, 1fr); }
+.pr__glas--2 { grid-template-columns: repeat(2, 1fr); }
+.pr__blech { display: block; aspect-ratio: 4 / 3; background:
+  repeating-linear-gradient(90deg, #6f7479 0 10px, #9aa0a6 10px 14px, #c3c8cc 14px 26px, #9aa0a6 26px 30px, #6f7479 30px 40px); }
+.pr__blech--vlies { background:
+  linear-gradient(180deg, transparent 72%, #f1ede2 72%),
+  repeating-linear-gradient(90deg, #6f7479 0 10px, #9aa0a6 10px 14px, #c3c8cc 14px 26px, #9aa0a6 26px 30px, #6f7479 30px 40px); }
+[hidden].pr__schritt, [hidden].pr__glas { display: none; }
+@media (max-width: 640px) {
+  .pr__produkte--3 { gap: 8px; }
+  .pr__produkte--3 .pr__prod-text small { display: none; }
+  .pr__produkte--3 .pr__prod-text strong { font-size: .82rem; line-height: 1.25; }
+  .pr__glas--2 small { display: block; }
+}
+@media (max-width: 640px) {
+  .pr__produkte--3 .pr__prod-text strong { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
+}
+
+/* Kopfzeile: Button „Preis berechnen“ + kompakte, einzeilige Navigation */
+.nav a, .nav .btn { white-space: nowrap; }
+.nav__preis { background: #fff; }
+@media (min-width: 1181px) and (max-width: 1440px) {
+  .nav { gap: 2px; }
+  .nav a { padding: 9px 9px; font-size: .92rem; }
+  .nav .btn { padding: 9px 14px; margin-left: 6px; }
+  .nav__partner { margin-left: 6px; padding: 8px 10px; }
+  .header__kontakt { gap: 12px; }
+}
+/* Aufklappmenü schon ab Tablet/kleinem Laptop (vorher erst ≤ 640 px) */
+@media (max-width: 1180px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: fixed; top: 0; right: 0; height: 100vh; width: 80%; max-width: 320px; background: #fff;
+    flex-direction: column; align-items: flex-start; padding: 90px 24px 24px; gap: 4px;
+    box-shadow: -8px 0 30px rgba(0,0,0,.15); transform: translateX(100%); transition: transform .3s ease; overflow-y: auto; z-index: 105;
+  }
+  .nav.offen { transform: translateX(0); }
+  .nav a { width: 100%; padding: 14px 12px; border-bottom: 1px solid var(--farbe-grau-linie); border-radius: 0; }
+  .nav .btn { width: 100%; margin: 12px 0 0; text-align: center; justify-content: center; border-radius: 8px; }
+  .nav .btn + .btn { margin-top: 10px; }
+  .nav__partner { border: none; margin: 12px 0 0; justify-content: center; background: var(--farbe-grau); border-radius: 8px; }
+}
