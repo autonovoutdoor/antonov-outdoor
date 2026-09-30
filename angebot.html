@@ -160,11 +160,11 @@
 
     <!-- 0: Start -->
     <section class="fn-step is-active" data-step="intro">
-      <div class="fn-hero">
+      <div class="fn-hero" id="fnHero">
         <picture><source srcset="bilder/terrassenueberdachung-1-m.webp 1200w, bilder/terrassenueberdachung-1.webp 2400w" sizes="100vw" type="image/webp">
         <img src="bilder/terrassenueberdachung-1.jpg" alt="Terrassenüberdachung aus Aluminium"></picture>
       </div>
-      <h1 class="fn-h">Was kostet Ihre Terrassenüberdachung? Ihr Preis in 2 Minuten</h1>
+      <h1 class="fn-h" id="fnH1">Was kostet Ihr Terrassendach oder Carport? Ihr Preis in 2 Minuten</h1>
       <p class="fn-sub">Beantworten Sie ein paar kurze Fragen – danach sehen Sie <strong>sofort Ihren persönlichen Richtpreis</strong> inklusive Montage und Lieferung.</p>
       <div class="fn-badges">
         <span class="fn-badge">💶 Preis sofort</span>
@@ -177,21 +177,24 @@
 
     <!-- 1: Modell -->
     <section class="fn-step" data-step="q" data-key="Modell">
-      <p class="fn-q">Welcher Stil gefällt Ihnen?</p>
+      <p class="fn-q">Was möchten Sie überdachen lassen?</p>
       <div class="fn-opts">
         <button class="fn-opt" type="button" data-val="Terrassendach TDS">
           <picture><source srcset="bilder/terrassenueberdachung-1-m.webp" type="image/webp"><img class="fn-opt__img" src="bilder/terrassenueberdachung-1-m.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Klassisch geneigt<small>Terrassendach TDS</small></span></button>
+          <span class="fn-opt__lbl">Terrassendach<small>klassisch geneigt (TDS)</small></span></button>
         <button class="fn-opt" type="button" data-val="Flachdach SkyView">
           <picture><source srcset="bilder/referenz-2-m.webp" type="image/webp"><img class="fn-opt__img" src="bilder/referenz-2-m.jpg" alt=""></picture>
-          <span class="fn-opt__lbl">Modern flach<small>Flachdach SkyView</small></span></button>
+          <span class="fn-opt__lbl">Terrassendach<small>modern flach (SkyView)</small></span></button>
+        <button class="fn-opt" type="button" data-val="Carport Flat Line">
+          <picture><source srcset="bilder/flatline-1-m.webp" type="image/webp"><img class="fn-opt__img" src="bilder/flatline-1-m.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Carport<small>Flat Line, freistehend</small></span></button>
         <button class="fn-opt" type="button" data-val="Noch unklar"><div class="fn-opt__illu" aria-hidden="true"><svg viewBox="0 0 200 120"><circle cx="100" cy="60" r="34" class="i-kreis"/><path d="M88 50a12 12 0 1 1 18 10c-4 3-6 5-6 10" class="i-frage"/><circle cx="100" cy="82" r="3.5" class="i-punkt"/></svg></div><span class="fn-opt__lbl">Noch unklar<small>bitte beraten</small></span></button>
       </div>
       <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
     </section>
 
     <!-- 2: Montage -->
-    <section class="fn-step" data-step="q" data-key="Montageart">
+    <section class="fn-step" data-step="q" data-key="Montageart" data-nur="dach">
       <p class="fn-q">Wie soll die Überdachung angebracht sein?</p>
       <div class="fn-opts">
         <button class="fn-opt" type="button" data-val="Wandmontage"><div class="fn-opt__illu" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="14" y="8" width="26" height="104" rx="2" class="i-wand"/><path d="M22 20h8M22 34h8M22 48h8M22 62h8M22 76h8M22 90h8" class="i-fuge"/><path d="M40 30 L182 44" class="i-dach"/><path d="M40 30 L182 44 L182 49 L40 35 Z" class="i-glas"/><path d="M176 48 V110" class="i-pfosten"/><path d="M112 41 V110" class="i-pfosten i-pfosten--hinten"/><path d="M8 112 H192" class="i-boden"/></svg></div><span class="fn-opt__lbl">Wandmontage<small>am Haus befestigt</small></span></button>
@@ -203,12 +206,12 @@
 
     <!-- 2: Maße (Breite & Tiefe) -->
     <section class="fn-step" data-step="masse">
-      <p class="fn-q">Welche Maße soll die Überdachung haben?</p>
+      <p class="fn-q" id="fnMasseQ">Welche Maße soll die Überdachung haben?</p>
       <p class="fn-sub" style="text-align:center;">Ungefähre Werte genügen – wir prüfen alles beim kostenlosen Aufmaß.</p>
       <div class="fn-row">
-        <div class="fn-field"><label for="fnBreite">Breite</label>
+        <div class="fn-field"><label for="fnBreite" id="fnBreiteL">Breite</label>
           <div class="fn-inwrap"><input class="fn-input fn-hasunit" id="fnBreite" type="tel" inputmode="numeric" placeholder="z. B. 500"><span class="fn-unit">cm</span></div></div>
-        <div class="fn-field"><label for="fnTiefe">Tiefe (Ausladung)</label>
+        <div class="fn-field"><label for="fnTiefe" id="fnTiefeL">Tiefe (Ausladung)</label>
           <div class="fn-inwrap"><input class="fn-input fn-hasunit" id="fnTiefe" type="tel" inputmode="numeric" placeholder="z. B. 350"><span class="fn-unit">cm</span></div></div>
       </div>
       <p class="fn-masshint">Angabe in Zentimetern (z.&nbsp;B. 500&nbsp;cm = 5&nbsp;m)</p>
@@ -219,7 +222,7 @@
     </section>
 
     <!-- 3: Dach-Eindeckung -->
-    <section class="fn-step" data-step="q" data-key="Eindeckung">
+    <section class="fn-step" data-step="q" data-key="Eindeckung" data-nur="dach">
       <p class="fn-q">Woraus soll das Dach sein?</p>
       <div class="fn-opts">
         <button class="fn-opt" type="button" data-val="VSG-Glas 8 mm klar">
@@ -236,9 +239,23 @@
       <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
     </section>
 
+    <!-- 3b: Dach-Eindeckung Carport -->
+    <section class="fn-step" data-step="q" data-key="Eindeckung" data-nur="carport">
+      <p class="fn-q">Welches Dach soll Ihr Carport bekommen?</p>
+      <div class="fn-opts">
+        <button class="fn-opt" type="button" data-val="Trapezblech">
+          <picture><source srcset="bilder/blech-trapez.webp" type="image/webp"><img class="fn-opt__img" src="bilder/blech-trapez.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Trapezblech<small>robust &amp; langlebig</small></span></button>
+        <button class="fn-opt" type="button" data-val="Trapezblech mit Antikondensvlies">
+          <picture><source srcset="bilder/blech-trapez-vlies.webp" type="image/webp"><img class="fn-opt__img" src="bilder/blech-trapez-vlies.jpg" alt=""></picture>
+          <span class="fn-opt__lbl">Mit Antikondensvlies<small>kein Tropfwasser</small></span></button>
+      </div>
+      <div class="fn-nav"><button class="fn-back" type="button" data-back aria-label="Zurück">‹</button></div>
+    </section>
+
     <!-- 4: Zeitpunkt -->
     <section class="fn-step" data-step="q" data-key="Zeitpunkt">
-      <p class="fn-q">Wann soll die Überdachung eingebaut werden?</p>
+      <p class="fn-q">Wann soll es losgehen?</p>
       <div class="fn-opts">
         <button class="fn-opt" type="button" data-val="In 1–3 Monaten"><div class="fn-opt__illu" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="62" y="22" width="76" height="76" rx="10" class="i-kal"/><rect x="62" y="22" width="76" height="22" rx="10" class="i-kalkopf"/><rect x="62" y="34" width="76" height="10" class="i-kalkopf"/><path d="M80 16v14M120 16v14" class="i-ring"/><text x="100" y="80" text-anchor="middle" class="i-kaltext">1–3</text></svg></div><span class="fn-opt__lbl">In 1–3 Monaten<small>möglichst bald</small></span></button>
         <button class="fn-opt" type="button" data-val="In 4–6 Monaten"><div class="fn-opt__illu" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="62" y="22" width="76" height="76" rx="10" class="i-kal"/><rect x="62" y="22" width="76" height="22" rx="10" class="i-kalkopf"/><rect x="62" y="34" width="76" height="10" class="i-kalkopf"/><path d="M80 16v14M120 16v14" class="i-ring"/><text x="100" y="80" text-anchor="middle" class="i-kaltext">4–6</text></svg></div><span class="fn-opt__lbl">In 4–6 Monaten<small>zur nächsten Saison</small></span></button>
@@ -373,21 +390,30 @@
 
   // ---- Richtpreis (gleiche Preislogik wie preisrechner.html) ----
   var PREIS = null;
+  function istCarport(){ return answers.Modell === "Carport Flat Line"; }
   function preisBerechnen(){
     PREIS = null;
     var pr = window.aoPreisrechner; if (!pr) return;
+    var b = parseInt(answers.Breite,10), t = parseInt(answers.Tiefe,10);
+    if (!b || !t) return;
+    if (istCarport()){
+      // Carport Flat Line: immer freistehend, Tiefe bis 600 cm, Breite ab 300 cm
+      var ec = /Vlies/i.test(answers.Eindeckung||"") ? "vlies" : "standard";
+      if (b > 1400 || t > 600) { PREIS = { individuell:true, modell:"carport", eind:ec, art:"frei", b:b, t:t }; return; }
+      var rc = pr.berechne("carport", ec, Math.max(300, b), Math.max(200, t), "frei");
+      PREIS = { von:rc.von, bis:rc.bis, modell:"carport", eind:ec, art:"frei", b:b, t:t };
+      return;
+    }
     var modell = answers.Modell === "Flachdach SkyView" ? "skyview" : "tds";
     var eind = /opal|matt/i.test(answers.Eindeckung||"") ? "matt" : /Polycarbonat/i.test(answers.Eindeckung||"") ? "poly" : "klar";
     var art = answers.Montageart === "Freistehend" ? "frei" : "wand";
-    var b = parseInt(answers.Breite,10), t = parseInt(answers.Tiefe,10);
-    if (!b || !t) return;
     if (b > 1400 || t > 405) { PREIS = { individuell:true, modell:modell, eind:eind, art:art, b:b, t:t }; return; }
     var r = pr.berechne(modell, eind, Math.max(200, b), Math.max(150, t), art);
     PREIS = { von:r.von, bis:r.bis, modell:modell, eind:eind, art:art, b:b, t:t };
   }
   var euro = function(n){ return n.toLocaleString("de-DE") + " €"; };
-  var NAMEN = { tds:"Terrassendach TDS", skyview:"Flachdach SkyView" };
-  var EIND = { klar:"VSG-Glas 8 mm klar", matt:"VSG-Glas 8 mm opal/matt", poly:"Polycarbonat 16 mm" };
+  var NAMEN = { tds:"Terrassendach TDS", skyview:"Flachdach SkyView", carport:"Carport Flat Line" };
+  var EIND = { klar:"VSG-Glas 8 mm klar", matt:"VSG-Glas 8 mm opal/matt", poly:"Polycarbonat 16 mm", standard:"Trapezblech", vlies:"Trapezblech mit Antikondensvlies" };
   function preisText(){
     if (!PREIS) return "-";
     if (PREIS.individuell) return "individuell (Maß außerhalb des Rechners)";
@@ -416,26 +442,49 @@
   var bar = document.getElementById("fnBar");
   var idx = 0;
   var answers = {};
-  var totalCounted = steps.filter(function(s){ return s.dataset.step!=="intro" && s.dataset.step!=="danke"; }).length;
-
+  // Carport-Direkteinstieg für Anzeigen: angebot.html?produkt=carport
+  var DIREKT = null;
+  try{ DIREKT = new URLSearchParams(location.search).get("produkt"); }catch(e){}
+  if (DIREKT === "carport"){
+    answers.Modell = "Carport Flat Line";
+    document.getElementById("fnH1").textContent = "Was kostet Ihr Carport? Ihr Preis in 2 Minuten";
+    var hero = document.getElementById("fnHero");
+    hero.innerHTML = '<picture><source srcset="bilder/flatline-1-m.webp" type="image/webp"><img src="bilder/flatline-1-m.jpg" alt="Carport aus Aluminium"></picture>';
+    document.title = "Was kostet Ihr Carport? Preis in 2 Minuten | Antonov Outdoor";
+  }
+  // Welche Schritte gelten? (Modell-Schritt entfällt beim Direkteinstieg, Montage/Glas nur fürs Terrassendach, Blech nur für Carport)
+  function sichtbar(step){
+    if (DIREKT === "carport" && step.dataset.key === "Modell") return false;
+    var nur = step.dataset.nur;
+    if (!nur) return true;
+    return nur === (istCarport() ? "carport" : "dach");
+  }
+  function zaehlt(s){ return s.dataset.step!=="intro" && s.dataset.step!=="danke" && sichtbar(s); }
   function countedIndex(i){
     var n = 0;
-    for (var k=1; k<=i && k<steps.length; k++){
-      var st = steps[k].dataset.step;
-      if (st!=="intro" && st!=="danke") n++;
-    }
+    for (var k=1; k<=i && k<steps.length; k++){ if (zaehlt(steps[k])) n++; }
     return n;
+  }
+  function massTexte(){
+    var cp = istCarport();
+    document.getElementById("fnMasseQ").textContent = cp ? "Welche Maße soll Ihr Carport haben?" : "Welche Maße soll die Überdachung haben?";
+    document.getElementById("fnBreiteL").textContent = cp ? "Breite (Einfahrt)" : "Breite";
+    document.getElementById("fnTiefeL").textContent = cp ? "Länge (Stellplatz)" : "Tiefe (Ausladung)";
+    document.getElementById("fnBreite").placeholder = cp ? "z. B. 300" : "z. B. 500";
+    document.getElementById("fnTiefe").placeholder = cp ? "z. B. 500" : "z. B. 350";
   }
   function show(i){
     steps[idx].classList.remove("is-active");
     idx = Math.max(0, Math.min(steps.length-1, i));
     steps[idx].classList.add("is-active");
-    var pct = steps[idx].dataset.step==="danke" ? 100 : Math.round((countedIndex(idx)/totalCounted)*100);
+    if (steps[idx].dataset.step === "masse") massTexte();
+    var gesamt = steps.filter(zaehlt).length;
+    var pct = steps[idx].dataset.step==="danke" ? 100 : Math.round((countedIndex(idx)/gesamt)*100);
     bar.style.width = pct + "%";
     try{ window.scrollTo({top:0,behavior:"smooth"}); }catch(e){ window.scrollTo(0,0); }
   }
-  function next(){ show(idx+1); }
-  function back(){ show(idx-1); }
+  function next(){ var j = idx + 1; while (j < steps.length - 1 && !sichtbar(steps[j])) j++; show(j); }
+  function back(){ var j = idx - 1; while (j > 0 && !sichtbar(steps[j])) j--; show(j); }
 
   document.querySelectorAll("[data-next]").forEach(function(b){ b.addEventListener("click", next); });
   document.querySelectorAll("[data-back]").forEach(function(b){ b.addEventListener("click", back); });
@@ -477,6 +526,7 @@
     var mail = document.getElementById("fnMail").value.trim();
     var ok   = document.getElementById("fnConsent").checked;
     if (!name || !tel || !/.+@.+\..+/.test(mail) || !ok){ err.style.display="block"; return; }
+    if (istCarport()) answers.Montageart = "Freistehend (Carport)";
     preisBerechnen();
     // Honeypot: ausgefüllt = Bot → Preis zeigen, aber nichts senden
     var hp = document.getElementById("fnHp");
@@ -488,7 +538,7 @@
 
     var payload = {
       access_key: WEB3FORMS_KEY,
-      subject: "🔥 Neue Lead-Anfrage (Preis-Funnel) – " + preisText(),
+      subject: "🔥 Neue Lead-Anfrage – " + (PREIS ? NAMEN[PREIS.modell] : (answers.Modell || "Funnel")) + " – " + preisText(),
       from_name: "Antonov Outdoor – Angebots-Funnel",
       replyto: mail, email: mail, botcheck: "",
       Richtpreis: preisText(),
