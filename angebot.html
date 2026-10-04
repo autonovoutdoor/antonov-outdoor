@@ -280,7 +280,7 @@
         <input type="text" id="fnHp" name="hp_firma" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
         <label class="fn-consent"><input type="checkbox" id="fnConsent" required>
           <span>Ich stimme zu, dass Antonov Outdoor mich zu meiner Anfrage kontaktiert. Es gilt die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
-        <label class="fn-consent fn-consent--opt" id="fnAdsWrap"><input type="checkbox" id="fnAds">
+        <label class="fn-consent fn-consent--opt" id="fnAdsWrap" style="display:none"><input type="checkbox" id="fnAds">
           <span><em>Optional:</em> Meine Anfrage darf verschlüsselt an Meta (Facebook/Instagram) gemeldet werden, damit Antonov Outdoor den Erfolg seiner Anzeigen messen kann. Widerruf jederzeit möglich.</span></label>
         <div class="fn-nav">
           <button class="fn-back" type="button" data-back aria-label="Zurück">‹</button>
@@ -396,9 +396,14 @@
   }
 
   // Meta Conversions API (Edge Function meta-lead) – nur mit Einwilligung (Banner oder optionaler Haken)
+  // AUS bis die Edge Function „meta-lead“ in Supabase eingerichtet ist (Token + Pixel im Business-Portfolio).
+  // Zum Aktivieren: true setzen → optionaler Haken erscheint im Formular und Leads gehen zusätzlich per Server an Meta.
+  var META_CAPI_AKTIV = false;
+  if (META_CAPI_AKTIV && !(window.aoAdsConsent && window.aoAdsConsent())){ var aw2 = document.getElementById("fnAdsWrap"); if (aw2) aw2.style.display = ""; }
   function cookie(n){ var m = document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : null; }
   function sendToMeta(eventId, name, tel, mail){
     try{
+      if (!META_CAPI_AKTIV) return;
       var ads = document.getElementById("fnAds");
       var zustimmung = (window.aoAdsConsent && window.aoAdsConsent()) || (ads && ads.checked);
       if (!zustimmung) return;
