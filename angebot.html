@@ -81,6 +81,7 @@
   .fn-consent{ display:flex; gap:10px; align-items:flex-start; font-size:.85rem; color:#555; margin:6px 0 4px; }
   .fn-consent input{ width:20px; height:20px; margin-top:2px; flex:none; accent-color:var(--fn-gold); }
   .fn-consent a{ color:var(--fn-gold-d); }
+  .fn-consent--opt{ font-size:.78rem; color:#777; }
 
   .fn-btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%;
            padding:17px 20px; border:none; border-radius:12px; background:var(--fn-gold); color:#fff;
@@ -279,6 +280,8 @@
         <input type="text" id="fnHp" name="hp_firma" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
         <label class="fn-consent"><input type="checkbox" id="fnConsent" required>
           <span>Ich stimme zu, dass Antonov Outdoor mich zu meiner Anfrage kontaktiert. Es gilt die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
+        <label class="fn-consent fn-consent--opt" id="fnAdsWrap"><input type="checkbox" id="fnAds">
+          <span><em>Optional:</em> Meine Anfrage darf verschlüsselt an Meta (Facebook/Instagram) gemeldet werden, damit Antonov Outdoor den Erfolg seiner Anzeigen messen kann. Widerruf jederzeit möglich.</span></label>
         <div class="fn-nav">
           <button class="fn-back" type="button" data-back aria-label="Zurück">‹</button>
           <button class="fn-btn" type="submit" id="fnSubmit">Preis anzeigen ✓</button>
@@ -336,9 +339,13 @@
     window.fbq('track', 'PageView');
   }
   // Beim Absenden aufgerufen – feuert nur, wenn der Pixel (nach Einwilligung) geladen ist
-  window.aoFireLead = function(){ try{ if(window.fbq) window.fbq('track','Lead'); }catch(e){} };
+  // eventID = gleiche Kennung wie beim Server-Event (Conversions API) → Meta zählt den Lead nur einmal
+  window.aoFireLead = function(eventId){ try{ if(window.fbq) window.fbq('track','Lead',{},{eventID:eventId}); }catch(e){} };
+  window.aoAdsConsent = function(){ try{ return localStorage.getItem(KEY) === "yes"; }catch(e){ return false; } };
 
   var choice = null; try{ choice = localStorage.getItem(KEY); }catch(e){}
+  // Wer im Banner schon zugestimmt hat, braucht den optionalen Haken im Formular nicht
+  if (choice === "yes"){ var aw = document.getElementById("fnAdsWrap"); if (aw) aw.style.display = "none"; }
   if (choice === "yes"){ loadPixel(); return; }
   if (choice === "no"){ return; }
   var cc = document.getElementById("fnCC");
@@ -385,6 +392,28 @@
       // Mit Notiz (Modell + Richtpreis) senden; nimmt die Schnittstelle das Feld nicht an -> bisheriges Format (kein Lead geht verloren)
       var mitNotiz = Object.assign({}, basis, { p_notes: preisNotiz() });
       post(mitNotiz).then(function(r){ if (!r.ok) return post(basis); }).catch(function(){ post(basis).catch(function(){}); });
+    }catch(e){}
+  }
+
+  // Meta Conversions API (Edge Function meta-lead) – nur mit Einwilligung (Banner oder optionaler Haken)
+  function cookie(n){ var m = document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : null; }
+  function sendToMeta(eventId, name, tel, mail){
+    try{
+      var ads = document.getElementById("fnAds");
+      var zustimmung = (window.aoAdsConsent && window.aoAdsConsent()) || (ads && ads.checked);
+      if (!zustimmung) return;
+      var fbclid = null; try{ fbclid = new URLSearchParams(location.search).get("fbclid"); }catch(e){}
+      var fbc = cookie("_fbc") || (fbclid ? "fb.1." + Date.now() + "." + fbclid : null);
+      fetch(SUPA_URL + "/functions/v1/meta-lead", {
+        method:"POST", keepalive:true,
+        headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer "+SUPA_ANON },
+        body: JSON.stringify({
+          consent:true, event_id:eventId, name:name, phone:tel, email:mail,
+          fbc:fbc, fbp:cookie("_fbp"), url:location.href, user_agent:navigator.userAgent,
+          content_name: PREIS ? NAMEN[PREIS.modell] : (answers.Modell || "Funnel"),
+          value: PREIS && !PREIS.individuell ? PREIS.von : null
+        })
+      }).catch(function(){});
     }catch(e){}
   }
 
@@ -555,7 +584,9 @@
       body: JSON.stringify(payload)
     }).then(function(r){ return r.json(); }).then(function(res){
       if (res && res.success){
-        if (window.aoFireLead) window.aoFireLead();
+        var eventId = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+        if (window.aoFireLead) window.aoFireLead(eventId);
+        sendToMeta(eventId, name, tel, mail);
         preisAnzeigen();
         next();
       } else { throw new Error("fail"); }
