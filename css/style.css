@@ -1344,3 +1344,28 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .nav .btn + .btn { margin-top: 10px; }
   .nav__partner { border: none; margin: 12px 0 0; justify-content: center; background: var(--farbe-grau); border-radius: 8px; }
 }
+
+/* BAUSATZ-SHOP-EINBINDUNG */
+.bausatz-teaser { background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%); color: #fff; }
+.bausatz-teaser__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.bausatz-teaser h2 { color: #fff; margin: 8px 0 14px; }
+.bausatz-teaser p { color: #c9c9c9; }
+.bausatz-teaser .kicker { color: var(--farbe-gold-leucht); }
+.bausatz-teaser__liste { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; margin: 20px 0 26px; padding: 0; color: #eee; font-weight: 600; font-size: .95rem; }
+.bausatz-teaser__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn--rahmen-hell { border: 2px solid rgba(255,255,255,.45); color: #fff; background: transparent; }
+.btn--rahmen-hell:hover { border-color: var(--farbe-gold); color: var(--farbe-gold-leucht); }
+.bausatz-teaser__bild { position: relative; display: block; border-radius: var(--radius); overflow: hidden; box-shadow: var(--schatten-stark); }
+.bausatz-teaser__bild img { width: 100%; height: auto; display: block; transition: transform .5s ease; }
+.bausatz-teaser__bild:hover img { transform: scale(1.03); }
+.bausatz-teaser__bild span { position: absolute; left: 16px; bottom: 16px; background: var(--farbe-gold); color: #fff; font-family: var(--schrift-headline); font-weight: 800; font-size: 1.25rem; padding: 8px 14px; border-radius: 8px; }
+.bausatz-box { display: flex; align-items: center; gap: 18px; background: #fff8e6; border: 1px solid #f0dc9c; border-radius: var(--radius); padding: 20px 24px; }
+.bausatz-box__icon { font-size: 2rem; flex: none; }
+.bausatz-box__text { flex: 1; color: var(--farbe-text); }
+.bausatz-box .btn { flex: none; white-space: nowrap; }
+@media (max-width: 860px) {
+  .bausatz-teaser__grid { grid-template-columns: 1fr; gap: 28px; }
+  .bausatz-teaser__liste { grid-template-columns: 1fr; }
+  .bausatz-box { flex-direction: column; align-items: flex-start; text-align: left; }
+  .bausatz-box .btn { width: 100%; text-align: center; }
+}
