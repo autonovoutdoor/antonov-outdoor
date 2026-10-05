@@ -106,18 +106,20 @@
 
   .fn-trust{ display:flex; align-items:center; justify-content:center; gap:16px; margin:14px 0 0;
              color:#666; font-size:.82rem; flex-wrap:wrap; }
+  .fn-oder{ font-size:.8rem; color:#777; margin:-4px 0 8px; }
   .fn-err{ color:#c0392b; font-size:.9rem; margin-top:10px; text-align:center; display:none; }
 
   /* Consent-Banner (Meta-Pixel) */
   .fn-cc{ position:fixed; left:0; right:0; bottom:0; z-index:60; background:#1a1a1a; color:#eee;
-          padding:14px 16px; box-shadow:0 -4px 18px rgba(0,0,0,.28); display:none; }
+          padding:9px 12px calc(9px + env(safe-area-inset-bottom)); box-shadow:0 -4px 18px rgba(0,0,0,.28); display:none; }
   .fn-cc.is-show{ display:block; }
-  .fn-cc__inner{ max-width:520px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
-  .fn-cc p{ margin:0; font-size:.8rem; line-height:1.45; color:#cfcabb; }
+  .fn-cc__inner{ max-width:620px; margin:0 auto; display:flex; align-items:center; gap:10px; }
+  .fn-cc p{ margin:0; font-size:.72rem; line-height:1.35; color:#cfcabb; flex:1; }
+  body.cc-offen{ padding-bottom:78px; }
   .fn-cc a{ color:var(--fn-gold); }
-  .fn-cc__btns{ display:flex; gap:10px; }
-  .fn-cc__btns button{ flex:1; padding:11px; border-radius:10px; border:none; font-weight:700;
-                       cursor:pointer; font-size:.92rem; font-family:inherit; }
+  .fn-cc__btns{ display:flex; gap:6px; flex:none; }
+  .fn-cc__btns button{ padding:9px 12px; border-radius:9px; border:none; font-weight:700;
+                       cursor:pointer; font-size:.8rem; font-family:inherit; }
   .fn-cc__ok{ background:var(--fn-gold); color:#fff; }
   .fn-cc__no{ background:#3a3a3a; color:#eee; }
 
@@ -274,9 +276,10 @@
         <div class="fn-field"><label for="fnName">Name</label>
           <input class="fn-input" id="fnName" name="name" type="text" placeholder="Vor- und Nachname" autocomplete="name" required></div>
         <div class="fn-field"><label for="fnTel">Telefon</label>
-          <input class="fn-input" id="fnTel" name="telefon" type="tel" placeholder="0170 1234567" autocomplete="tel" required></div>
+          <input class="fn-input" id="fnTel" name="telefon" type="tel" placeholder="0170 1234567" autocomplete="tel"></div>
         <div class="fn-field"><label for="fnMail">E-Mail</label>
-          <input class="fn-input" id="fnMail" name="email" type="email" placeholder="ihre@email.de" autocomplete="email" required></div>
+          <input class="fn-input" id="fnMail" name="email" type="email" placeholder="ihre@email.de" autocomplete="email"></div>
+        <p class="fn-oder">Telefon <b>oder</b> E-Mail genügt.</p>
         <input type="text" id="fnHp" name="hp_firma" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
         <label class="fn-consent"><input type="checkbox" id="fnConsent" required>
           <span>Ich stimme zu, dass Antonov Outdoor mich zu meiner Anfrage kontaktiert. Es gilt die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
@@ -286,7 +289,7 @@
           <button class="fn-back" type="button" data-back aria-label="Zurück">‹</button>
           <button class="fn-btn" type="submit" id="fnSubmit">Preis anzeigen ✓</button>
         </div>
-        <p class="fn-err" id="fnErr">Bitte füllen Sie Name, Telefon, E-Mail aus und bestätigen Sie die Zustimmung.</p>
+        <p class="fn-err" id="fnErr">Bitte geben Sie Ihren Namen und Telefon oder E-Mail an und bestätigen Sie die Zustimmung.</p>
         <div class="fn-trust"><span>🔒 Ihre Daten sind sicher</span><span>⏱️ Schnelle Rückmeldung</span></div>
       </form>
     </section>
@@ -315,10 +318,10 @@
 
 <div class="fn-cc" id="fnCC">
   <div class="fn-cc__inner">
-    <p>Wir würden gern Marketing-Cookies des <strong>Meta-Pixels</strong> setzen, um den Erfolg unserer Instagram-/Facebook-Anzeigen zu messen. Das geschieht nur mit Ihrer Einwilligung. Details in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+    <p>Dürfen wir mit dem <strong>Meta-Pixel</strong> (Marketing-Cookies) den Erfolg unserer Anzeigen messen? Nur mit Ihrer Einwilligung – <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.</p>
     <div class="fn-cc__btns">
-      <button type="button" class="fn-cc__no" id="fnCCno">Ablehnen</button>
-      <button type="button" class="fn-cc__ok" id="fnCCok">Akzeptieren</button>
+      <button type="button" class="fn-cc__no" id="fnCCno">Nein</button>
+      <button type="button" class="fn-cc__ok" id="fnCCok">Ja, ok</button>
     </div>
   </div>
 </div>
@@ -349,14 +352,18 @@
   if (choice === "yes"){ loadPixel(); return; }
   if (choice === "no"){ return; }
   var cc = document.getElementById("fnCC");
-  cc.classList.add("is-show");
+  // Banner erst nach dem ersten Klick im Funnel zeigen – der Startbildschirm bleibt frei (Pixel lädt ohnehin erst nach Einwilligung)
+  var zeigen = function(){ if (cc.dataset.gezeigt) return; cc.dataset.gezeigt = "1"; cc.classList.add("is-show"); document.body.classList.add("cc-offen"); };
+  window.aoZeigeConsent = zeigen;
+  setTimeout(zeigen, 20000); // spätestens nach 20 s
+  var zu = function(){ cc.classList.remove("is-show"); document.body.classList.remove("cc-offen"); };
   document.getElementById("fnCCok").addEventListener("click", function(){
     try{ localStorage.setItem(KEY,"yes"); }catch(e){}
-    cc.classList.remove("is-show"); loadPixel();
+    zu(); loadPixel();
   });
   document.getElementById("fnCCno").addEventListener("click", function(){
     try{ localStorage.setItem(KEY,"no"); }catch(e){}
-    cc.classList.remove("is-show");
+    zu();
   });
 })();
 </script>
@@ -368,6 +375,17 @@
   // Supabase (Antonov Base) – öffentlicher anon-Key; Insert ausschließlich über RPC submit_lead
   var SUPA_URL = "https://nrpwbbepwuauikqpcvxz.supabase.co";
   var SUPA_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycHdiYmVwd3VhdWlrcXBjdnh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyMTA3NDIsImV4cCI6MjEwMTc4Njc0Mn0.1ds84MnzcWvSTH4XkTZuGuvU6Uc9XZKiAJzWPOYimjQ";
+  // Cookiefreie Schritt-Zählung: zufällige Sitzungs-ID nur im Arbeitsspeicher (kein Cookie, kein localStorage, keine personenbezogenen Daten)
+  var SID = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  function track(schritt){
+    try{
+      var u = fnUtm();
+      fetch(SUPA_URL + "/rest/v1/rpc/funnel_event", { method:"POST", keepalive:true,
+        headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer "+SUPA_ANON },
+        body: JSON.stringify({ p_session:SID, p_schritt:schritt, p_quelle:u.source, p_kampagne:u.campaign || null, p_produkt:(typeof answers !== "undefined" && answers.Modell) || null, p_mobil: matchMedia("(max-width: 700px)").matches })
+      }).catch(function(){});
+    }catch(e){}
+  }
   function fnUtm(){
     var q; try{ q = new URLSearchParams(location.search); }catch(e){ q = { get:function(){ return null; } }; }
     return { source:q.get('utm_source')||'direkt', medium:q.get('utm_medium')||'', campaign:q.get('utm_campaign')||'', content:q.get('utm_content')||'', term:q.get('utm_term')||'' };
@@ -376,7 +394,7 @@
     try{
       var u = fnUtm();
       var basis = {
-        p_name:name, p_telefon:tel, p_email:mail,
+        p_name:name, p_telefon:tel || null, p_email:mail || null,
         p_montageart:answers.Montageart||null, p_breite:answers.Breite||null, p_tiefe:answers.Tiefe||null,
         p_eindeckung:answers.Eindeckung||null, p_zeitpunkt:answers.Zeitpunkt||null,
         p_source:u.source, p_medium:u.medium, p_campaign:u.campaign, p_content:u.content, p_term:u.term,
@@ -512,12 +530,13 @@
     idx = Math.max(0, Math.min(steps.length-1, i));
     steps[idx].classList.add("is-active");
     if (steps[idx].dataset.step === "masse") massTexte();
+    track(steps[idx].dataset.key || steps[idx].dataset.step);
     var gesamt = steps.filter(zaehlt).length;
     var pct = steps[idx].dataset.step==="danke" ? 100 : Math.round((countedIndex(idx)/gesamt)*100);
     bar.style.width = pct + "%";
     try{ window.scrollTo({top:0,behavior:"smooth"}); }catch(e){ window.scrollTo(0,0); }
   }
-  function next(){ var j = idx + 1; while (j < steps.length - 1 && !sichtbar(steps[j])) j++; show(j); }
+  function next(){ if (window.aoZeigeConsent) window.aoZeigeConsent(); var j = idx + 1; while (j < steps.length - 1 && !sichtbar(steps[j])) j++; show(j); }
   function back(){ var j = idx - 1; while (j > 0 && !sichtbar(steps[j])) j--; show(j); }
 
   document.querySelectorAll("[data-next]").forEach(function(b){ b.addEventListener("click", next); });
@@ -559,7 +578,9 @@
     var tel  = document.getElementById("fnTel").value.trim();
     var mail = document.getElementById("fnMail").value.trim();
     var ok   = document.getElementById("fnConsent").checked;
-    if (!name || !tel || !/.+@.+\..+/.test(mail) || !ok){ err.style.display="block"; return; }
+    var mailOk = /.+@.+\..+/.test(mail), telOk = tel.replace(/\D/g,"").length >= 6;
+    if (!name || !(telOk || mailOk) || (mail && !mailOk) || !ok){ err.style.display="block"; track("formular_unvollstaendig"); return; }
+    track("absenden");
     if (istCarport()) answers.Montageart = "Freistehend (Carport)";
     preisBerechnen();
     // Honeypot: ausgefüllt = Bot → Preis zeigen, aber nichts senden
@@ -574,7 +595,7 @@
       access_key: WEB3FORMS_KEY,
       subject: "🔥 Neue Lead-Anfrage – " + (PREIS ? NAMEN[PREIS.modell] : (answers.Modell || "Funnel")) + " – " + preisText(),
       from_name: "Antonov Outdoor – Angebots-Funnel",
-      replyto: mail, email: mail, botcheck: "",
+      replyto: mail || undefined, email: mail || "-", Telefon_oder_Mail: (tel ? "Tel. " + tel : "") + (tel && mail ? " / " : "") + (mail ? mail : ""), botcheck: "",
       Richtpreis: preisText(),
       Modell: answers.Modell || "-",
       Montageart: answers.Montageart || "-",
@@ -601,6 +622,7 @@
       err.style.display="block";
     });
   });
+  track("geladen");
 })();
 </script>
 </body>
