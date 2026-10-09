@@ -1369,3 +1369,7 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
   .bausatz-box { flex-direction: column; align-items: flex-start; text-align: left; }
   .bausatz-box .btn { width: 100%; text-align: center; }
 }
+
+/* 3D-KONFIGURATOR – Menüpunkt (auf mittleren Laptops ausgeblendet, damit die Kopfzeile einzeilig bleibt) */
+.nav__3d { font-weight: 700; color: var(--farbe-gold-dunkel) !important; }
+@media (min-width: 1181px) and (max-width: 1440px) { .nav__3d { display: none; } }

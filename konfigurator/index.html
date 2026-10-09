@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D-Konfigurator Terrassendach, Carport & Lamellendach | Antonov Outdoor</title>
+<meta name="description" content="Planen Sie Ihr Terrassendach, Ihren Carport oder Ihr Lamellendach in 3D – mit Ihren Maßen, Farben, Verglasung und Markisen. Richtpreis direkt nach der Konfiguration. Antonov Outdoor, Waldshut-Tiengen.">
+<link rel="canonical" href="https://antonov-outdoor.de/konfigurator/">
+<meta property="og:title" content="3D-Konfigurator | Antonov Outdoor">
+<meta property="og:description" content="Terrassendach, Carport & Lamellendach in 3D konfigurieren – mit Richtpreis.">
+<meta property="og:image" content="https://antonov-outdoor.de/bilder/kleinanzeigen/ka-titelbild.jpg">
+<link rel="icon" href="../bilder/favicon-32.png">
+<style>
+  :root { --gold: #c49b2d; --gold2: #e8b840; --dunkel: #17191b; --panel: #1f2225; --linie: #33373b; --text: #e9e6df; --grau: #9a9690; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--dunkel); color: var(--text); font-family: "Segoe UI", system-ui, Arial, sans-serif; overflow: hidden; }
+  #app { display: flex; height: 100%; }
+  #panel { width: 340px; flex: none; background: var(--panel); border-right: 1px solid var(--linie); display: flex; flex-direction: column; transition: margin-left .25s ease; }
+  body.praesentation #panel { margin-left: -340px; }
+  .kopf { padding: 18px 20px 14px; border-bottom: 1px solid var(--linie); display: flex; align-items: center; gap: 12px; }
+  .kopf img { height: 46px; }
+  .kopf .t1 { font-weight: 800; letter-spacing: .02em; }
+  .kopf .t2 { font-size: 12px; color: var(--grau); }
+  .scroll { flex: 1; overflow-y: auto; padding: 6px 20px 20px; }
+  .scroll::-webkit-scrollbar { width: 8px; } .scroll::-webkit-scrollbar-thumb { background: #3a3e42; border-radius: 4px; }
+  .grp { margin-top: 16px; }
+  .grp[hidden] { display: none; }
+  .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .09em; color: var(--grau); margin-bottom: 7px; display: flex; justify-content: space-between; }
+  .seg { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 6px; }
+  .seg button { background: #2a2e32; color: var(--text); border: 1px solid #3a3e43; border-radius: 8px; padding: 9px 6px; font: inherit; font-size: 13px; cursor: pointer; transition: .15s; line-height: 1.2; }
+  .seg button:hover { border-color: #5a5f64; }
+  .seg button.an { background: var(--gold); border-color: var(--gold); color: #111; font-weight: 700; }
+  .seg.prod button { padding: 11px 4px; }
+  #sel-produkt { grid-template-columns: 1fr 1fr; }
+  .seg.prod small { display: block; font-size: 10.5px; opacity: .75; font-weight: 400; margin-top: 2px; }
+  .farben { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .farben button { padding: 6px 2px 7px; }
+  .farben i { display: block; width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 5px; border: 2px solid rgba(255,255,255,.25); }
+  .farben span { font-size: 10.5px; }
+  .regler { display: flex; align-items: center; gap: 10px; }
+  .regler input[type=range] { flex: 1; accent-color: var(--gold); }
+  .regler input[type=number] { width: 72px; background: #2a2e32; border: 1px solid #3a3e43; color: var(--text); border-radius: 6px; padding: 6px; font: inherit; font-size: 13px; text-align: right; }
+  .regler em { font-style: normal; color: var(--grau); font-size: 12px; }
+  .cb { display: flex; align-items: center; gap: 9px; padding: 6px 0; font-size: 13.5px; cursor: pointer; }
+  .cb input { accent-color: var(--gold); width: 16px; height: 16px; }
+  #verk-einst.aus { opacity: .45; }
+  #p-verk-info { white-space: pre-line; }
+  .stoffe .fam { font-size: 10.5px; color: var(--grau); margin: 7px 0 4px; letter-spacing: .05em; }
+  .stoffe .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .stoffe button { width: 24px; height: 24px; border-radius: 5px; border: 2px solid rgba(255,255,255,.15); cursor: pointer; padding: 0; }
+  .stoffe button:hover { border-color: #fff; }
+  .stoffe button.an { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  #grp-markise .lbl span:last-child { text-transform: none; letter-spacing: 0; color: var(--gold2); }
+  [hidden] { display: none !important; }
+  /* aufklappbare Abschnitte */
+  .sek { border: 1px solid var(--linie); border-radius: 12px; margin-top: 10px; background: #23272a; }
+  .sek > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .sek > summary::-webkit-details-marker { display: none; }
+  .sek > summary::after { content: '▸'; color: var(--grau); transition: transform .2s; }
+  .sek[open] > summary::after { transform: rotate(90deg); }
+  .sek-t { font-weight: 800; font-size: 14px; }
+  .sek-s { flex: 1; text-align: right; font-size: 11.5px; color: var(--gold2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sek[open] > summary { border-bottom: 1px solid var(--linie); }
+  .sek > .grp, .sek > .hin { padding: 0 14px; } .sek > .grp:last-child, .sek > .hin:last-child { padding-bottom: 14px; }
+  .sek .grp { margin-top: 12px; }
+  .hin { font-size: 11px; color: var(--grau); margin-top: 6px; }
+  /* Farbwahl: Knopf + Ausklapp-Auswahl */
+  .fw { position: relative; }
+  .fw-btn { width: 100%; display: flex; align-items: center; gap: 10px; background: #2a2e32; border: 1px solid #3a3e43; border-radius: 8px; padding: 7px 10px; color: var(--text); font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+  .fw-btn:hover { border-color: #5a5f64; }
+  .fw-btn b { margin-left: auto; color: var(--grau); font-weight: 400; }
+  .fw-sw { width: 26px; height: 26px; border-radius: 6px; border: 2px solid rgba(255,255,255,.25); flex: none; }
+  .fw-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fw-pop { display: none; margin-top: 6px; padding: 10px; background: #15171a; border: 1px solid var(--linie); border-radius: 10px; max-height: 300px; overflow-y: auto; }
+  .fw.offen .fw-pop { display: block; }
+  .fw.offen .fw-btn { border-color: var(--gold); }
+  .nebenknopf { margin-top: 10px; width: 100%; background: #2a2e32; color: var(--text); border: 1px dashed #5a5f64; border-radius: 8px; padding: 8px; font: inherit; font-size: 12.5px; cursor: pointer; }
+  .seg button:disabled { opacity: .3; cursor: not-allowed; }
+  .velz { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 8px; margin-top: 6px; font-size: 13px; }
+  .velz .seg button { padding: 7px 4px; font-size: 12.5px; }
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+  #preisbox { margin-top: 16px; background: #15171a; border: 1px solid var(--linie); border-radius: 10px; padding: 12px 14px; font-size: 13px; }
+  #preisbox[hidden] { display: none; }
+  #preisbox .z { display: flex; justify-content: space-between; padding: 3px 0; color: #cfcac1; }
+  #preisbox .sum { border-top: 1px solid var(--linie); margin-top: 6px; padding-top: 8px; font-weight: 700; color: var(--text); }
+  #preisbox .br { font-size: 18px; color: var(--gold2); font-weight: 800; }
+  #preisbox .hin { font-size: 11px; color: var(--grau); margin-top: 6px; line-height: 1.4; }
+  .fuss { padding: 12px 20px; border-top: 1px solid var(--linie); font-size: 11px; color: var(--grau); line-height: 1.5; }
+  #main { flex: 1; position: relative; min-width: 0; }
+  #viewer { position: absolute; inset: 0; }
+  #viewer canvas { display: block; }
+  .labels { position: absolute; inset: 0; pointer-events: none; }
+  .mass { background: rgba(23,25,27,.86); color: #fff; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+  .mass.klein { font-size: 11.5px; font-weight: 600; border-color: rgba(255,255,255,.35); }
+  .info { position: absolute; left: 18px; top: 16px; pointer-events: none; background: rgba(23,25,27,.72); padding: 10px 16px 11px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(6px); }
+  .info h1 { margin: 0; font-size: 26px; font-weight: 800; color: #fff; }
+  .info .spec { font-size: 14px; color: #fff; opacity: .95; margin-top: 2px; }
+  .info .fl { font-size: 12px; color: var(--gold2); font-weight: 700; margin-top: 3px; }
+  .leiste { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 8px; background: rgba(23,25,27,.82); padding: 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(6px); }
+  .leiste .seg { display: flex; gap: 4px; }
+  .leiste button { background: transparent; color: var(--text); border: 1px solid transparent; border-radius: 8px; padding: 8px 11px; font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .leiste button:hover { background: #2c3034; }
+  .leiste button.an { background: var(--gold); color: #111; font-weight: 700; }
+  .leiste .trenn { width: 1px; background: #3a3e43; margin: 2px 2px; }
+  .oben-rechts { position: absolute; right: 18px; top: 16px; display: flex; gap: 8px; }
+  .oben-rechts button { background: rgba(23,25,27,.82); color: var(--text); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 9px 13px; font: inherit; font-size: 13px; cursor: pointer; }
+  .oben-rechts button:hover { border-color: var(--gold); }
+  @media (max-width: 1100px) { .info { top: 66px; } }
+  .abschl { padding: 12px 20px 4px; border-top: 1px solid var(--linie); text-align: center; font-size: 11.5px; color: var(--grau); }
+  .abschl button { width: 100%; background: var(--gold); color: #111; border: 0; border-radius: 10px; padding: 13px; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; margin-bottom: 5px; }
+  .abschl button:hover { background: var(--gold2); }
+  #abschluss { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  #abschluss[hidden] { display: none; }
+  .ab-bg { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); }
+  .ab-box { position: relative; background: var(--panel); border: 1px solid var(--linie); border-radius: 16px; width: min(980px, 100%); max-height: calc(100vh - 40px); overflow: auto; display: grid; grid-template-columns: 1fr 1fr; }
+  .ab-x { position: absolute; right: 12px; top: 8px; background: none; border: 0; color: var(--text); font-size: 28px; cursor: pointer; z-index: 2; }
+  .ab-links { padding: 22px; border-right: 1px solid var(--linie); }
+  .ab-links img { width: 100%; border-radius: 10px; display: block; }
+  .ab-links h2 { margin: 14px 0 6px; font-size: 20px; }
+  #ab-spec { white-space: pre-line; font-size: 13px; color: #cfcac1; line-height: 1.6; }
+  .ab-rechts { padding: 22px 24px; }
+  .ab-rechts h3 { margin: 4px 0 6px; font-size: 21px; }
+  .ab-rechts p { color: #cfcac1; font-size: 13.5px; margin: 0 0 12px; }
+  .ab-rechts input, .ab-rechts select, .ab-rechts textarea { width: 100%; background: #2a2e32; border: 1px solid #3a3e43; color: var(--text); border-radius: 8px; padding: 10px 11px; font: inherit; font-size: 14px; margin-bottom: 8px; }
+  .ab-zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ab-klein { font-size: 11.5px; color: var(--grau); margin: -2px 0 8px; }
+  .ab-ok { align-items: flex-start; font-size: 12px; color: #cfcac1; } .ab-ok a { color: var(--gold2); } .ab-ok input { width: 16px; margin: 2px 0 0; flex: none; }
+  .ab-fehler { background: #4a2020; color: #ffd2cc; border-radius: 8px; padding: 8px 10px; font-size: 12.5px; margin: 6px 0; }
+  .ab-rechts button { width: 100%; background: var(--gold); color: #111; border: 0; border-radius: 10px; padding: 13px; font: inherit; font-weight: 800; font-size: 14.5px; cursor: pointer; margin-top: 8px; }
+  .ab-rechts button:disabled { opacity: .6; }
+  .ab-preis { background: #15171a; border: 1px solid var(--gold); border-radius: 12px; padding: 14px; text-align: center; margin: 14px 0 10px; }
+  .ab-preis span { display: block; font-size: 12px; color: var(--grau); text-transform: uppercase; letter-spacing: .08em; }
+  .ab-preis b { display: block; font-size: 32px; color: var(--gold2); margin: 2px 0; }
+  .ab-preis small { color: var(--grau); }
+  #ab-preis-text { white-space: pre-wrap; font: 12px/1.55 "Segoe UI", Arial; color: #cfcac1; background: #1a1c1f; border-radius: 8px; padding: 10px 12px; margin: 0 0 8px; max-height: 220px; overflow: auto; }
+  @media (max-width: 760px) { .ab-box { grid-template-columns: 1fr; } .ab-links { border-right: 0; border-bottom: 1px solid var(--linie); } }
+
+  /* ---------- Handy: 3D oben, Einstellungen darunter ---------- */
+  @media (max-width: 760px) {
+    #app { flex-direction: column; }
+    #main { order: 0; flex: none; height: 48vh; height: 48svh; }
+    #panel { order: 1; width: 100%; flex: 1; min-height: 0; border-right: 0; border-top: 1px solid var(--linie); margin-left: 0 !important; }
+    body.praesentation #panel { display: none; }
+    body.praesentation #main { height: 100vh; height: 100svh; }
+    .kopf { padding: 8px 14px; } .kopf img { height: 30px; } .kopf .t1 { font-size: 13.5px; } .kopf .t2 { display: none; }
+    .fuss { display: none; }
+    .scroll { padding: 0 12px 12px; }
+    .sek { margin-top: 8px; } .sek > summary { padding: 11px 12px; }
+    .abschl { padding: 8px 12px; } .abschl button { padding: 11px; font-size: 14.5px; margin-bottom: 2px; } .abschl div { font-size: 10.5px; }
+    .info { left: 8px; top: 8px; padding: 6px 10px; max-width: calc(100% - 140px); }
+    .info h1 { font-size: 15px; } .info .spec { display: none; } .info .fl { font-size: 11px; }
+    .oben-rechts { right: 8px; top: 8px; gap: 5px; }
+    .oben-rechts button { padding: 7px 9px; font-size: 15px; }
+    .oben-rechts .txt { display: none; }
+    .leiste { left: 6px; right: 6px; bottom: 6px; transform: none; overflow-x: auto; padding: 5px; gap: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .leiste::-webkit-scrollbar { display: none; }
+    .leiste button { padding: 7px 9px; font-size: 12px; flex: none; }
+    .mass { font-size: 10.5px; padding: 2px 6px; } .mass.klein { display: none; }
+    .seg button { padding: 10px 4px; } .seg.prod button { font-size: 12.5px; }
+    #sel-produkt { grid-template-columns: 1fr 1fr; }
+    .regler input[type=range] { height: 28px; }
+    .cb { padding: 8px 0; }
+    .fw-pop { max-height: 240px; }
+    .stoffe button { width: 30px; height: 30px; }
+  }
+  .oben-rechts button.gold { background: var(--gold); color: #111; font-weight: 700; border-color: var(--gold); }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="panel">
+    <div class="kopf"><a href="../" title="Zur Startseite antonov-outdoor.de"><img src="assets/logo-weiss.png" alt="Antonov Outdoor – zur Startseite"></a><div><div class="t1">3D-Konfigurator</div><div class="t2">Antonov Outdoor · Alu-Außensysteme</div></div></div>
+    <div class="scroll">
+      <details class="sek" open>
+        <summary><span class="sek-t">Produkt &amp; Maße</span><span class="sek-s" id="sum-produkt"></span></summary>
+        <div class="grp"><div class="seg prod" id="sel-produkt">
+          <button data-v="tds">Terrassendach<small>TDS · geneigt</small></button>
+          <button data-v="skyview">SkyView<small>Flachdach</small></button>
+          <button data-v="carport">Carport<small>Flat Line</small></button>
+          <button data-v="sunpro">Lamellendach<small>SunPro Plus</small></button>
+        </div></div>
+        <div class="grp" id="grp-montage"><div class="lbl">Montage</div>
+          <div class="seg" id="sel-montage"><button data-v="wand">An der Hauswand</button><button data-v="frei">Freistehend</button></div></div>
+        <div class="grp"><div class="lbl"><span id="lbl-b">Breite</span><span>cm</span></div>
+          <div class="regler"><input type="range" id="in-b" step="10"><input type="number" id="in-b-n" step="10"></div></div>
+        <div class="grp"><div class="lbl"><span id="lbl-t">Tiefe</span><span>cm</span></div>
+          <div class="regler"><input type="range" id="in-t" step="10"><input type="number" id="in-t-n" step="10"></div></div>
+      </details>
+
+      <details class="sek">
+        <summary><span class="sek-t">Dach &amp; Farbe</span><span class="sek-s" id="sum-dach"></span></summary>
+        <div class="grp" id="grp-eind"><div class="lbl">Dacheindeckung</div>
+          <div class="seg" id="sel-eind"><button data-v="klar">Glas klar</button><button data-v="matt">Glas opal</button><button data-v="poly">Polycarbonat</button></div></div>
+        <div class="grp" id="grp-blech" hidden><div class="lbl">Dach</div>
+          <div class="seg" id="sel-blech"><button data-v="standard">Trapezblech</button><button data-v="vlies">+ Antikondensvlies</button></div></div>
+        <div class="grp"><div class="lbl">Farbe Aluminium</div>
+          <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button>
+            <div class="fw-pop"><div class="seg farben" id="sel-farbe">
+              <button data-v="7016" title="RAL 7016 Anthrazit"><i style="background:#383e42"></i><span>7016 Anthrazit</span></button>
+              <button data-v="9006" title="RAL 9006 Weißaluminium"><i style="background:#a5a8a6"></i><span>9006 Weißalu</span></button>
+              <button data-v="9007" title="RAL 9007 Graualuminium"><i style="background:#8c8c88"></i><span>9007 Graualu</span></button>
+              <button data-v="9010" title="RAL 9010 Reinweiß"><i style="background:#f1ede1"></i><span>9010 Weiß</span></button>
+            </div></div></div></div>
+        <div class="grp" id="grp-sunpro" hidden><div class="lbl"><span>Lamellenstellung</span><span id="spwinkel-w">45°</span></div>
+          <div class="regler"><input type="range" id="in-spwinkel" min="0" max="110" value="45"></div>
+          <div class="seg" style="margin-top:8px"><button id="btn-spzu">◀ Schließen</button><button id="btn-spauf">Öffnen ▶</button></div>
+          <div class="hin">Lamellen drehbar 0–110° · inkl. Motor, Somfy-Steuerung &amp; 5-Kanal-Handsender · Lamellen in der Gestellfarbe</div>
+          <div class="lbl" style="margin-top:12px">Extras</div>
+          <label class="cb"><input type="checkbox" id="cb-spSeite">Seitliche Beleuchtung</label>
+          <label class="cb"><input type="checkbox" id="cb-spRegen">Regensensor (schließt bei Regen)</label>
+          <label class="cb"><input type="checkbox" id="cb-spTahoma">Smartphone-Steuerung TaHoma</label>
+          <label class="cb"><input type="checkbox" id="cb-spFb">Zusätzliche Fernbedienung</label></div>
+        <div class="grp"><label class="cb"><input type="checkbox" id="cb-led"><span id="led-txt">LED-Spots im Dach</span></label></div>
+      </details>
+
+      <details class="sek" id="grp-seiten">
+        <summary><span class="sek-t">Seiten &amp; Verglasung</span><span class="sek-s" id="sum-seiten"></span></summary>
+        <div class="grp">
+          <div class="zwei">
+            <label class="cb"><input type="checkbox" id="cb-seiteL">Festverglasung links</label>
+            <label class="cb"><input type="checkbox" id="cb-seiteR">Festverglasung rechts</label>
+          </div>
+          <label class="cb"><input type="checkbox" id="cb-front">Glas-Schiebewand vorne (Kaltwintergarten)</label></div>
+        <div class="hin" id="keil-hin" hidden style="padding:0 14px">▲ Beim Terrassendach TDS wird das Dreieck über den Seitenelementen automatisch mit Festverglasung (Keil) geschlossen.</div>
+        <div class="grp"><div class="lbl">Velaris Lamellenwand</div>
+          <div class="velz"><span>Vorne</span><div class="seg" id="sel-velV"><button data-v="keine">–</button><button data-v="schieb">Schiebbar</button><button data-v="fest">Fest</button></div></div>
+          <div class="velz"><span>Links</span><div class="seg" id="sel-velL"><button data-v="keine">–</button><button data-v="schieb">Schiebbar</button><button data-v="fest">Fest</button></div></div>
+          <div class="velz"><span>Rechts</span><div class="seg" id="sel-velR"><button data-v="keine">–</button><button data-v="schieb">Schiebbar</button><button data-v="fest">Fest</button></div></div>
+          <div id="grp-vellam" hidden><div class="lbl" style="margin-top:8px">Lamellenfarbe</div>
+            <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button>
+              <div class="fw-pop"><div class="seg farben" id="sel-vellam" style="grid-template-columns:1fr 1fr">
+                <button data-v="7016" title="Anthrazit RAL 7016"><i style="background:#3d4246"></i><span>Anthrazit 7016</span></button>
+                <button data-v="oak" title="Golden Oak (Holzoptik)"><i style="background:repeating-linear-gradient(0deg,#b0895a 0 4px,#97723f 4px 5px)"></i><span>Golden Oak</span></button>
+              </div></div></div>
+            <div class="hin">Elemente bis 1,5 m Breite · Rahmen in der Gestellfarbe</div></div>
+          <div id="grp-velanim" hidden><div class="lbl" style="margin-top:10px">Laufschienen (Spuren)</div>
+            <div class="seg" id="sel-velspuren"><button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button></div>
+            <div class="hin" id="velspuren-hin"></div>
+            <div class="seg" style="margin-top:8px"><button id="btn-velzu">◀ Schließen</button><button id="btn-velauf">Öffnen ▶</button></div></div>
+        </div>
+      </details>
+
+      <details class="sek" id="grp-markise">
+        <summary><span class="sek-t">Sonnenschutz</span><span class="sek-s" id="sum-markise"></span></summary>
+        <div class="grp" id="grp-dachmark"><div class="lbl">Am Dach</div>
+          <div class="seg" id="sel-dachmark" style="grid-template-columns:repeat(4,1fr)"><button data-v="keine">Keine</button><button data-v="auf">Aufdach</button><button data-v="unter">Unterdach</button><button data-v="plissee">Plissee</button></div>
+          <div id="grp-stoff-dach" hidden><div class="lbl" style="margin-top:8px">Stoff Dachmarkise</div>
+            <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button><div class="fw-pop"><div id="stoff-dach" class="stoffe"></div></div></div></div>
+          <div id="grp-plissee" hidden>
+            <div class="lbl" style="margin-top:8px">Plissee-Stoff</div>
+            <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button><div class="fw-pop"><div id="stoff-plissee" class="stoffe"></div></div></div>
+            <div class="lbl" style="margin-top:8px">Profilfarbe</div>
+            <div class="seg" id="sel-plprofil"><button data-v="weiss">Weiß</button><button data-v="alu">Alu</button><button data-v="anthrazit">Anthrazit</button><button data-v="schwarz">Schwarz</button></div>
+            <div class="hin">Zwischen den Sparren · manuell mit Bedienstab</div></div>
+        </div>
+        <div class="grp"><div class="lbl">Senkrechtmarkise eZip</div>
+          <div class="zwei" style="grid-template-columns:1fr 1fr 1fr">
+            <label class="cb"><input type="checkbox" id="cb-zipV">Vorne</label>
+            <label class="cb"><input type="checkbox" id="cb-zipL">Links</label>
+            <label class="cb"><input type="checkbox" id="cb-zipR">Rechts</label>
+          </div>
+          <div id="grp-stoff-zip" hidden><div class="lbl" style="margin-top:6px">Stoff Senkrechtmarkise</div>
+            <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button><div class="fw-pop"><div id="stoff-zip" class="stoffe"></div></div></div></div>
+        </div>
+        <div class="grp" id="grp-ausfahren">
+          <div class="lbl"><span>Ausfahren</span><span id="ausfahren-w">85 %</span></div>
+          <div class="regler"><input type="range" id="in-ausfahren" min="0" max="100" value="85"></div>
+          <div class="seg" style="margin-top:8px"><button id="btn-mzu">◀ Einfahren</button><button id="btn-mauf">Ausfahren ▶</button></div>
+        </div>
+        <div class="hin">Alle Markisen mit Somfy-Funkmotor &amp; Handsender</div>
+      </details>
+
+      <details class="sek" id="grp-verk" hidden>
+        <summary><span class="sek-t">Verkleidung</span><span class="sek-s" id="sum-verk"></span></summary>
+        <div class="grp">
+          <div class="seg prod" id="sel-verkwand" style="margin-bottom:8px"><button data-v="hinten">Rückseite<small></small></button><button data-v="links">Links<small></small></button><button data-v="rechts">Rechts<small></small></button></div>
+          <label class="cb" style="font-weight:700"><input type="checkbox" id="cb-verkAn">Diese Wand verkleiden</label>
+          <div id="verk-einst">
+            <div class="seg" id="sel-verkart" style="margin:6px 0 8px"><button data-v="zaun">Zaunpaneele</button><button data-v="latten">Rechteckprofil 25×70</button></div>
+            <div class="seg" id="sel-verkricht"><button data-v="waagerecht">Waagerecht</button><button data-v="senkrecht">Senkrecht</button></div>
+            <div id="verk-abst" hidden><div class="lbl" style="margin-top:10px">Abstand zwischen den Profilen</div>
+              <div class="seg" id="sel-verkabst"><button data-v="30">3,0 cm</button><button data-v="35">3,5 cm</button><button data-v="40">4,0 cm</button></div></div>
+            <div class="lbl" style="margin-top:10px">Farbe Verkleidung</div>
+            <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button>
+              <div class="fw-pop"><div class="seg farben" id="sel-verkfarbe">
+                <button data-v="7016" title="RAL 7016 Anthrazit"><i style="background:#383e42"></i><span>7016</span></button>
+                <button data-v="9006" title="RAL 9006 Weißaluminium"><i style="background:#a5a8a6"></i><span>9006</span></button>
+                <button data-v="9007" title="RAL 9007 Graualuminium"><i style="background:#8c8c88"></i><span>9007</span></button>
+                <button data-v="9010" title="RAL 9010 Reinweiß"><i style="background:#f1ede1"></i><span>9010</span></button>
+                <button data-v="nut" title="Holzdekor NUT Dunkel"><i style="background:linear-gradient(100deg,#4a1d09,#5b250c 40%,#6b3214 55%,#4f200a)"></i><span>NUT Dunkel</span></button>
+                <button data-v="mocca" title="Holzdekor Eiche Mocca"><i style="background:radial-gradient(circle at 30% 40%,#8a5a1c 0 8%,transparent 9%),radial-gradient(circle at 70% 65%,#8a5a1c 0 7%,transparent 8%),#6e3d0c"></i><span>Eiche Mocca</span></button>
+                <button data-v="rovere" title="Holzdekor Rovere Pechino Hell"><i style="background:linear-gradient(100deg,#86450a,#97500d 40%,#a9611c 55%,#8a480b)"></i><span>Rovere Hell</span></button>
+              </div></div></div>
+            <div class="hin" id="verk-hin"></div>
+            <button id="btn-verkalle" class="nebenknopf">Auf alle Wände übernehmen</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="sek">
+        <summary><span class="sek-t">Anzeige</span><span class="sek-s"></span></summary>
+        <div class="grp"><label class="cb"><input type="checkbox" id="cb-masse" checked>Maße anzeigen</label></div>
+      </details>
+
+      <div id="preisbox" hidden>
+        <div class="z"><span>Dach (Listenpreis)</span><span id="p-dach"></span></div>
+        <div class="z"><span>Montage</span><span id="p-mont"></span></div>
+        <div class="z"><span>Lieferung</span><span id="p-lief"></span></div>
+        <div id="p-mark-z" hidden><div class="z"><span>Markisen</span><span id="p-mark"></span></div><div class="hin" id="p-mark-info" style="margin:0 0 4px;white-space:pre-line"></div></div>
+        <div id="p-spx-z" hidden><div class="z"><span>Lamellendach-Extras</span><span id="p-spx"></span></div><div class="hin" id="p-spx-info" style="margin:0 0 4px;white-space:pre-line"></div></div>
+        <div id="p-vel-z" hidden><div class="z"><span>Velaris</span><span id="p-vel"></span></div><div class="hin" id="p-vel-info" style="margin:0 0 4px;white-space:pre-line"></div></div>
+        <div id="p-glas-z" hidden><div class="z"><span>Verglasung</span><span id="p-glas"></span></div><div class="hin" id="p-glas-info" style="margin:0 0 4px;white-space:pre-line"></div></div>
+        <div id="p-verk-z" hidden><div class="z"><span>Verkleidung</span><span id="p-verk"></span></div><div class="hin" id="p-verk-info" style="margin:0 0 4px"></div></div>
+        <div class="z sum"><span>Netto</span><span id="p-netto"></span></div>
+        <div class="z sum" style="border:0;margin:0;padding-top:2px"><span>inkl. 19 % MwSt.</span><span class="br" id="p-brutto"></span></div>
+        <div class="hin" id="p-hinweis" hidden>Ab 4,05 m Tiefe ggf. zzgl. Verstärkung – wird beim Aufmaß kalkuliert.</div>
+        <div class="hin">Richtpreis, unverbindlich. Verbindlich nach Aufmaß vor Ort.</div>
+      </div>
+    </div>
+    <div class="abschl"><button id="btn-abschluss">Konfiguration abschließen →</button><div>Danach sehen Sie Ihren Richtpreis</div></div>
+    <div class="fuss">Maus: links drehen · rechts verschieben · Rad zoomen<br><a href="../" style="color:var(--gold2)">← Zurück zur Website</a> · Taste <b>R</b> automatisch drehen</div>
+  </aside>
+  <main id="main">
+    <div id="viewer"></div>
+    <div class="info"><h1 id="titel"></h1><div class="spec" id="spec"></div><div class="fl" id="flaeche"></div></div>
+    <div class="oben-rechts">
+      <button id="btn-panel" title="Bedienfeld ein/aus (P)">☰ <span class="txt">Bedienfeld</span></button>
+      <button id="btn-vollbild" title="Vollbild">⛶ <span class="txt">Vollbild</span></button>
+      <button id="btn-bild" class="gold" title="Bild speichern">📷 <span class="txt">Bild speichern</span></button>
+    </div>
+    <div class="leiste">
+      <div class="seg" id="sel-ansicht">
+        <button data-v="perspektive">Perspektive</button><button data-v="vorne">Vorne</button><button data-v="seite">Seite</button><button data-v="oben">Von oben</button><button data-v="innen">Darunter</button>
+      </div>
+      <div class="trenn"></div>
+      <div class="seg" id="sel-zeit"><button data-v="tag">☀ Tag</button><button data-v="abend">🌙 Abend</button></div>
+      <div class="trenn"></div>
+      <button id="btn-dreh">⟳ Drehen</button>
+    </div>
+  </main>
+</div>
+<div id="abschluss" hidden>
+  <div class="ab-bg" data-schliessen></div>
+  <div class="ab-box">
+    <button class="ab-x" data-schliessen title="Schließen" type="button">×</button>
+    <div class="ab-links">
+      <img id="ab-bild" alt="Ihre Konfiguration">
+      <h2 id="ab-titel"></h2>
+      <div id="ab-spec"></div>
+    </div>
+    <div class="ab-rechts">
+      <form id="ab-form" novalidate>
+        <h3>Fast geschafft!</h3>
+        <p>Wohin dürfen wir Ihre Konfiguration und Ihr Angebot schicken? Danach sehen Sie sofort Ihren Richtpreis.</p>
+        <input id="ab-name" placeholder="Vor- und Nachname *" autocomplete="name">
+        <div class="ab-zwei"><input id="ab-tel" placeholder="Telefon" autocomplete="tel"><input id="ab-mail" placeholder="E-Mail" autocomplete="email"></div>
+        <div class="ab-klein">Telefon <b>oder</b> E-Mail genügt.</div>
+        <input id="ab-ort" placeholder="PLZ / Ort (für das Aufmaß)" autocomplete="postal-code">
+        <select id="ab-zeit"><option value="">Wann soll es losgehen?</option><option>So schnell wie möglich</option><option>In 1–3 Monaten</option><option>In 3–6 Monaten</option><option>Nächstes Jahr</option><option>Nur informieren</option></select>
+        <textarea id="ab-nachricht" rows="3" placeholder="Nachricht (optional)"></textarea>
+        <input id="ab-hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <label class="cb ab-ok"><input type="checkbox" id="ab-ok"><span>Ich stimme zu, dass Antonov Outdoor meine Angaben zur Bearbeitung meiner Anfrage verwendet (<a href="https://antonov-outdoor.de/datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>).</span></label>
+        <div id="ab-fehler" class="ab-fehler" hidden></div>
+        <button id="ab-senden" type="submit">Konfiguration senden &amp; Richtpreis anzeigen</button>
+      </form>
+      <div id="ab-danke" hidden>
+        <h3>Vielen Dank! 🎉</h3>
+        <p>Ihre Konfiguration ist bei uns angekommen – wir melden uns schnellstmöglich für einen kostenlosen Aufmaßtermin.</p>
+        <div id="ab-offline" class="ab-klein" hidden>Hinweis: Gerade keine Internetverbindung – die Anfrage wird automatisch nachgesendet.</div>
+        <div class="ab-preis"><span>Ihr Richtpreis</span><b id="ab-preis"></b><small id="ab-preis-netto"></small></div>
+        <pre id="ab-preis-text"></pre>
+        <div class="ab-klein">Unverbindlicher Richtpreis auf Basis der Listenpreise. Verbindlich erst nach dem Aufmaß vor Ort.</div>
+        <button data-schliessen type="button">Weiter ansehen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
