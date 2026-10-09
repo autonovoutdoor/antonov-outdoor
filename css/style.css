@@ -1371,5 +1371,4 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
 }
 
 /* 3D-KONFIGURATOR – Menüpunkt (auf mittleren Laptops ausgeblendet, damit die Kopfzeile einzeilig bleibt) */
-.nav__3d { font-weight: 700; color: var(--farbe-gold-dunkel) !important; }
-@media (min-width: 1181px) and (max-width: 1440px) { .nav__3d { display: none; } }
+.nav__3d { background: #fff; font-weight: 700; }
