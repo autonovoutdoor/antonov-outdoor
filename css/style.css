@@ -1372,3 +1372,11 @@ html.a11y-lesehilfe .a11y-lesebalken { display: block; }
 
 /* 3D-KONFIGURATOR – Menüpunkt (auf mittleren Laptops ausgeblendet, damit die Kopfzeile einzeilig bleibt) */
 .nav__3d { background: #fff; font-weight: 700; }
+
+/* ÜBER UNS – persönliches Wort vom Inhaber */
+.brief { max-width: 780px; margin: 0 auto; background: #fff; border-left: 4px solid var(--farbe-gold); border-radius: 12px; padding: 38px 42px; box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+.brief p { font-size: 1.05rem; line-height: 1.75; }
+.brief__gruss { margin-top: 22px; }
+.brief__name { font-family: 'Segoe Script', 'Brush Script MT', cursive; font-size: 2rem; color: var(--farbe-gold-dunkel); line-height: 1.1; }
+.brief__rolle { font-size: .9rem; color: #6b6b6b; margin-top: 4px; }
+@media (max-width: 640px) { .brief { padding: 26px 20px; } .brief__name { font-size: 1.7rem; } }
