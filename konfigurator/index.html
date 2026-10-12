@@ -124,6 +124,7 @@
   .abschl { padding: 12px 20px 4px; border-top: 1px solid var(--linie); text-align: center; font-size: 11.5px; color: var(--grau); }
   .abschl button { width: 100%; background: var(--gold); color: #111; border: 0; border-radius: 10px; padding: 13px; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; margin-bottom: 5px; }
   .abschl button:hover { background: var(--gold2); }
+  .abschl.im-scroll { border-top: 0; margin-top: 18px; padding: 4px 0 18px; }
   #abschluss { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
   #abschluss[hidden] { display: none; }
   .ab-bg { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); }
@@ -198,9 +199,13 @@
         <div class="grp" id="grp-montage"><div class="lbl">Montage</div>
           <div class="seg" id="sel-montage"><button data-v="wand">An der Hauswand</button><button data-v="frei">Freistehend</button></div></div>
         <div class="grp"><div class="lbl"><span id="lbl-b">Breite</span><span>cm</span></div>
-          <div class="regler"><input type="range" id="in-b" step="10"><input type="number" id="in-b-n" step="10"></div></div>
+          <div class="regler"><input type="range" id="in-b" step="5"><input type="number" id="in-b-n" step="5"></div></div>
         <div class="grp"><div class="lbl"><span id="lbl-t">Tiefe</span><span>cm</span></div>
-          <div class="regler"><input type="range" id="in-t" step="10"><input type="number" id="in-t-n" step="10"></div></div>
+          <div class="regler"><input type="range" id="in-t" step="5"><input type="number" id="in-t-n" step="5"></div></div>
+        <div class="grp" id="grp-treppe" hidden><label class="cb"><input type="checkbox" id="cb-treppe">Treppe vor dem Eingang (von links)</label>
+          <div class="regler" style="margin-top:4px"><span style="font-size:12.5px;color:var(--grau)">Höhe bis Podest</span><input type="number" id="in-treppe" min="20" max="150" step="5" value="100"><span style="font-size:12.5px">cm</span></div></div>
+        <div class="grp" id="grp-hoehe" hidden><div class="lbl"><span>Höhe vorne (Pfosten)</span><span>cm</span></div>
+          <div class="regler"><input type="range" id="in-h" step="5"><input type="number" id="in-h-n" step="5"></div></div>
       </details>
 
       <details class="sek">
@@ -422,6 +427,6 @@
   </div>
 </div>
 
-<script src="app.js?v=a883dfaa3e"></script>
+<script src="app.js?v=0d20684966"></script>
 </body>
 </html>
