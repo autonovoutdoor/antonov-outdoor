@@ -339,6 +339,7 @@
           <div class="lp-feld"><label for="lpMsg">Ihre Wünsche <small>(optional)</small></label><textarea id="lpMsg" placeholder="z. B. Maße, Farbe, Seitenwände, Beleuchtung …"></textarea></div>
           <input type="text" id="lpHp" class="lp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="lp-check"><input type="checkbox" id="lpOk"> <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden. Mehr in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</span></label>
+          <label class="lp-check" style="margin-top:-8px;"><input type="checkbox" id="lpAds"> <span>Ich bin einverstanden, dass Antonov Outdoor meine Anfrage über den Meta-Pixel (Cookies) an Meta meldet, um die Werbung zu verbessern. <small>(freiwillig)</small></span></label>
           <div class="lp-err" id="lpErr">Bitte Name, PLZ / Ort und Telefon angeben und der Datenschutzerklärung zustimmen.</div>
           <button type="submit" class="lp-btn" id="lpSend">Kostenlose Beratung anfragen</button>
           <p class="lp-garantie">🔒 Ihre Daten bleiben bei uns · kein Newsletter · keine Weitergabe</p>
@@ -396,10 +397,11 @@
     window.fbq('init', PIXEL_ID); window.fbq('track', 'PageView');
   }
   window.aoFireLead = function(id){ try{ if(window.fbq) window.fbq('track','Lead',{content_name:'Terrassendach Beratung'},{eventID:id}); }catch(e){} };
+  // Einwilligung über den Haken im Formular: Pixel laden, Einwilligung merken, Lead melden
+  window.aoAdsJa = function(id){ try{ localStorage.setItem(KEY, "yes"); }catch(e){} loadPixel(); window.aoFireLead(id); };
   var choice = null; try{ choice = localStorage.getItem(KEY); }catch(e){}
   if (choice === "yes"){ loadPixel(); return; }
-  // Kein Cookie-Banner auf dieser Seite (Nutzerwunsch 12.10.2026): Pixel lädt NUR, wenn früher bereits eingewilligt wurde
-  // (z. B. auf angebot.html). Ohne Einwilligung kein Meta-Pixel – rechtlich nicht anders zulässig.
+  // Kein Cookie-Banner: Einwilligung über den freiwilligen Haken im Formular (#lpAds) – erst dann lädt der Pixel
 })();
 </script>
 
@@ -482,7 +484,7 @@
       .then(function(res){
         if (!res || !res.success) throw new Error("fail");
         var id = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
-        if (window.aoFireLead) window.aoFireLead(id);
+        if (document.getElementById("lpAds").checked && window.aoAdsJa) window.aoAdsJa(id); else if (window.aoFireLead) window.aoFireLead(id);
         track("gesendet"); fertig();
       })
       .catch(function(){
