@@ -106,6 +106,16 @@
   .lp-chips label{ display:flex; align-items:center; justify-content:center; text-align:center; min-height:50px; padding:10px; border:1.5px solid #dcd6c6; border-radius:10px; cursor:pointer; font-size:.93rem; font-weight:600; color:var(--lp-text); background:#fff; transition:all .15s; }
   .lp-chips input:checked + label{ border-color:var(--lp-gold); background:#fbf3dd; color:var(--lp-dunkel); box-shadow:inset 0 0 0 1px var(--lp-gold); }
   .lp-chips label:hover{ border-color:var(--lp-gold); }
+  .lp-chips--3{ grid-template-columns:repeat(3,1fr); }
+  .lp-feld > label.lp-check{ display:flex; font-weight:500; font-size:.9rem; color:var(--lp-grau); margin-bottom:0; }
+  .lp-masse{ background:#fbf8f0; border:1.5px solid #e6dfcc; border-radius:12px; padding:16px 18px 14px; transition:opacity .2s; }
+  .lp-masse.aus{ opacity:.4; pointer-events:none; }
+  .lp-regler{ margin-bottom:12px; }
+  .lp-regler .kopf{ display:flex; justify-content:space-between; align-items:baseline; font-size:.93rem; color:var(--lp-grau); margin-bottom:4px; }
+  .lp-regler .kopf b{ font-family:'Barlow Condensed',sans-serif; font-size:1.5rem; color:var(--lp-dunkel); }
+  .lp-regler input[type=range]{ width:100%; height:34px; accent-color:var(--lp-gold); cursor:pointer; }
+  .lp-flaeche{ text-align:center; font-size:.95rem; color:var(--lp-grau); border-top:1px dashed #e0d8c3; padding-top:10px; }
+  .lp-flaeche b{ color:var(--lp-gold-d); font-size:1.15rem; }
   .lp-zwei{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   .lp-feld input[type=text], .lp-feld input[type=tel], .lp-feld input[type=email], .lp-feld textarea{ width:100%; padding:14px 15px; border:1.5px solid #dcd6c6; border-radius:10px; font:inherit; font-size:1rem; background:#fff; }
   .lp-feld input:focus, .lp-feld textarea:focus{ outline:none; border-color:var(--lp-gold); box-shadow:0 0 0 3px rgba(196,155,45,.18); }
@@ -159,6 +169,7 @@
     .lp-hero .lp-wrap{ padding-bottom:40px; }
     .lp-hand{ grid-template-columns:1fr; }
     .lp-zwei{ grid-template-columns:1fr; }
+    .lp-chips--3{ grid-template-columns:1fr; }
     .lp-form-box{ padding:28px 18px; border-radius:14px; }
     .lp-top a.tel span{ display:none; }
     .lp-sticky{ display:flex; transform:translateY(110%); transition:transform .3s; }
@@ -301,21 +312,20 @@
             </div>
           </div>
           <div class="lp-feld">
-            <div class="lbl">Ungefähre Größe der Terrasse</div>
-            <div class="lp-chips">
-              <input type="radio" name="groesse" id="g1" value="bis ca. 15 m²"><label for="g1">bis ca. 15 m²</label>
-              <input type="radio" name="groesse" id="g2" value="ca. 15–30 m²"><label for="g2">ca. 15–30 m²</label>
-              <input type="radio" name="groesse" id="g3" value="über 30 m²"><label for="g3">über 30 m²</label>
-              <input type="radio" name="groesse" id="g4" value="weiß ich noch nicht"><label for="g4">weiß ich noch nicht</label>
+            <div class="lbl">Ungefähre Größe des Dachs <small>(einfach schieben)</small></div>
+            <div class="lp-masse" id="lpMasse">
+              <div class="lp-regler"><div class="kopf"><span>Breite</span><b id="lpBw">5,0 m</b></div><input type="range" id="lpB" min="2" max="12" step="0.5" value="5"></div>
+              <div class="lp-regler"><div class="kopf"><span>Tiefe</span><b id="lpTw">3,0 m</b></div><input type="range" id="lpT" min="1.5" max="5" step="0.25" value="3"></div>
+              <div class="lp-flaeche">ca. <b id="lpFl">15</b> m² überdachte Fläche</div>
             </div>
+            <label class="lp-check" style="margin:10px 0 0;"><input type="checkbox" id="lpMassUnbekannt"> <span>Die Maße kenne ich noch nicht – bitte beim Termin aufmessen</span></label>
           </div>
           <div class="lp-feld">
             <div class="lbl">Wann soll Ihr Dach stehen?</div>
-            <div class="lp-chips">
-              <input type="radio" name="zeit" id="z1" value="so bald wie möglich"><label for="z1">so bald wie möglich</label>
-              <input type="radio" name="zeit" id="z2" value="Frühjahr 2027"><label for="z2">Frühjahr 2027</label>
-              <input type="radio" name="zeit" id="z3" value="Sommer 2027 oder später"><label for="z3">Sommer 2027 / später</label>
-              <input type="radio" name="zeit" id="z4" value="ich informiere mich erst"><label for="z4">ich informiere mich erst</label>
+            <div class="lp-chips lp-chips--3">
+              <input type="radio" name="zeit" id="z1" value="so schnell wie möglich"><label for="z1">So schnell wie möglich</label>
+              <input type="radio" name="zeit" id="z2" value="in 1–3 Monaten"><label for="z2">In 1–3 Monaten</label>
+              <input type="radio" name="zeit" id="z3" value="später – noch in Planung"><label for="z3">Später – ich plane in Ruhe</label>
             </div>
           </div>
           <div class="lp-zwei">
@@ -422,6 +432,12 @@
   function stickyPruefen(){ if (sticky) sticky.classList.toggle("zeigen", scrollY > 520 && !formSicht); }
   addEventListener("scroll", stickyPruefen, { passive:true });
   if ("IntersectionObserver" in window) new IntersectionObserver(function(e){ formSicht = e[0].isIntersecting; stickyPruefen(); }, { threshold:.05 }).observe($("anfrage"));
+  // Größe per Schieberegler
+  var fmt = function(v){ return v.toLocaleString("de-DE", { minimumFractionDigits:1, maximumFractionDigits:2 }) + " m"; };
+  function masse(){ if ($("lpMassUnbekannt").checked) return null; var b = +$("lpB").value, t = +$("lpT").value; return { b:b, t:t, text:fmt(b) + " breit × " + fmt(t) + " tief (ca. " + Math.round(b * t) + " m²)" }; }
+  function masseZeigen(){ var b = +$("lpB").value, t = +$("lpT").value; $("lpBw").textContent = fmt(b); $("lpTw").textContent = fmt(t); $("lpFl").textContent = Math.round(b * t); $("lpMasse").classList.toggle("aus", $("lpMassUnbekannt").checked); }
+  ["lpB", "lpT", "lpMassUnbekannt"].forEach(function(id){ $(id).addEventListener("input", masseZeigen); $(id).addEventListener("change", masseZeigen); });
+  masseZeigen();
   track("geladen");
   document.querySelectorAll("[data-cta]").forEach(function(a){ a.addEventListener("click", function(){ track("klick-" + a.dataset.cta); if (window.aoZeigeConsent) window.aoZeigeConsent(); }); });
   var formGesehen = false;
@@ -439,12 +455,12 @@
     if ($("lpHp").value){ fertig(); return; } // Bot
     var btn = $("lpSend"); btn.disabled = true; btn.textContent = "Wird gesendet …";
     track("absenden");
-    var produkt = wert("produkt") || "-", groesse = wert("groesse") || "-", zeit = wert("zeit") || "-";
+    var produkt = wert("produkt") || "-", zeit = wert("zeit") || "-", M = masse(), groesse = M ? M.text : "Maße noch unbekannt (Aufmaß beim Termin)";
     var notiz = "Landingpage Terrassendach (Qualität): " + produkt + " · Größe " + groesse + " · " + zeit + " · PLZ/Ort " + plz + (msg ? " · Wünsche: " + msg : "") + (ort ? " · Anzeige-Ort: " + ort : "");
 
     // 1) Antonov Base (Leads) – best effort
     try{
-      var basis = { p_name:name, p_telefon:tel, p_email:mail || null, p_montageart:null, p_breite:null, p_tiefe:null, p_eindeckung:produkt, p_zeitpunkt:zeit,
+      var basis = { p_name:name, p_telefon:tel, p_email:mail || null, p_montageart:null, p_breite:M ? Math.round(M.b * 100) + " cm" : null, p_tiefe:M ? Math.round(M.t * 100) + " cm" : null, p_eindeckung:produkt, p_zeitpunkt:zeit,
         p_source:UTM.source, p_medium:UTM.medium, p_campaign:UTM.campaign || "lp-terrassendach", p_content:UTM.content, p_term:UTM.term,
         p_landing_page:location.pathname, p_referrer:document.referrer || null };
       var post = function(b){ return fetch(SUPA_URL + "/rest/v1/rpc/submit_lead", { method:"POST", headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON }, body:JSON.stringify(b) }); };
