@@ -371,14 +371,8 @@
   <a href="tel:+4915679818872" class="lp-btn tel" aria-label="Anrufen">📞</a>
 </div>
 
-<div class="lp-cc" id="lpCC">
-  <div class="lp-cc__inner">
-    <p>Dürfen wir mit dem <strong>Meta-Pixel</strong> (Marketing-Cookies) den Erfolg unserer Anzeigen messen? Nur mit Ihrer Einwilligung – <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.</p>
-    <div class="lp-cc__btns"><button type="button" class="lp-cc__no" id="lpCCno">Nein</button><button type="button" class="lp-cc__ok" id="lpCCok">Ja, ok</button></div>
-  </div>
-</div>
 
-<!-- Meta-Pixel: lädt ausschließlich nach Einwilligung (gleicher Pixel + gleicher Einwilligungs-Speicher wie angebot.html) -->
+<!-- Meta-Pixel: lädt nur bei bereits erteilter Einwilligung (kein Banner auf dieser Seite) -->
 <script>
 (function(){
   var PIXEL_ID = "1733703514828005", KEY = "ao_ads_consent";
@@ -394,15 +388,8 @@
   window.aoFireLead = function(id){ try{ if(window.fbq) window.fbq('track','Lead',{content_name:'Terrassendach Beratung'},{eventID:id}); }catch(e){} };
   var choice = null; try{ choice = localStorage.getItem(KEY); }catch(e){}
   if (choice === "yes"){ loadPixel(); return; }
-  if (choice === "no") return;
-  var cc = document.getElementById("lpCC");
-  var zeigen = function(){ if (cc.dataset.g) return; cc.dataset.g = "1"; cc.classList.add("is-show"); };
-  window.aoZeigeConsent = zeigen;
-  setTimeout(zeigen, 12000);                                   // Banner nicht sofort über dem Hero
-  window.addEventListener("scroll", function s(){ if (scrollY > 500){ zeigen(); removeEventListener("scroll", s); } }, { passive:true });
-  var zu = function(){ cc.classList.remove("is-show"); };
-  document.getElementById("lpCCok").addEventListener("click", function(){ try{ localStorage.setItem(KEY,"yes"); }catch(e){} zu(); loadPixel(); });
-  document.getElementById("lpCCno").addEventListener("click", function(){ try{ localStorage.setItem(KEY,"no"); }catch(e){} zu(); });
+  // Kein Cookie-Banner auf dieser Seite (Nutzerwunsch 12.10.2026): Pixel lädt NUR, wenn früher bereits eingewilligt wurde
+  // (z. B. auf angebot.html). Ohne Einwilligung kein Meta-Pixel – rechtlich nicht anders zulässig.
 })();
 </script>
 
