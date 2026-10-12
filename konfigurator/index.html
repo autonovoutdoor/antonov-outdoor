@@ -181,9 +181,16 @@
     .stoffe button { width: 30px; height: 30px; }
   }
   .oben-rechts button.gold { background: var(--gold); color: #111; font-weight: 700; border-color: var(--gold); }
+  #laden { position: fixed; inset: 0; z-index: 9999; background: radial-gradient(circle at 50% 40%, #262a2e, var(--dunkel)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; color: var(--text); font: 600 16px/1.4 system-ui, sans-serif; text-align: center; padding: 16px; transition: opacity .5s; }
+  #laden img { width: 120px; height: auto; }
+  #laden .ring { width: 42px; height: 42px; border: 3px solid var(--linie); border-top-color: var(--gold); border-radius: 50%; animation: ladeDreh .9s linear infinite; }
+  #laden small { color: var(--grau); font-weight: 400; font-size: 13px; }
+  #laden.weg { opacity: 0; pointer-events: none; }
+  @keyframes ladeDreh { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
+<div id="laden"><img src="assets/logo-weiss.png" alt="Antonov Outdoor"><div class="ring"></div><div>Ihr 3D-Konfigurator wird geladen …<br><small>Einen Moment bitte</small></div></div>
 <div id="app">
   <aside id="panel">
     <div class="kopf"><a href="../" title="Zur Startseite antonov-outdoor.de"><img src="assets/logo-weiss.png" alt="Antonov Outdoor – zur Startseite"></a><div><div class="t1">3D-Konfigurator</div><div class="t2">Antonov Outdoor · Alu-Außensysteme</div></div></div>
@@ -441,6 +448,6 @@
   </div>
 </div>
 
-<script src="app.js?v=20f67f9fa1"></script>
+<script src="app.js?v=47445557f1"></script>
 </body>
 </html>
