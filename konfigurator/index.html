@@ -33,6 +33,7 @@
   .seg.prod button { padding: 11px 4px; }
   #sel-produkt { grid-template-columns: 1fr; }
   #sel-produkt button { text-align: left; padding: 10px 12px; }
+  .prod-trenn { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); padding: 8px 4px 0; font-weight: 700; }
   .prodwahl .fw-sw { display: none; }
   .prodwahl .fw-btn { padding: 11px 12px; font-size: 14.5px; font-weight: 700; }
   .seg.prod small { display: block; font-size: 10.5px; opacity: .75; font-weight: 400; margin-top: 2px; }
@@ -195,6 +196,10 @@
           <button data-v="skyview" title="Flachdach SkyView">Flachdach SkyView<small>kubisch, innenliegendes Gefälle</small></button>
           <button data-v="carport" title="Carport Flat Line">Carport Flat Line<small>Trapezblech, Verkleidung wählbar</small></button>
           <button data-v="sunpro" title="Lamellendach SunPro Plus">Lamellendach SunPro Plus<small>drehbare Lamellen, motorisch</small></button>
+          <div class="prod-trenn">Eingang</div>
+          <button data-v="eingang" title="Eingangsüberdachung TDS">Eingangsüberdachung TDS<small>über dem Eingang, auch mit Treppe</small></button>
+          <button data-v="fly" title="Glas-Vordach Fly">Glas-Vordach Fly<small>schwebendes Glas, 17 mm VSG</small></button>
+          <button data-v="frontline" title="Vordach Front Line">Vordach Front Line<small>Rechteckvordach, Seitenteil & Briefkasten</small></button>
         </div></div></div></div>
         <div class="grp" id="grp-montage"><div class="lbl">Montage</div>
           <div class="seg" id="sel-montage"><button data-v="wand">An der Hauswand</button><button data-v="frei">Freistehend</button></div></div>
@@ -202,6 +207,15 @@
           <div class="regler"><input type="range" id="in-b" step="5"><input type="number" id="in-b-n" step="5"></div></div>
         <div class="grp"><div class="lbl"><span id="lbl-t">Tiefe</span><span>cm</span></div>
           <div class="regler"><input type="range" id="in-t" step="5"><input type="number" id="in-t-n" step="5"></div></div>
+        <div class="grp" id="grp-frontline" hidden><div class="lbl">Größe</div>
+          <div class="seg" id="sel-flmodell" style="grid-template-columns:repeat(2,1fr)"><button data-v="160">160 × 90 cm</button><button data-v="200">200 × 90 cm</button><button data-v="250">250 × 90 cm</button><button data-v="xl">Plus 250 × 125</button></div>
+          <div class="lbl" style="margin-top:10px">Ausführung</div>
+          <div class="seg" id="sel-flausf" style="grid-template-columns:1fr"><button data-v="nur">Nur Vordach</button><button data-v="seite">Mit Seitenteil (220 cm)</button><button data-v="bk">Seitenteil mit Briefkasten</button><button data-v="pfosten">Mit 2 Pfosten</button><button data-v="xlbk">Seitenteil, Pfosten &amp; Briefkasten</button></div>
+          <div id="grp-flseite"><div class="lbl" style="margin-top:10px">Seitenteil (von außen gesehen)</div>
+          <div class="seg" id="sel-flseite"><button data-v="links">Links</button><button data-v="rechts">Rechts</button></div></div>
+          <div class="lbl" style="margin-top:10px">Design</div>
+          <div class="seg" id="sel-fldesign"><button data-v="anthrazit">Anthrazit</button><button data-v="holz">Wood (Holzoptik)</button></div>
+          <div class="hin">Standardgrößen ab Lager · Anthrazit · Wood nur 160/200/250</div></div>
         <div class="grp" id="grp-treppe" hidden><label class="cb"><input type="checkbox" id="cb-treppe">Treppe vor dem Eingang (von links)</label>
           <div class="regler" style="margin-top:4px"><span style="font-size:12.5px;color:var(--grau)">Höhe bis Podest</span><input type="number" id="in-treppe" min="20" max="150" step="5" value="100"><span style="font-size:12.5px">cm</span></div></div>
         <div class="grp" id="grp-hoehe" hidden><div class="lbl"><span>Höhe vorne (Pfosten)</span><span>cm</span></div>
@@ -214,7 +228,7 @@
           <div class="seg" id="sel-eind"><button data-v="klar">Glas klar</button><button data-v="matt">Glas opal</button><button data-v="poly">Polycarbonat</button></div></div>
         <div class="grp" id="grp-blech" hidden><div class="lbl">Dach</div>
           <div class="seg" id="sel-blech"><button data-v="standard">Trapezblech</button><button data-v="vlies">+ Antikondensvlies</button></div></div>
-        <div class="grp"><div class="lbl">Farbe Aluminium</div>
+        <div class="grp" id="grp-farbe"><div class="lbl">Farbe Aluminium</div>
           <div class="fw"><button class="fw-btn" type="button"><i class="fw-sw"></i><span class="fw-txt"></span><b>▾</b></button>
             <div class="fw-pop"><div class="seg farben" id="sel-farbe">
               <button data-v="7016" title="RAL 7016 Anthrazit"><i style="background:#383e42"></i><span>7016 Anthrazit</span></button>
@@ -427,6 +441,6 @@
   </div>
 </div>
 
-<script src="app.js?v=0d20684966"></script>
+<script src="app.js?v=a2d4185635"></script>
 </body>
 </html>
