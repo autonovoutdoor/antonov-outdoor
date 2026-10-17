@@ -489,8 +489,15 @@ document.addEventListener("DOMContentLoaded", function () {
     b.addEventListener("click", function () { zeige(i); neustart(); });
     punkteBox.appendChild(b); punkte.push(b);
   });
+  var bereit = false;
+  function ladeSlide(s) { // Bilder der Folge-Slides erst bei Bedarf laden (schnellere Startseite)
+    if (!s) return; var q = s.querySelector("source[data-srcset]"), im = s.querySelector("img[data-src]");
+    if (q) { q.srcset = q.getAttribute("data-srcset"); q.removeAttribute("data-srcset"); }
+    if (im) { im.src = im.getAttribute("data-src"); im.removeAttribute("data-src"); }
+  }
   function zeige(i) {
     index = (i + slides.length) % slides.length;
+    ladeSlide(slides[index]); if (bereit) ladeSlide(slides[(index + 1) % slides.length]);
     slides.forEach(function (s, n) {
       var an = n === index;
       s.classList.toggle("aktiv", an);
@@ -522,5 +529,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "ArrowRight") { weiter(); neustart(); }
     if (e.key === "ArrowLeft") { zeige(index - 1); neustart(); }
   });
-  zeige(0); start();
+  zeige(0);
+  window.addEventListener("load", function () { setTimeout(function () { bereit = true; ladeSlide(slides[1]); start(); }, 1200); });
 })();

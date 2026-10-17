@@ -602,6 +602,9 @@ ul { list-style: none; }
       image-set(url("../bilder/referenz-6.webp") type("image/webp"), url("../bilder/referenz-6.jpg") type("image/jpeg"));
   }
 }
+@media (max-width: 900px) {
+  .seitenkopf { background-image: linear-gradient(rgba(24,31,38,.74), rgba(24,31,38,.82)), url("../bilder/referenz-6-s.webp"); }
+}
 .seitenkopf h1 { color: #fff; margin-bottom: 10px; }
 .seitenkopf p { color: #dfe5ea; max-width: 660px; margin: 0 auto; }
 .brotkrumen { font-size: 0.86rem; color: #b7c3cd; margin-top: 14px; }
