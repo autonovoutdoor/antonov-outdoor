@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# KI-Suchdienste ausdrücklich erlaubt (ChatGPT-Suche, Perplexity, Claude, Google, Bing)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://antonov-outdoor.de/sitemap.xml
