@@ -1,10 +1,6 @@
 /* ==========================================================================
    Antonov Outdoor – Produkt-Konfigurator (datengetrieben, ohne Bibliotheken)
-   Nachbildung des Konfigurators von bv-aussensysteme.de:
    Produktwahl → produktspezifische Schritte → Kontaktdaten → Zusammenfassung.
-   Texte eigenständig formuliert; Produkt-/Materialbezeichnungen sachlich übernommen.
-   HINWEIS: Der Versand zeigt nur eine Bestätigung (Demo). Für echten Mailversand
-   siehe ANLEITUNG.md (z. B. Formspree oder eigenes Backend).
    ========================================================================== */
 (function () {
   "use strict";
@@ -128,7 +124,7 @@
     };
   }
 
-  /* ---- Produkt-Definitionen (Reihenfolge = Referenz) --------------------- */
+  /* ---- Produkt-Definitionen  --------------------- */
   var PRODUKTE = [
     { v: "Terrassendach TDS", desc: "Klassiker – Glas oder Polycarbonat", icon: "🏠", img: "bilder/terrassenueberdachung-1", steps: [
       { title: "Art des Aufbaus", groups: [ { key: "aufbau", type: "choice", required: true, cols: 2, options: [
