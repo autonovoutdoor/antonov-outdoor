@@ -308,7 +308,7 @@
             <input type="text" id="lpHp" class="lp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="lp-err" id="lpErr">Bitte Name, Telefon und PLZ / Ort angeben.</div>
             <button type="submit" class="lp-btn" id="lpSend">Kostenlose Beratung anfragen</button>
-            <p class="lp-garantie">🔒 Ihre Daten bleiben bei uns · kein Newsletter · keine Weitergabe<br>Mit dem Absenden werden Ihre Angaben nur zur Bearbeitung Ihrer Anfrage verwendet – mehr in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+            <p class="lp-garantie">🔒 Ihre Daten bleiben bei uns · kein Newsletter<br>Mit dem Absenden willigen Sie ein, dass wir Ihre Anfrage zur Erfolgsmessung unserer Werbung verschlüsselt an Meta (Facebook/Instagram) melden – jederzeit widerrufbar, mehr in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
             <div class="lp-nav"><button type="button" class="lp-zurueck">← Zurück</button></div>
           </div>
         </form>
@@ -463,6 +463,9 @@
   var $ = function(id){ return document.getElementById(id); };
   var q; try{ q = new URLSearchParams(location.search); }catch(e){ q = { get:function(){ return null; } }; }
   var UTM = { source:q.get("utm_source")||"direkt", medium:q.get("utm_medium")||"", campaign:q.get("utm_campaign")||"", content:q.get("utm_content")||"", term:q.get("utm_term")||"" };
+  // Meta Conversions API: Lead nach dem Absenden serverseitig melden (Einwilligung über den Hinweis am Absende-Button)
+  var META_CAPI_AKTIV = true;
+  var FBC = q.get("fbclid") ? "fb.1." + Date.now() + "." + q.get("fbclid") : null; // Klick-Kennung aus dem Anzeigen-Link, nichts auf dem Gerät gespeichert
 
   // Ort aus der Anzeige übernehmen: terrassendach.html?ort=Waldshut-Tiengen → „Hochwertige Terrassendächer in Waldshut-Tiengen“
   var ort = (q.get("ort") || "").replace(/[^A-Za-zÄÖÜäöüß \-.]/g, "").trim().slice(0, 40);
@@ -547,6 +550,14 @@
       .then(function(res){
         if (!res || !res.success) throw new Error("fail");
         var id = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+        if (META_CAPI_AKTIV){
+          try{
+            fetch(SUPA_URL + "/functions/v1/meta-lead", { method:"POST", keepalive:true,
+              headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON },
+              body:JSON.stringify({ consent:true, event_id:id, name:name, phone:tel, email:mail || null, fbc:FBC, url:location.href, content_name:"Terrassendach Beratung" })
+            }).catch(function(){});
+          }catch(e){}
+        }
         track("gesendet"); fertig(id);
       })
       .catch(function(){
@@ -557,16 +568,8 @@
   });
   function fertig(id){
     $("lpFormWrap").style.display = "none"; $("lpDanke").style.display = "block";
-    // Meta-Lead: bei früherer Einwilligung sofort, sonst freiwillige Frage auf der Danke-Seite
-    if (id){
-      var schon = null; try{ schon = localStorage.getItem("ao_ads_consent"); }catch(e){}
-      if (schon === "yes"){ if (window.aoFireLead) window.aoFireLead(id); }
-      else {
-        $("lpMeta").style.display = "block";
-        $("lpMetaJa").onclick = function(){ if (window.aoAdsJa) window.aoAdsJa(id); $("lpMeta").style.display = "none"; $("lpMetaDank").style.display = "block"; track("meta-ja"); };
-        $("lpMetaNein").onclick = function(){ $("lpMeta").style.display = "none"; track("meta-nein"); };
-      }
-    }
+    // Meta-Lead: Einwilligung über den Hinweis am Absende-Button → Pixel laden + Lead (gleiche eventID wie die Conversions API, Meta zählt ihn nur einmal)
+    if (id && window.aoAdsJa) window.aoAdsJa(id);
     try{ $("anfrage").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){}
   }
 })();
