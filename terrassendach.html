@@ -129,6 +129,11 @@
   .lp-hp{ position:absolute; left:-9999px; }
   .lp-form-box .lp-btn{ width:100%; font-size:1.12rem; padding:18px; }
   .lp-garantie{ text-align:center; font-size:.85rem; color:var(--lp-grau); margin-top:14px; }
+  .lp-vertrauen{ background:#f6f1e3; border-radius:10px; padding:10px 14px; font-size:.92rem; color:var(--lp-dunkel); margin:0 0 16px; }
+  .lp-wa-alt{ display:block; text-align:center; margin-top:12px; padding:12px; border:1.5px solid #25d366; border-radius:10px; color:#128c4a; font-weight:700; text-decoration:none; }
+  .lp-wa-alt:hover{ background:#effbf3; }
+  .lp-hinweis{ text-align:center; font-size:.72rem; line-height:1.4; color:#9a958a; margin-top:8px; }
+  .lp-hinweis a{ color:#9a958a; }
   .lp-danke{ display:none; text-align:center; padding:20px 0; }
   .lp-danke .ok{ width:70px; height:70px; border-radius:50%; background:#e9f6ec; color:#1e8a3a; display:flex; align-items:center; justify-content:center; font-size:2.2rem; margin:0 auto 18px; }
   .lp-danke h2{ margin-bottom:10px; }
@@ -154,6 +159,13 @@
   .lp-chips--gross label{ min-height:84px; flex-direction:column; gap:6px; font-size:1rem; }
   .lp-chips--gross label i{ font-style:normal; font-size:1.7rem; line-height:1; }
   .lp-chips--3.lp-chips--gross label{ min-height:64px; }
+  /* Schritt 1: Auswahl mit Produktfotos */
+  .lp-bildwahl{ grid-template-columns:1fr 1fr; gap:10px; }
+  .lp-bildwahl label{ padding:0; gap:0; overflow:hidden; justify-content:flex-start; min-height:0; }
+  .lp-bildwahl label img{ display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; transition:transform .25s; }
+  .lp-bildwahl label:hover img{ transform:scale(1.04); }
+  .lp-bildwahl label span{ display:flex; align-items:center; justify-content:center; min-height:46px; padding:8px 8px 9px; font-size:.92rem; line-height:1.25; }
+  .lp-bildwahl input:checked + label img{ opacity:.85; }
   .lp-nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:20px; }
   .lp-form-box .lp-nav .lp-btn{ width:auto; padding:15px 30px; margin-left:auto; }
   .lp-zurueck{ background:none; border:0; color:var(--lp-grau); font:inherit; font-size:.95rem; cursor:pointer; padding:10px 4px; }
@@ -268,11 +280,11 @@
         <form id="lpForm" novalidate>
           <div class="lp-step aktiv" data-step="1">
             <div class="lp-frage">Was planen Sie?</div>
-            <div class="lp-chips lp-chips--gross lp-auto">
-              <input type="radio" name="produkt" id="p1" value="Terrassendach mit Glas"><label for="p1"><i>🏡</i>Terrassendach mit Glas</label>
-              <input type="radio" name="produkt" id="p2" value="Terrassendach mit Glas-Schiebewänden"><label for="p2"><i>↔️</i>Mit Glas-Schiebewänden</label>
-              <input type="radio" name="produkt" id="p3" value="Lamellendach"><label for="p3"><i>☀️</i>Lamellendach</label>
-              <input type="radio" name="produkt" id="p4" value="Noch offen – Beratung gewünscht"><label for="p4"><i>💬</i>Noch offen – bitte beraten</label>
+            <div class="lp-chips lp-chips--gross lp-bildwahl lp-auto">
+              <input type="radio" name="produkt" id="p1" value="Terrassendach mit Glas"><label for="p1"><img src="bilder/lp-wahl-glas.webp" alt="" width="480" height="320" decoding="async"><span>Terrassendach mit Glas</span></label>
+              <input type="radio" name="produkt" id="p2" value="Terrassendach mit Glas-Schiebewänden"><label for="p2"><img src="bilder/lp-wahl-schiebe.webp" alt="" width="480" height="320" decoding="async"><span>Mit Glas-Schiebewänden</span></label>
+              <input type="radio" name="produkt" id="p3" value="Lamellendach"><label for="p3"><img src="bilder/lp-wahl-lamelle.webp" alt="" width="480" height="320" decoding="async"><span>Lamellendach</span></label>
+              <input type="radio" name="produkt" id="p4" value="Noch offen – Beratung gewünscht"><label for="p4"><img src="bilder/lp-wahl-offen.webp" alt="" width="480" height="320" decoding="async"><span>Noch offen – bitte beraten</span></label>
             </div>
           </div>
           <div class="lp-step" data-step="2">
@@ -296,19 +308,22 @@
           </div>
           <div class="lp-step" data-step="4">
             <div class="lp-frage">Fast geschafft! Wie erreichen wir Sie?</div>
+            <p class="lp-vertrauen">📞 Wir melden uns innerhalb von 24&nbsp;Stunden – <b>unverbindlich und ohne Verkaufsdruck</b>.</p>
             <div class="lp-feld"><label for="lpName">Ihr Name *</label><input type="text" id="lpName" autocomplete="name"></div>
             <div class="lp-zwei">
-              <div class="lp-feld"><label for="lpTel">Telefon *</label><input type="tel" id="lpTel" autocomplete="tel" placeholder="für die Terminabsprache"></div>
-              <div class="lp-feld"><label for="lpOrtIn">PLZ / Ort *</label><input type="text" id="lpOrtIn" autocomplete="postal-code" placeholder="z. B. 79761"></div>
+              <div class="lp-feld"><label for="lpTel">Telefon</label><input type="tel" id="lpTel" autocomplete="tel" placeholder="für die Terminabsprache"></div>
+              <div class="lp-feld"><label for="lpMail">oder E-Mail</label><input type="email" id="lpMail" autocomplete="email" placeholder="falls Sie lieber schreiben"></div>
             </div>
-            <details class="lp-mehr"><summary>+ E-Mail oder Wünsche hinzufügen <small>(optional)</small></summary>
-              <div class="lp-feld" style="margin-top:12px;"><label for="lpMail">E-Mail</label><input type="email" id="lpMail" autocomplete="email"></div>
-              <div class="lp-feld"><label for="lpMsg">Ihre Wünsche</label><textarea id="lpMsg" placeholder="z. B. Farbe, Seitenwände, Beleuchtung …"></textarea></div>
+            <div class="lp-feld"><label for="lpOrtIn">PLZ / Ort *</label><input type="text" id="lpOrtIn" autocomplete="postal-code" placeholder="z. B. 79761"></div>
+            <details class="lp-mehr"><summary>+ Wünsche hinzufügen <small>(optional)</small></summary>
+              <div class="lp-feld" style="margin-top:12px;"><label for="lpMsg">Ihre Wünsche</label><textarea id="lpMsg" placeholder="z. B. Farbe, Seitenwände, Beleuchtung …"></textarea></div>
             </details>
             <input type="text" id="lpHp" class="lp-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <div class="lp-err" id="lpErr">Bitte Name, Telefon und PLZ / Ort angeben.</div>
+            <div class="lp-err" id="lpErr">Bitte Name, PLZ / Ort und Telefon oder E-Mail angeben.</div>
             <button type="submit" class="lp-btn" id="lpSend">Kostenlose Beratung anfragen</button>
-            <p class="lp-garantie">🔒 Ihre Daten bleiben bei uns · kein Newsletter<br>Mit dem Absenden willigen Sie ein, dass wir Ihre Anfrage zur Erfolgsmessung unserer Werbung verschlüsselt an Meta (Facebook/Instagram) melden – jederzeit widerrufbar, mehr in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
+            <a class="lp-wa-alt" id="lpWa4" data-cta="whatsapp-schritt4" href="https://wa.me/4915679818872?text=Guten%20Tag%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Terrassen%C3%BCberdachung%20und%20h%C3%A4tte%20gerne%20eine%20kostenlose%20Beratung." target="_blank" rel="noopener">💬 Lieber per WhatsApp schreiben</a>
+            <p class="lp-garantie">🔒 Ihre Daten bleiben bei uns · kein Newsletter · keine Werbeanrufe</p>
+            <p class="lp-hinweis">Mit dem Absenden willigen Sie ein, dass wir Ihre Anfrage zur Erfolgsmessung unserer Werbung verschlüsselt an Meta melden (widerrufbar) – <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.</p>
             <div class="lp-nav"><button type="button" class="lp-zurueck">← Zurück</button></div>
           </div>
         </form>
@@ -469,7 +484,11 @@
 
   // Ort aus der Anzeige übernehmen: terrassendach.html?ort=Waldshut-Tiengen → „Hochwertige Terrassendächer in Waldshut-Tiengen“
   var ort = (q.get("ort") || "").replace(/[^A-Za-zÄÖÜäöüß \-.]/g, "").trim().slice(0, 40);
-  if (ort){ var wa = $("lpWa"); if (wa) wa.href = wa.href.replace(encodeURIComponent("Terrassenüberdachung"), encodeURIComponent("Terrassenüberdachung in " + ort)); }
+  // WhatsApp-Knöpfe: vorausgefüllter Text mit Ort und Herkunft, damit man im Chat sieht, woher die Anfrage kommt
+  var src = UTM.source.toLowerCase();
+  var herkunft = /meta|facebook|instagram|fb|ig/.test(src) ? "Facebook/Instagram-Anzeige" : /google/.test(src) ? "Google" : "Website";
+  var waText = "Guten Tag, ich interessiere mich für eine Terrassenüberdachung" + (ort ? " in " + ort : "") + " und hätte gerne eine kostenlose Beratung. [über " + herkunft + "]";
+  ["lpWa", "lpWa4"].forEach(function(id){ var a = $(id); if (a) a.href = "https://wa.me/4915679818872?text=" + encodeURIComponent(waText); });
   if (ort){ $("lpOrt").textContent = "in " + ort; document.title = "Hochwertige Terrassendächer in " + ort + " – alles aus einer Hand | Antonov Outdoor"; }
 
   // Cookiefreie Schritt-Zählung (gleiche Auswertung wie beim Angebots-Funnel, Kampagne = „lp-terrassendach“)
@@ -517,8 +536,10 @@
   $("lpForm").addEventListener("submit", function(ev){
     ev.preventDefault();
     var name = $("lpName").value.trim(), plz = $("lpOrtIn").value.trim(), tel = $("lpTel").value.trim(), mail = $("lpMail").value.trim(), msg = $("lpMsg").value.trim();
-    var telOk = tel.replace(/\D/g, "").length >= 6, mailOk = !mail || /.+@.+\..+/.test(mail);
-    if (!name || !plz || !telOk || !mailOk){ $("lpErr").style.display = "block"; track("formular-unvollstaendig"); return; }
+    // Pflicht: Name, PLZ/Ort und Telefon ODER E-Mail (eingegebene Werte müssen gültig sein)
+    var telOk = tel.replace(/\D/g, "").length >= 6, mailOk = /.+@.+\..+/.test(mail);
+    var kontaktOk = (telOk || mailOk) && (!tel || telOk) && (!mail || mailOk);
+    if (!name || !plz || !kontaktOk){ $("lpErr").style.display = "block"; track("formular-unvollstaendig"); return; }
     $("lpErr").style.display = "none";
     if ($("lpHp").value){ fertig(); return; } // Bot
     var btn = $("lpSend"); btn.disabled = true; btn.textContent = "Wird gesendet …";
@@ -528,7 +549,7 @@
 
     // 1) Antonov Base (Leads) – best effort
     try{
-      var basis = { p_name:name, p_telefon:tel, p_email:mail || null, p_montageart:null, p_breite:M ? Math.round(M.b * 100) + " cm" : null, p_tiefe:M ? Math.round(M.t * 100) + " cm" : null, p_eindeckung:produkt, p_zeitpunkt:zeit,
+      var basis = { p_name:name, p_telefon:tel || "-", p_email:mail || null, p_montageart:null, p_breite:M ? Math.round(M.b * 100) + " cm" : null, p_tiefe:M ? Math.round(M.t * 100) + " cm" : null, p_eindeckung:produkt, p_zeitpunkt:zeit,
         p_source:UTM.source, p_medium:UTM.medium, p_campaign:UTM.campaign || "lp-terrassendach", p_content:UTM.content, p_term:UTM.term,
         p_landing_page:location.pathname, p_referrer:document.referrer || null };
       var post = function(b){ return fetch(SUPA_URL + "/rest/v1/rpc/submit_lead", { method:"POST", headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON }, body:JSON.stringify(b) }); };
@@ -538,10 +559,10 @@
     // 2) Mail an uns (Web3Forms)
     var payload = {
       access_key:WEB3FORMS_KEY, botcheck:"",
-      subject:"⭐ Neue Beratungsanfrage Terrassendach – " + name + " – " + plz + " – " + tel,
+      subject:"⭐ Neue Beratungsanfrage Terrassendach – " + name + " – " + plz + " – " + (tel || mail),
       from_name:"Antonov Outdoor – Landingpage Terrassendach",
       name:name, phone:tel,
-      message:["BERATUNGSANFRAGE (Landingpage Qualität)", "Name: " + name, "Telefon: " + tel, "E-Mail: " + (mail || "-"), "PLZ / Ort: " + plz, "", "Vorhaben: " + produkt, "Größe: " + groesse, "Zeitpunkt: " + zeit, "Wünsche: " + (msg || "-"), "", "Quelle: " + UTM.source + (UTM.campaign ? " / " + UTM.campaign : "") + (ort ? " / Ort in Anzeige: " + ort : "")].join("\n"),
+      message:["BERATUNGSANFRAGE (Landingpage Qualität)", "Name: " + name, "Telefon: " + (tel || "-"), "E-Mail: " + (mail || "-"), "PLZ / Ort: " + plz, "", "Vorhaben: " + produkt, "Größe: " + groesse, "Zeitpunkt: " + zeit, "Wünsche: " + (msg || "-"), "", "Quelle: " + UTM.source + (UTM.campaign ? " / " + UTM.campaign : "") + (ort ? " / Ort in Anzeige: " + ort : "")].join("\n"),
       Vorhaben:produkt, "Größe":groesse, Zeitpunkt:zeit, "PLZ / Ort":plz
     };
     if (mail){ payload.email = mail; payload.replyto = mail; }
