@@ -143,12 +143,52 @@
       <li>Checkliste Baubewilligung zum Abhaken</li>
       <li>So einfach geht der Kauf über die Grenze</li>
     </ul>
-    <a class="btn" href="#ratgeber" data-cta="hero">Ratgeber gratis sichern →</a>
+    <a class="btn" href="#ratgeber" data-cta="hero">Ratgeber gratis herunterladen →</a>
     <div class="klein">20 Seiten · PDF · sofort zum Download</div>
   </div>
   <div class="mock">
     <span class="badge">Gratis</span>
     <img src="bilder/ratgeber-cover.jpg" alt="Titelseite Terrassendach-Ratgeber Schweiz 2027" width="320" height="452">
+  </div>
+</div></section>
+
+<section class="sec" id="ratgeber" style="padding-top:44px"><div class="w">
+  <div class="kopf">
+    <span class="kick">Kostenlos &amp; unverbindlich</span>
+    <h2>Jetzt Ratgeber sichern</h2>
+    <p>Kurz Ihre Angaben eintragen – der Download startet sofort.</p>
+  </div>
+
+  <div class="box" id="wrap">
+    <div class="testmodus" id="testmodus">Testmodus: Auf dieser Vorschau werden keine Anfragen gesendet und keine Daten gespeichert.</div>
+    <form id="form" novalidate>
+      <div class="step aktiv" data-step="4">
+        
+        <div class="frage" style="margin-bottom:14px">Ratgeber gratis herunterladen<small>20 Seiten PDF · sofort verfügbar</small></div>
+        <div class="zwei">
+          <div class="feld"><label for="fName">Vorname</label><input type="text" id="fName" autocomplete="given-name"></div>
+          <div class="feld"><label for="fMail">E-Mail</label><input type="email" id="fMail" autocomplete="email" inputmode="email"></div>
+        </div>
+        <div class="zwei">
+          <div class="feld"><label for="fOrt">PLZ / Ort</label><input type="text" id="fOrt" autocomplete="postal-code" placeholder="z. B. 5330 Bad Zurzach"></div>
+          <div class="feld"><label for="fTel">Telefon <small>(freiwillig, für Rückfragen)</small></label><input type="tel" id="fTel" autocomplete="tel" inputmode="tel"></div>
+        </div>
+        <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <label class="check"><input type="checkbox" id="fOk"><span>Ich bin einverstanden, dass Antonov Outdoor meine Angaben speichert, um mir den Ratgeber bereitzustellen und mich zu meinem Vorhaben zu kontaktieren. Widerruf jederzeit möglich. <a href="datenschutz.html" target="_blank">Datenschutz</a></span></label>
+        <div class="err" id="err">Bitte Vorname, gültige E-Mail und PLZ/Ort angeben und dem Datenschutz zustimmen.</div>
+        <button type="submit" class="btn" id="send">Ratgeber jetzt gratis herunterladen</button>
+        <div class="hinweis">Mit dem Absenden wird die Anfrage zur Erfolgsmessung unserer Werbung an Meta übermittelt.</div>
+        </div>
+    </form>
+
+    <div class="danke" id="danke">
+      <div class="ok">✓</div>
+      <h3>Vielen Dank – Ihr Ratgeber ist bereit!</h3>
+      <p>Der Download startet automatisch. Falls nicht, klicken Sie einfach auf den Knopf.</p>
+      <a class="btn" id="dl" href="downloads/Ratgeber_Terrassendach_Schweiz_2027.pdf" download>📄 Ratgeber herunterladen (PDF)</a>
+      <p style="margin-top:26px">Sie möchten Ihr Dach gleich planen lassen? Wir erstellen Ihnen gerne eine <b>persönliche Planung in 3D</b>.</p>
+      <a class="wa" id="wa" href="https://wa.me/4915679818872" target="_blank" rel="noopener">💬 Per WhatsApp anfragen</a>
+    </div>
   </div>
 </div></section>
 
@@ -168,85 +208,7 @@
   </div>
 </div></section>
 
-<section class="sec" id="ratgeber"><div class="w">
-  <div class="kopf">
-    <span class="kick">In 1 Minute zum Ratgeber</span>
-    <h2>Welches Dach passt zu Ihnen?</h2>
-    <p>Beantworten Sie 3 kurze Fragen – Sie erhalten unsere Empfehlung und den kompletten Ratgeber gratis als PDF.</p>
-  </div>
 
-  <div class="box" id="wrap">
-    <div class="testmodus" id="testmodus">Testmodus: Auf dieser Vorschau werden keine Anfragen gesendet und keine Daten gespeichert.</div>
-    <form id="form" novalidate>
-      <div class="fort"><span id="stepTxt">Frage 1 von 4</span><div class="bar"><i id="prog"></i></div></div>
-
-      <div class="step aktiv" data-step="1">
-        <div class="frage">Was ist Ihnen am wichtigsten?<small>Wählen Sie, was am besten passt</small></div>
-        <div class="wahl auto">
-          <input type="radio" name="ziel" id="z1" value="tds"><label for="z1"><img src="bilder/td-1-s.webp" alt="" loading="lazy"><span>Wetterschutz für die Terrasse</span></label>
-          <input type="radio" name="ziel" id="z2" value="skyview"><label for="z2"><img src="bilder/skyview-1-s.webp" alt="" loading="lazy"><span>Modernes Flachdach</span></label>
-          <input type="radio" name="ziel" id="z3" value="kwg"><label for="z3"><img src="bilder/kaltwintergarten-1-s.webp" alt="" loading="lazy"><span>Fast das ganze Jahr draussen sitzen</span></label>
-          <input type="radio" name="ziel" id="z4" value="lamelle"><label for="z4"><img src="bilder/pergola-5-s.webp" alt="" loading="lazy"><span>Sonne &amp; Schatten flexibel steuern</span></label>
-          <input type="radio" name="ziel" id="z5" value="carport"><label for="z5"><img src="bilder/carport-1-s.webp" alt="" loading="lazy"><span>Schutz für das Auto</span></label>
-          <input type="radio" name="ziel" id="z6" value="markise"><label for="z6"><img src="bilder/markise-unterdach-1-s.webp" alt="" loading="lazy"><span>Beschattung für mein Dach</span></label>
-        </div>
-      </div>
-
-      <div class="step" data-step="2">
-        <div class="frage">Wie gross soll es ungefähr werden?<small>Eine grobe Schätzung reicht</small></div>
-        <div class="wahl wahl--2 auto">
-          <input type="radio" name="groesse" id="g1" value="bis 12 m²"><label class="txt" for="g1"><span>Klein · bis ca. 12 m²</span></label>
-          <input type="radio" name="groesse" id="g2" value="12–25 m²"><label class="txt" for="g2"><span>Mittel · 12–25 m²</span></label>
-          <input type="radio" name="groesse" id="g3" value="über 25 m²"><label class="txt" for="g3"><span>Gross · über 25 m²</span></label>
-          <input type="radio" name="groesse" id="g4" value="noch unklar"><label class="txt" for="g4"><span>Weiss ich noch nicht</span></label>
-        </div>
-        <button type="button" class="zurueck">← zurück</button>
-      </div>
-
-      <div class="step" data-step="3">
-        <div class="frage">Wann möchten Sie es umsetzen?</div>
-        <div class="wahl wahl--2 auto">
-          <input type="radio" name="zeit" id="t1" value="Frühling 2027"><label class="txt" for="t1"><span>Frühling 2027</span></label>
-          <input type="radio" name="zeit" id="t2" value="Sommer 2027"><label class="txt" for="t2"><span>Sommer 2027</span></label>
-          <input type="radio" name="zeit" id="t3" value="später"><label class="txt" for="t3"><span>Später</span></label>
-          <input type="radio" name="zeit" id="t4" value="nur informieren"><label class="txt" for="t4"><span>Ich informiere mich erst</span></label>
-        </div>
-        <button type="button" class="zurueck">← zurück</button>
-      </div>
-
-      <div class="step" data-step="4">
-        <div class="empf" id="empf">
-          <img id="empfImg" src="bilder/td-1-s.webp" alt="">
-          <div><small>Unsere Empfehlung für Sie</small><b id="empfName">Terrassendach TDS</b><span id="empfText">Materialpreis ab CHF 2'500 · Details im Ratgeber</span></div>
-        </div>
-        <div class="frage" style="margin-bottom:14px">Wohin dürfen wir Ihren Ratgeber senden?</div>
-        <div class="zwei">
-          <div class="feld"><label for="fName">Vorname</label><input type="text" id="fName" autocomplete="given-name"></div>
-          <div class="feld"><label for="fMail">E-Mail</label><input type="email" id="fMail" autocomplete="email" inputmode="email"></div>
-        </div>
-        <div class="zwei">
-          <div class="feld"><label for="fOrt">PLZ / Ort</label><input type="text" id="fOrt" autocomplete="postal-code" placeholder="z. B. 5330 Bad Zurzach"></div>
-          <div class="feld"><label for="fTel">Telefon <small>(freiwillig, für Rückfragen)</small></label><input type="tel" id="fTel" autocomplete="tel" inputmode="tel"></div>
-        </div>
-        <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <label class="check"><input type="checkbox" id="fOk"><span>Ich bin einverstanden, dass Antonov Outdoor meine Angaben speichert, um mir den Ratgeber bereitzustellen und mich zu meinem Vorhaben zu kontaktieren. Widerruf jederzeit möglich. <a href="datenschutz.html" target="_blank">Datenschutz</a></span></label>
-        <div class="err" id="err">Bitte Vorname, gültige E-Mail und PLZ/Ort angeben und dem Datenschutz zustimmen.</div>
-        <button type="submit" class="btn" id="send">Ratgeber jetzt gratis herunterladen</button>
-        <div class="hinweis">Mit dem Absenden wird die Anfrage zur Erfolgsmessung unserer Werbung an Meta übermittelt.</div>
-        <button type="button" class="zurueck">← zurück</button>
-      </div>
-    </form>
-
-    <div class="danke" id="danke">
-      <div class="ok">✓</div>
-      <h3>Vielen Dank – Ihr Ratgeber ist bereit!</h3>
-      <p>Der Download startet automatisch. Falls nicht, klicken Sie einfach auf den Knopf.</p>
-      <a class="btn" id="dl" href="downloads/Ratgeber_Terrassendach_Schweiz_2027.pdf" download>📄 Ratgeber herunterladen (PDF)</a>
-      <p style="margin-top:26px">Sie möchten Ihr Dach gleich planen lassen? Wir erstellen Ihnen gerne eine <b>persönliche Planung in 3D</b>.</p>
-      <a class="wa" id="wa" href="https://wa.me/4915679818872" target="_blank" rel="noopener">💬 Per WhatsApp anfragen</a>
-    </div>
-  </div>
-</div></section>
 
 <section class="sec sec--cr"><div class="w">
   <div class="kopf"><span class="kick">Warum Antonov Outdoor</span><h2>Direkt an der Grenze – für Sie in der Schweiz da</h2></div>
@@ -347,22 +309,22 @@
     if ($("hp").value){ fertig(); return; }
     var btn = $("send"); btn.disabled = true; btn.textContent = "Einen Moment …";
     track("absenden");
-    var ziel = wert("ziel") || "tds", p = PRODUKTE[ziel], groesse = wert("groesse") || "-", zeit = wert("zeit") || "-";
-    var notiz = "Lead-Magnet Ratgeber Schweiz · Interesse: " + p.name + " · Grösse " + groesse + " · " + zeit + " · PLZ/Ort " + ort + " · Herkunft " + herkunft;
+    var p = { name:"Ratgeber Schweiz" }, groesse = "-", zeit = "-";
+    var notiz = "Lead-Magnet Ratgeber Schweiz · PLZ/Ort " + ort + " · Herkunft " + herkunft;
     var id = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
 
     if (!LIVE){ console.log("[Test] Lead NICHT gesendet:", { name:name, mail:mail, tel:tel, ort:ort, notiz:notiz }); setTimeout(function(){ fertig(); }, 400); return; }
 
     // 1) Antonov Base (Leads)
     try{
-      var basis = { p_name:name, p_telefon:tel || "-", p_email:mail, p_montageart:null, p_breite:null, p_tiefe:null, p_eindeckung:p.name, p_zeitpunkt:zeit,
+      var basis = { p_name:name, p_telefon:tel || "-", p_email:mail, p_montageart:null, p_breite:null, p_tiefe:null, p_eindeckung:null, p_zeitpunkt:null,
         p_source:UTM.source, p_medium:UTM.medium, p_campaign:UTM.campaign, p_content:UTM.content, p_term:UTM.term, p_landing_page:location.pathname, p_referrer:document.referrer || null };
       rpc("submit_lead", Object.assign({}, basis, { p_notes:notiz })).then(function(r){ if (!r.ok) return rpc("submit_lead", basis); }).catch(function(){ rpc("submit_lead", basis).catch(function(){}); });
     }catch(e){}
     // 2) Mail an uns (Web3Forms)
     var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"📄 Ratgeber Schweiz geladen – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Schweiz",
       name:name, email:mail, replyto:mail, phone:tel,
-      message:["RATGEBER SCHWEIZ (Lead-Magnet)", "Vorname: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "", "Interesse: " + p.name, "Grösse: " + groesse, "Zeitpunkt: " + zeit, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
+      message:["RATGEBER SCHWEIZ (Lead-Magnet)", "Vorname: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
     fetch("https://api.web3forms.com/submit", { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).catch(function(){});
     // 3) Meta Conversions API
     try{ fetch(SUPA_URL + "/functions/v1/meta-lead", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON },
@@ -373,8 +335,7 @@
 
   function fertig(id){
     $("form").style.display = "none"; $("danke").style.display = "block";
-    var p = PRODUKTE[wert("ziel") || "tds"];
-    $("wa").href = "https://wa.me/4915679818872?text=" + encodeURIComponent("Grüezi, ich habe Ihren Ratgeber Schweiz geladen und interessiere mich für: " + p.name + ". Können Sie mein Dach in 3D planen? [über " + herkunft + "]");
+    $("wa").href = "https://wa.me/4915679818872?text=" + encodeURIComponent("Grüezi, ich habe Ihren Ratgeber Schweiz geladen. Können Sie mein Terrassendach in 3D planen? [über " + herkunft + "]");
     if (id && window.aoLeadPixel) window.aoLeadPixel(id);
     try{ $("dl").click(); }catch(e){}
     try{ $("wrap").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){}
