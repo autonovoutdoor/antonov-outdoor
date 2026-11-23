@@ -185,7 +185,7 @@
       <div class="ok">✓</div>
       <h3>Vielen Dank – Ihr Ratgeber ist bereit!</h3>
       <p>Der Download startet automatisch. Falls nicht, klicken Sie einfach auf den Knopf.</p>
-      <a class="btn" id="dl" href="downloads/Ratgeber_Terrassendach_Schweiz_2027.pdf" download>📄 Ratgeber herunterladen (PDF)</a>
+      <a class="btn" id="dl" href="downloads/Ratgeber_Terrassendach_Schweiz_2027.pdf" target="_blank" rel="noopener" download>📄 Ratgeber herunterladen (PDF)</a>
       <p style="margin-top:26px">Sie möchten Ihr Dach gleich planen lassen? Wir erstellen Ihnen gerne eine <b>persönliche Planung in 3D</b>.</p>
       <a class="wa" id="wa" href="https://wa.me/4915679818872" target="_blank" rel="noopener">💬 Per WhatsApp anfragen</a>
     </div>
@@ -325,12 +325,14 @@
     var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"📄 Ratgeber Schweiz geladen – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Schweiz",
       name:name, email:mail, replyto:mail, phone:tel,
       message:["RATGEBER SCHWEIZ (Lead-Magnet)", "Vorname: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
-    fetch("https://api.web3forms.com/submit", { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).catch(function(){});
+    var mailOk = fetch("https://api.web3forms.com/submit", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).then(function(r){ track(r.ok ? "mail-ok" : "mail-fehler-" + r.status); }).catch(function(){ track("mail-fehler-netz"); });
     // 3) Meta Conversions API
     try{ fetch(SUPA_URL + "/functions/v1/meta-lead", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON },
       body:JSON.stringify({ consent:true, event_id:id, name:name, phone:tel || null, email:mail, fbc:FBC, url:location.href, content_name:"Ratgeber Schweiz" }) }).catch(function(){}); }catch(e){}
     track("gesendet");
-    fertig(id);
+    // Download erst, wenn die Mail raus ist (iOS öffnet das PDF im selben Tab und bricht offene Anfragen ab) – max. 4 s warten
+    var fertigGemacht = false; function weiter(){ if (!fertigGemacht){ fertigGemacht = true; fertig(id); } }
+    mailOk.then(weiter); setTimeout(weiter, 4000);
   });
 
   function fertig(id){
