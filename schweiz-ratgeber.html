@@ -187,15 +187,16 @@
         <div class="empf"><img id="empfImg" src="bilder/td-1-s.webp" alt=""><div><small>Im Ratgeber für Sie</small><b id="empfName">Terrassendach</b><span id="empfText"></span></div></div>
         <div class="zwei">
           <div class="feld"><label for="fName">Vorname</label><input type="text" id="fName" autocomplete="given-name"></div>
-          <div class="feld"><label for="fMail">E-Mail</label><input type="email" id="fMail" autocomplete="email" inputmode="email"></div>
+          <div class="feld"><label for="fNach">Nachname</label><input type="text" id="fNach" autocomplete="family-name"></div>
         </div>
         <div class="zwei">
+          <div class="feld"><label for="fMail">E-Mail</label><input type="email" id="fMail" autocomplete="email" inputmode="email"></div>
           <div class="feld"><label for="fOrt">PLZ / Ort</label><input type="text" id="fOrt" autocomplete="postal-code" placeholder="z. B. 5330 Bad Zurzach"></div>
-          <div class="feld"><label for="fTel">Telefon <small>(freiwillig, für Rückfragen)</small></label><input type="tel" id="fTel" autocomplete="tel" inputmode="tel"></div>
         </div>
+        <div class="feld"><label for="fTel">Telefon <small>(freiwillig, für Rückfragen)</small></label><input type="tel" id="fTel" autocomplete="tel" inputmode="tel"></div>
         <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
         <label class="check"><input type="checkbox" id="fOk"><span>Ich bin einverstanden, dass Antonov Outdoor meine Angaben speichert, um mir den Ratgeber bereitzustellen und mich zu meinem Vorhaben zu kontaktieren. Widerruf jederzeit möglich. <a href="datenschutz.html" target="_blank">Datenschutz</a></span></label>
-        <div class="err" id="err">Bitte Vorname, gültige E-Mail und PLZ/Ort angeben und dem Datenschutz zustimmen.</div>
+        <div class="err" id="err">Bitte Vor- und Nachname, gültige E-Mail und PLZ/Ort angeben und dem Datenschutz zustimmen.</div>
         <button type="submit" class="btn" id="send">Ratgeber jetzt gratis herunterladen</button>
         <div class="hinweis">Mit dem Absenden wird die Anfrage zur Erfolgsmessung unserer Werbung an Meta übermittelt.</div>
         <button type="button" class="zurueck">← zurück</button>
@@ -328,8 +329,8 @@
 
   $("form").addEventListener("submit", function(ev){
     ev.preventDefault();
-    var name = $("fName").value.trim(), mail = $("fMail").value.trim(), ort = $("fOrt").value.trim(), tel = $("fTel").value.trim();
-    if (!name || !/.+@.+\..+/.test(mail) || !ort || !$("fOk").checked){ $("err").style.display = "block"; track("formular-unvollstaendig"); return; }
+    var vor = $("fName").value.trim(), nach = $("fNach").value.trim(), name = (vor + " " + nach).trim(), mail = $("fMail").value.trim(), ort = $("fOrt").value.trim(), tel = $("fTel").value.trim();
+    if (!vor || !nach ||!/.+@.+\..+/.test(mail) || !ort || !$("fOk").checked){ $("err").style.display = "block"; track("formular-unvollstaendig"); return; }
     $("err").style.display = "none";
     if ($("hp").value){ fertig(); return; }
     var btn = $("send"); btn.disabled = true; btn.textContent = "Einen Moment …";
@@ -349,7 +350,7 @@
     // 2) Mail an uns (Web3Forms)
     var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"📄 Ratgeber CH – " + plan + " – " + zeit + " – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Schweiz",
       name:name, email:mail, replyto:mail, phone:tel,
-      message:["RATGEBER SCHWEIZ (Lead-Magnet)", "Vorname: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "Plant: " + plan, "Wann: " + zeit, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
+      message:["RATGEBER SCHWEIZ (Lead-Magnet)", "Name: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "Plant: " + plan, "Wann: " + zeit, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
     var mailOk = fetch("https://api.web3forms.com/submit", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).then(function(r){ track(r.ok ? "mail-ok" : "mail-fehler-" + r.status); }).catch(function(){ track("mail-fehler-netz"); });
     // 3) Meta Conversions API
     try{ fetch(SUPA_URL + "/functions/v1/meta-lead", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON },
