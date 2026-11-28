@@ -76,7 +76,8 @@
   .feld{ margin-bottom:12px; }
   .feld label{ display:block; font-weight:700; font-size:.92rem; color:var(--n); margin-bottom:6px; }
   .feld label small{ font-weight:400; color:var(--gr); }
-  .feld input[type=text], .feld input[type=email], .feld input[type=tel]{ width:100%; padding:13px 14px; border:1.5px solid var(--li); border-radius:10px; font:inherit; font-size:1rem; background:#fff; }
+  .feld textarea{ min-height:84px; resize:vertical; line-height:1.45; }
+  .feld input[type=text], .feld input[type=email], .feld input[type=tel], .feld textarea{ width:100%; padding:13px 14px; border:1.5px solid var(--li); border-radius:10px; font:inherit; font-size:1rem; background:#fff; }
   .feld input:focus{ outline:none; border-color:var(--g); box-shadow:0 0 0 3px rgba(196,155,45,.18); }
   .zwei{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .check{ display:flex; gap:10px; align-items:flex-start; font-size:.86rem; color:var(--gr); line-height:1.5; margin:6px 0 16px; }
@@ -200,6 +201,7 @@
           <div class="feld"><label for="fOrt">PLZ / Ort</label><input type="text" id="fOrt" autocomplete="postal-code" placeholder="z. B. 5330 Bad Zurzach"></div>
         </div>
         <div class="feld"><label for="fTel">Telefon <small>(freiwillig, für Rückfragen)</small></label><input type="tel" id="fTel" autocomplete="tel" inputmode="tel"></div>
+        <div class="feld"><label for="fMsg">Ihre Nachricht <small>(freiwillig)</small></label><textarea id="fMsg" maxlength="1500" placeholder="z. B. Masse, Gemeinde oder Ihre Frage"></textarea></div>
         <input type="text" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
         <label class="check"><input type="checkbox" id="fOk"><span>Ich bin einverstanden, dass Antonov Outdoor meine Angaben speichert, um mir den Ratgeber bereitzustellen und mich zu meinem Vorhaben zu kontaktieren. Widerruf jederzeit möglich. <a href="datenschutz.html" target="_blank">Datenschutz</a></span></label>
         <div class="err" id="err">Bitte Vor- und Nachname, gültige E-Mail und PLZ/Ort angeben und dem Datenschutz zustimmen.</div>
@@ -343,14 +345,14 @@
 
   $("form").addEventListener("submit", function(ev){
     ev.preventDefault();
-    var vor = $("fName").value.trim(), nach = $("fNach").value.trim(), name = (vor + " " + nach).trim(), mail = $("fMail").value.trim(), ort = $("fOrt").value.trim(), tel = $("fTel").value.trim();
+    var vor = $("fName").value.trim(), nach = $("fNach").value.trim(), name = (vor + " " + nach).trim(), mail = $("fMail").value.trim(), ort = $("fOrt").value.trim(), tel = $("fTel").value.trim(), msg = $("fMsg").value.trim();
     if (!vor || !nach || !/.+@.+\..+/.test(mail) || !ort || !$("fOk").checked){ $("err").style.display = "block"; track("formular-unvollstaendig"); return; }
     $("err").style.display = "none";
     if ($("hp").value){ fertig(); return; }
     var btn = $("send"); btn.disabled = true; btn.textContent = "Einen Moment …";
     track("absenden");
     var plan = ZN[wert("ziel")] || "-", zeit = ZT[wert("zeit")] || "-";
-    var notiz = "Lead-Magnet Ratgeber Baugesuch Schweiz · Plant: " + plan + " · Wann: " + zeit + " · PLZ/Ort " + ort + " · Herkunft " + herkunft;
+    var notiz = "Lead-Magnet Ratgeber Baugesuch Schweiz · Plant: " + plan + " · Wann: " + zeit + " · PLZ/Ort " + ort + " · Herkunft " + herkunft + (msg ? " · Nachricht: " + msg : "");
     var id = "lead-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
 
     if (!LIVE){ console.log("[Test] Lead NICHT gesendet:", { name:name, mail:mail, tel:tel, ort:ort, notiz:notiz }); setTimeout(function(){ fertig(); }, 400); return; }
@@ -364,7 +366,7 @@
     // 2) Mail an uns (Web3Forms)
     var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"📐 Baugesuch CH – " + plan + " – " + zeit + " – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Baugesuch",
       name:name, email:mail, replyto:mail, phone:tel,
-      message:["RATGEBER BAUGESUCH SCHWEIZ (Lead-Magnet)", "Name: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "Plant: " + plan, "Wann: " + zeit, "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
+      message:["RATGEBER BAUGESUCH SCHWEIZ (Lead-Magnet)", "Name: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "Plant: " + plan, "Wann: " + zeit, "", "Nachricht: " + (msg || "-"), "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
     var mailOk = fetch("https://api.web3forms.com/submit", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).then(function(r){ track(r.ok ? "mail-ok" : "mail-fehler-" + r.status); }).catch(function(){ track("mail-fehler-netz"); });
     // 3) Meta Conversions API
     try{ fetch(SUPA_URL + "/functions/v1/meta-lead", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON },
