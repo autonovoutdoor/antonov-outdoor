@@ -183,9 +183,9 @@
       <div class="step" data-step="2">
         <div class="frage">Wann möchten Sie umsetzen?</div>
         <div class="wahl auto">
+          <input type="radio" name="zeit" id="zeit-sofort" value="sofort"><label class="txt" for="zeit-sofort"><span>So schnell wie möglich</span></label>
           <input type="radio" name="zeit" id="zeit-fruehling-2027" value="fruehling-2027"><label class="txt" for="zeit-fruehling-2027"><span>Frühling 2027</span></label>
           <input type="radio" name="zeit" id="zeit-sommer-2027" value="sommer-2027"><label class="txt" for="zeit-sommer-2027"><span>Sommer 2027</span></label>
-          <input type="radio" name="zeit" id="zeit-spaeter" value="spaeter"><label class="txt" for="zeit-spaeter"><span>Später</span></label>
           <input type="radio" name="zeit" id="zeit-unsicher" value="unsicher"><label class="txt" for="zeit-unsicher"><span>Weiss ich noch nicht</span></label>
         </div>
         <button type="button" class="zurueck">← zurück</button>
@@ -318,7 +318,7 @@
 
   var herkunft = /meta|facebook|instagram|fb|ig/.test(UTM.source.toLowerCase()) ? "Facebook/Instagram" : /google/.test(UTM.source.toLowerCase()) ? "Google" : "Website";
   var ZN = { tds:"Terrassenüberdachung", kwg:"Kaltwintergarten", skyview:"Flachdach SkyView", lamelle:"Lamellendach", offen:"noch unsicher" };
-  var ZT = { "fruehling-2027":"Frühling 2027", "sommer-2027":"Sommer 2027", spaeter:"Später", unsicher:"Weiss noch nicht" };
+  var ZT = { sofort:"So schnell wie möglich", "fruehling-2027":"Frühling 2027", "sommer-2027":"Sommer 2027", unsicher:"Weiss noch nicht" };
   var SID = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
   function wert(n){ var el = document.querySelector('input[name="' + n + '"]:checked'); return el ? el.value : null; }
   function rpc(name, body){ return fetch(SUPA_URL + "/rest/v1/rpc/" + name, { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "apikey":SUPA_ANON, "Authorization":"Bearer " + SUPA_ANON }, body:JSON.stringify(body) }); }
