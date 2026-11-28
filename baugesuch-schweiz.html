@@ -364,7 +364,7 @@
       rpc("submit_lead", Object.assign({}, basis, { p_notes:notiz })).then(function(r){ if (!r.ok) return rpc("submit_lead", basis); }).catch(function(){ rpc("submit_lead", basis).catch(function(){}); });
     }catch(e){}
     // 2) Mail an uns (Web3Forms)
-    var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"📐 Baugesuch CH – " + plan + " – " + zeit + " – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Baugesuch",
+    var payload = { access_key:WEB3FORMS_KEY, botcheck:"", subject:"💚 Baugesuch CH – " + plan + " – " + zeit + " – " + name + " – " + ort, from_name:"Antonov Outdoor – Ratgeber Baugesuch",
       name:name, email:mail, replyto:mail, phone:tel,
       message:["RATGEBER BAUGESUCH SCHWEIZ (Lead-Magnet)", "Name: " + name, "E-Mail: " + mail, "Telefon: " + (tel || "-"), "PLZ / Ort: " + ort, "Plant: " + plan, "Wann: " + zeit, "", "Nachricht: " + (msg || "-"), "", "Quelle: " + UTM.source + " / " + UTM.campaign].join("\n") };
     var mailOk = fetch("https://api.web3forms.com/submit", { method:"POST", keepalive:true, headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(payload) }).then(function(r){ track(r.ok ? "mail-ok" : "mail-fehler-" + r.status); }).catch(function(){ track("mail-fehler-netz"); });
